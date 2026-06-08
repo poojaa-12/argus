@@ -1,0 +1,30 @@
+{
+  "main_eval": {
+    "baseline": {
+      "passed": 39,
+      "total": 50,
+      "rate": 0.78,
+      "rate_pct": 78.0
+    },
+    "with_reliability": {
+      "passed": 46,
+      "total": 50,
+      "rate": 0.92,
+      "rate_pct": 92.0
+    }
+  },
+  "failure_injection_eval": {
+    "baseline": {
+      "passed": 12,
+      "total": 20,
+      "rate": 0.6,
+      "rate_pct": 60.0
+    },
+    "with_reliability": {
+      "passed": 18,
+      "total": 20,
+      "rate": 0.9,
+      "rate_pct": 90.0
+    }
+  }
+}
