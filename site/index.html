@@ -10,10 +10,16 @@
     <main class="container">
       <header class="header">
         <div>
-          <h1>Argus Reliability Dashboard</h1>
-          <p>Interview-ready view of deterministic eval performance.</p>
+          <h1>Argus Reliability</h1>
+          <nav class="top-nav">
+            <a class="nav-link active" href="./index.html">Overview</a>
+            <a class="nav-link" href="./metrics.html">Evaluation Metrics</a>
+          </nav>
         </div>
-        <button id="reload-btn" class="btn">Reload Report</button>
+        <div class="actions">
+          <span id="last-sync" class="muted-text">Sync: --</span>
+          <button id="reload-btn" class="btn" type="button">Reload Report</button>
+        </div>
       </header>
 
       <section id="status-card" class="card status-card">

@@ -95,7 +95,11 @@ function updateTargetStatus(report) {
 }
 
 async function loadReport() {
-  const urls = ["/eval_report.json", "../eval_report.json", "./eval_report.json"];
+  const urls = [
+    new URL("../eval_report.json", window.location.href).toString(),
+    new URL("./eval_report.json", window.location.href).toString(),
+    `${window.location.origin}/eval_report.json`,
+  ];
   let report = null;
   let lastError = null;
 
@@ -124,12 +128,24 @@ async function loadReport() {
     null,
     2
   );
+  const syncNode = document.getElementById("last-sync");
+  if (syncNode) {
+    syncNode.textContent = `Sync: ${new Date().toLocaleTimeString()}`;
+  }
 }
 
-document.getElementById("reload-btn").addEventListener("click", () => {
-  loadReport().catch((err) => {
+const reloadBtn = document.getElementById("reload-btn");
+reloadBtn.addEventListener("click", async () => {
+  reloadBtn.disabled = true;
+  reloadBtn.textContent = "Reloading...";
+  try {
+    await loadReport();
+  } catch (err) {
     document.getElementById("target-line").textContent = err.message;
-  });
+  } finally {
+    reloadBtn.disabled = false;
+    reloadBtn.textContent = "Reload Report";
+  }
 });
 
 loadReport().catch((err) => {

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Argus Evaluation Metrics</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header class="header">
+        <div>
+          <h1>Argus Reliability</h1>
+          <nav class="top-nav">
+            <a class="nav-link" href="./index.html">Overview</a>
+            <a class="nav-link active" href="./metrics.html">Evaluation Metrics</a>
+          </nav>
+        </div>
+        <div class="actions">
+          <span id="last-sync" class="muted-text">Sync: --</span>
+          <button id="reload-btn" class="btn" type="button">Reload Report</button>
+        </div>
+      </header>
+
+      <section class="card">
+        <h2>Detailed Evaluation Matrix</h2>
+        <p id="metrics-summary" class="muted-text">Loading...</p>
+        <div id="metrics-table-wrap"></div>
+      </section>
+
+      <section class="grid two-col">
+        <article class="card">
+          <h3>Main Suite Scenario Trends</h3>
+          <div id="main-metrics-scenarios"></div>
+        </article>
+        <article class="card">
+          <h3>Failure Suite Scenario Trends</h3>
+          <div id="failure-metrics-scenarios"></div>
+        </article>
+      </section>
+    </main>
+    <script src="./metrics.js"></script>
+  </body>
+</html>
