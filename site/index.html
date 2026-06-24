@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Argus Reliability Dashboard</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header class="header">
+        <div>
+          <h1>Argus Reliability Dashboard</h1>
+          <p>Interview-ready view of deterministic eval performance.</p>
+        </div>
+        <button id="reload-btn" class="btn">Reload Report</button>
+      </header>
+
+      <section id="status-card" class="card status-card">
+        <h2>Target Status</h2>
+        <p id="target-line">Loading...</p>
+      </section>
+
+      <section class="grid two-col">
+        <article class="card">
+          <h3>Main Eval</h3>
+          <div id="main-metrics"></div>
+        </article>
+        <article class="card">
+          <h3>Failure Injection Eval</h3>
+          <div id="failure-metrics"></div>
+        </article>
+      </section>
+
+      <section class="grid two-col">
+        <article class="card">
+          <h3>Main Eval by Scenario</h3>
+          <div id="main-scenarios"></div>
+        </article>
+        <article class="card">
+          <h3>Failure Injection by Scenario</h3>
+          <div id="failure-scenarios"></div>
+        </article>
+      </section>
+
+      <section class="card">
+        <h3>Runtime Config</h3>
+        <pre id="runtime-config"></pre>
+      </section>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>

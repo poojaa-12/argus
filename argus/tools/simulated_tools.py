@@ -30,6 +30,14 @@ class DeterministicToolEngine:
     scripts: dict[str, list[str]]
     counters: dict[str, int] = field(default_factory=dict)
 
+    def available_tools(self) -> set[str]:
+        tools: set[str] = set()
+        for script_key in self.scripts:
+            parts = script_key.split(":")
+            if len(parts) == 3:
+                tools.add(parts[1])
+        return tools
+
     def call(self, tool_name: str, payload: dict[str, Any]) -> dict[str, Any]:
         key = payload["key"]
         mode = payload.get("mode", "normal")
@@ -40,7 +48,13 @@ class DeterministicToolEngine:
         self.counters[script_key] = index + 1
 
         if token == "ok":
-            return {"tool": tool_name, "key": key, "mode": mode, "status": "ok"}
+            return {
+                "tool": tool_name,
+                "key": key,
+                "mode": mode,
+                "status": "ok",
+                "simulated_latency_ms": float(payload.get("simulated_latency_ms", 0.0)),
+            }
 
         exc_type = ERROR_MAP[token]
         raise exc_type(f"{tool_name} failed for {key} with {token}")

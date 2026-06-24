@@ -1,0 +1,157 @@
+:root {
+  --bg: #0b1220;
+  --card: #111a2e;
+  --border: #273553;
+  --text: #e8eefc;
+  --muted: #aab6d3;
+  --good: #22c55e;
+  --warn: #f59e0b;
+  --bad: #ef4444;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  color: var(--text);
+  background: linear-gradient(180deg, #070d19, #0b1220 40%);
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 16px 36px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+.header p {
+  margin: 6px 0 0;
+  color: var(--muted);
+}
+
+.btn {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #1a2642;
+  color: var(--text);
+  padding: 10px 14px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: #223254;
+}
+
+.grid {
+  display: grid;
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.two-col {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.card {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--card);
+  padding: 16px;
+}
+
+.card h2,
+.card h3 {
+  margin-top: 0;
+}
+
+.status-card.good {
+  border-color: #1e8f4a;
+}
+
+.status-card.warn {
+  border-color: #a16207;
+}
+
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.metric {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px;
+  background: #0f1730;
+}
+
+.metric .label {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.metric .value {
+  margin-top: 4px;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.scenario {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 8px;
+  background: #0f1730;
+}
+
+.scenario:last-child {
+  margin-bottom: 0;
+}
+
+.scenario .name {
+  text-transform: capitalize;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.bar-wrap {
+  background: #1a2440;
+  border-radius: 999px;
+  height: 10px;
+  overflow: hidden;
+}
+
+.bar {
+  height: 100%;
+  background: linear-gradient(90deg, #60a5fa, #22d3ee);
+}
+
+pre {
+  margin: 0;
+  background: #0c1326;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px;
+  overflow: auto;
+}
+
+@media (max-width: 800px) {
+  .two-col {
+    grid-template-columns: 1fr;
+  }
+}

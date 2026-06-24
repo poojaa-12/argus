@@ -12,6 +12,7 @@ def make_main_eval_suite() -> list[TaskPlan]:
             TaskPlan(
                 task_id=key,
                 expected_success=True,
+                scenario_tag="network",
                 steps=[
                     PlanStep(
                         step_id=f"{key}-s1",
@@ -37,6 +38,7 @@ def make_main_eval_suite() -> list[TaskPlan]:
             TaskPlan(
                 task_id=key,
                 expected_success=True,
+                scenario_tag="permanent",
                 steps=[
                     PlanStep(
                         step_id=f"{key}-required-timeout",
@@ -68,6 +70,9 @@ def make_injected_failure_suite() -> list[TaskPlan]:
             TaskPlan(
                 task_id=key,
                 expected_success=True,
+                scenario_tag=(
+                    "network" if i <= 6 else "parser" if i <= 12 else "executor" if i <= 18 else "permanent"
+                ),
                 steps=[
                     PlanStep(
                         step_id=f"{key}-faulty-step",
