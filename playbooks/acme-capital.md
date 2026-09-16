@@ -39,6 +39,7 @@ Associates were pasting CIM numbers into DealCloud by hand. Partners wanted ever
 3. Approve. Pipeline card moves to Diligence; SharePoint path is filled.
 4. Intake **Helios Solar**. Recommendation is pass. Reject the write.
 5. Intake **Meridian Logistics**. EBITDA is blank on purpose. Do not invent it.
+6. Upload your own `.pdf` / `.txt` CIM. Missing fields stay blank; CRM write still waits for HITL.
 
 ## Field insight worth feeding the product
 

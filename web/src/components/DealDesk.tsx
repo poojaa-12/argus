@@ -77,6 +77,10 @@ export default function DealDesk() {
         body: JSON.stringify({ dealId }),
       });
       const payload = (await res.json()) as IntakeResponse;
+      if (!res.ok) {
+        setStatus((payload as unknown as { error?: string }).error || "Intake failed.");
+        return;
+      }
       setActive(payload);
       setPipeline((current) => {
         const next = current.filter((row) => row.deal_id !== payload.opportunity.deal_id);
@@ -98,7 +102,11 @@ export default function DealDesk() {
       const res = await fetch("/api/resume", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ scored: active.scored, feedback }),
+        body: JSON.stringify({
+          scored: active.scored,
+          feedback,
+          filename: active.deal.filename,
+        }),
       });
       const payload = (await res.json()) as { opportunity: Opportunity; status: string };
       setActive({ ...active, opportunity: payload.opportunity });
@@ -109,6 +117,35 @@ export default function DealDesk() {
       setStatus(payload.status === "rejected" ? "Write blocked." : "DealCloud updated.");
     } catch {
       setStatus("Resume failed.");
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  async function upload(file: File) {
+    setBusy(true);
+    setStatus(`Reading ${file.name}…`);
+    try {
+      const body = new FormData();
+      body.append("file", file);
+      const res = await fetch("/api/upload", { method: "POST", body });
+      const payload = (await res.json()) as IntakeResponse & { error?: string };
+      if (!res.ok) {
+        setStatus(payload.error || "Could not read that file.");
+        return;
+      }
+      setActive(payload);
+      setPipeline((current) => {
+        const next = current.filter((row) => row.deal_id !== payload.opportunity.deal_id);
+        return [...next, payload.opportunity];
+      });
+      setStatus(
+        payload.scored.extraction.missing_fields.length
+          ? `Paused for approval. Blank fields: ${payload.scored.extraction.missing_fields.join(", ")}.`
+          : "Paused for associate approval.",
+      );
+    } catch {
+      setStatus("Upload failed.");
     } finally {
       setBusy(false);
     }
@@ -149,7 +186,24 @@ export default function DealDesk() {
         <section className="mt-4 grid gap-4 lg:grid-cols-[0.9fr_1.4fr]">
           <article className="rounded-2xl border border-slate-700 bg-[#111a2e] p-5">
             <h3 className="text-base font-semibold">Inbox</h3>
-            <p className="mt-1 text-sm text-zinc-400">Synthetic packages. Intake pauses before CRM write.</p>
+            <p className="mt-1 text-sm text-zinc-400">
+              Synthetic packages, or upload your own CIM / teaser (.pdf, .txt, .md). Missing numbers stay blank.
+            </p>
+            <label className="mt-3 flex cursor-pointer flex-col rounded-xl border border-dashed border-slate-600 bg-[#0f1730] p-3 text-sm hover:border-sky-500">
+              <span className="font-medium">Upload a document</span>
+              <span className="mt-1 text-xs text-zinc-400">Selectable-text PDF or a text extract. Max 4.5MB.</span>
+              <input
+                className="mt-2 text-xs"
+                type="file"
+                accept=".pdf,.txt,.md,.text,application/pdf,text/plain"
+                disabled={busy}
+                onChange={(event) => {
+                  const file = event.target.files?.[0];
+                  if (file) void upload(file);
+                  event.target.value = "";
+                }}
+              />
+            </label>
             <div className="mt-3 flex flex-col gap-2">
               {inbox.map((deal) => (
                 <button

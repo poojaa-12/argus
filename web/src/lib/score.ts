@@ -34,10 +34,18 @@ export function scoreDeal(extraction: DealExtraction, thesis: FirmThesis = ACME_
   else growthPts = 6;
 
   let geoPts = 0;
-  if (containsAny(hq, ["TX", "IL", "CO", "TN", "AZ", "United States", "US", "USA"])) geoPts = 10;
-  else if (containsAny(hq, ["Canada", "Toronto"])) geoPts = 10;
-  else if (hq) geoPts = 2;
-  else geoPts = 4;
+  if (
+    containsAny(hq, ["TX", "IL", "CO", "TN", "AZ", "MA", "NY", "CA", "WA", "FL", "United States", "US", "USA"]) ||
+    /,\s*[A-Z]{2}\b/.test(hq)
+  ) {
+    geoPts = 10;
+  } else if (containsAny(hq, ["Canada", "Toronto"])) {
+    geoPts = 10;
+  } else if (hq) {
+    geoPts = 2;
+  } else {
+    geoPts = 4;
+  }
 
   let levPts = 0;
   if (extraction.net_debt_ebitda === null) levPts = 4;

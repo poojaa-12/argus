@@ -1,7 +1,7 @@
 import { getDeal } from "./corpus";
-import { extractCim } from "./extract";
+import { extractCim, extractFromText, inferCompany, inferDocumentType } from "./extract";
 import { scoreDeal } from "./score";
-import type { Opportunity, ScoredDeal } from "./types";
+import type { DealRecord, Opportunity, ScoredDeal } from "./types";
 
 const STAGES = {
   advance: "Diligence",
@@ -34,7 +34,28 @@ export function writtenOpportunity(scored: ScoredDeal, filename: string): Opport
 
 export function intakeDeal(dealId: string) {
   const deal = getDeal(dealId);
-  const extraction = extractCim(dealId);
+  return packageIntake(deal, extractCim(dealId));
+}
+
+export function intakeUploaded(text: string, filename: string, dealId: string) {
+  const company = inferCompany(text, filename);
+  const documentType = inferDocumentType(filename, text);
+  const deal: DealRecord = {
+    id: dealId,
+    company,
+    document_type: documentType,
+    filename,
+    text,
+  };
+  const extraction = extractFromText(text, {
+    dealId,
+    company,
+    documentType,
+  });
+  return packageIntake(deal, extraction);
+}
+
+function packageIntake(deal: DealRecord, extraction: ReturnType<typeof extractCim>) {
   const scored = scoreDeal(extraction);
   return {
     deal,
@@ -48,20 +69,19 @@ export function intakeDeal(dealId: string) {
   };
 }
 
-export function resumeDeal(scored: ScoredDeal, feedback: string) {
-  const deal = getDeal(scored.deal_id);
+export function resumeDeal(scored: ScoredDeal, feedback: string, filename: string) {
   const rejected = ["reject", "deny", "no"].includes(feedback.trim().toLowerCase());
   if (rejected) {
     return {
       status: "rejected" as const,
       opportunity: {
-        ...pendingOpportunity(scored, deal.filename),
+        ...pendingOpportunity(scored, filename),
         status: "rejected" as const,
       },
     };
   }
   return {
     status: "completed" as const,
-    opportunity: writtenOpportunity(scored, deal.filename),
+    opportunity: writtenOpportunity(scored, filename),
   };
 }
