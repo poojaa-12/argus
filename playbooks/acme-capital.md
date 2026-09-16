@@ -4,6 +4,7 @@
 **Workflow:** CIM / teaser intake → thesis score → human approval → DealCloud + SharePoint  
 **Runtime:** Argus graph with HITL interrupts on destructive CRM writes  
 **Live:** https://argus-deal-intake.vercel.app  
+**Case study:** https://argus-deal-intake.vercel.app/case-study  
 **Owner analog:** Forward Deployed Engineer, last mile
 
 ## What the firm asked for

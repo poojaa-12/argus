@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import SiteNav from "@/components/SiteNav";
 import type { DealRecord, FirmThesis, Opportunity, ScoredDeal } from "@/lib/types";
 
 type CatalogDeal = Pick<DealRecord, "id" | "company" | "document_type" | "filename">;
@@ -162,7 +163,10 @@ export default function DealDesk() {
             <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-zinc-400">
               Argus Deal Intake · Vercel last-mile demo
             </p>
-            <h1 className="mt-2 font-sans text-3xl font-semibold tracking-tight">Acme Capital</h1>
+            <div className="mt-3">
+              <SiteNav active="desk" />
+            </div>
+            <h1 className="mt-4 font-sans text-3xl font-semibold tracking-tight">Acme Capital</h1>
             <p className="mt-2 max-w-2xl text-sm text-zinc-400">
               CIM / teaser extract, thesis score, human-in-the-loop, then DealCloud + SharePoint. Same
               associate loop as the Python runtime, shipped on Next.js / Tailwind / Vercel.

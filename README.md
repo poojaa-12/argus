@@ -83,6 +83,7 @@ tests require `ARGUS_INTEGRATION=1` after `make up`.
 ## Deal intake (Acme Capital demo)
 
 Live (Next.js / Tailwind / Vercel): **https://argus-deal-intake.vercel.app**
+Case study: **https://argus-deal-intake.vercel.app/case-study**
 
 Upload your own CIM or teaser (`.pdf`, `.txt`, `.md`) on that page. Selectable-text PDFs work; scanned image PDFs do not. Numbers that are not in the document stay blank.
 
