@@ -13,9 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Acme Capital · Inbound screening",
+  title: "Argus Deal Intake · prototype for Metal CIM workflow",
   description:
-    "CIM and teaser screening against a written thesis. Extracted fields stay blank if missing. DealCloud writes wait on an associate.",
+    "Prototype by Sai Pooja Sabbani for Metal's CIM intake: parse a CIM, score a thesis, wait for a human, then a DealCloud write. Missing fields stay blank.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

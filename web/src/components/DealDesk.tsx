@@ -59,6 +59,24 @@ function traceTone(status: TraceStatus) {
   return "border-zinc-700 text-zinc-500";
 }
 
+function statusTone(status: string) {
+  if (status.startsWith("INTERRUPTED")) return "border-amber-800 bg-[#1a1408] text-amber-200";
+  if (status.startsWith("WRITTEN")) return "border-emerald-800 bg-[#102418] text-emerald-300";
+  if (status.includes("BLOCKED") || status.includes("failed") || status.includes("Could not")) {
+    return "border-rose-900 bg-[#2a1214] text-rose-300";
+  }
+  if (
+    status.startsWith("Running") ||
+    status.startsWith("Writing") ||
+    status.startsWith("Reading") ||
+    status.startsWith("Blocking") ||
+    status.startsWith("Opening")
+  ) {
+    return "border-sky-900 bg-[#0d1c2a] text-sky-300";
+  }
+  return "border-[#2c3340] bg-[#11141a] text-zinc-400";
+}
+
 export default function DealDesk({ initial }: { initial?: CatalogResponse }) {
   const [thesis, setThesis] = useState<FirmThesis | null>(initial?.thesis ?? null);
   const [inbox, setInbox] = useState<InboxDeal[]>(initial?.deals ?? []);
@@ -214,22 +232,33 @@ export default function DealDesk({ initial }: { initial?: CatalogResponse }) {
   return (
     <div className="min-h-full bg-[#0a0c10] font-sans text-[13px] text-zinc-200">
       <header className="sticky top-0 z-10 border-b border-[#2c3340] bg-[#0a0c10]/95 backdrop-blur">
-        <div className="flex flex-wrap items-center justify-between gap-3 px-4 py-2.5">
-          <div className="flex flex-wrap items-center gap-4">
-            <div>
-              <p className="text-[10px] uppercase tracking-[0.16em] text-zinc-500">Acme Capital</p>
-              <h1 className="text-sm font-semibold tracking-tight">Inbound screening</h1>
+        <div className="flex flex-wrap items-start justify-between gap-3 px-4 py-3">
+          <div className="min-w-0 max-w-3xl">
+            <p className="text-[10px] uppercase tracking-[0.16em] text-zinc-500">Acme Capital · synthetic tenant</p>
+            <h1 className="mt-0.5 text-sm font-semibold tracking-tight">Inbound screening</h1>
+            <p className="mt-1.5 text-[12px] leading-5 text-zinc-400">
+              Prototype built for Metal&apos;s CIM intake workflow — CIM parsing → thesis scoring →
+              human-approved DealCloud write. Built by Sai Pooja Sabbani
+              {" · "}
+              <a className="text-zinc-300 hover:underline" href="https://linkedin.com/in/saipoojasabbani" target="_blank" rel="noreferrer">
+                LinkedIn
+              </a>
+              {" · "}
+              <a className="text-zinc-300 hover:underline" href="https://github.com/poojaa-12/argus" target="_blank" rel="noreferrer">
+                GitHub
+              </a>
+            </p>
+            <div className="mt-2">
+              <SiteNav active="desk" />
             </div>
-            <SiteNav active="desk" />
           </div>
-          <p className="font-mono text-[11px] text-amber-200/90">{status}</p>
+          <span className={`shrink-0 border px-2 py-1 font-mono text-[11px] ${statusTone(status)}`}>{status}</span>
         </div>
-        <div className="flex flex-wrap items-center justify-between gap-2 border-t border-[#222833] px-4 py-1.5">
+        <div className="flex flex-wrap items-center justify-between gap-2 border-t border-[#222833] px-4 py-2">
           <p className="font-mono text-[10px] text-zinc-500">
             {initial?.eval?.gold ?? "gold 6/6 · 0 invented blanks"}
             {" · "}
             {initial?.eval?.detail ?? "Helios sector pass · Meridian held"}
-            {" · tenant is synthetic"}
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-1.5 border-t border-[#222833] px-4 py-2">
@@ -249,7 +278,7 @@ export default function DealDesk({ initial }: { initial?: CatalogResponse }) {
 
       <main className="grid gap-0 min-[1080px]:grid-cols-[210px_minmax(0,1fr)_280px]">
         <aside className="order-2 border-b border-[#2c3340] min-[1080px]:order-1 min-[1080px]:border-b-0 min-[1080px]:border-r">
-          <div className="border-b border-[#2c3340] px-3 py-2">
+          <div className="border-b border-[#2c3340] px-4 py-3">
             <h2 className="text-[10px] font-semibold uppercase tracking-[0.14em] text-zinc-500">Queue</h2>
             <label className="mt-2 block cursor-pointer border border-dashed border-[#3a4252] bg-[#11141a] px-2 py-2 hover:border-zinc-400">
               <span className="text-[11px] font-medium">Drop CIM / teaser</span>
@@ -276,7 +305,7 @@ export default function DealDesk({ initial }: { initial?: CatalogResponse }) {
                   type="button"
                   disabled={busy}
                   onClick={() => intake(deal.id)}
-                  className={`border-b border-[#222833] px-3 py-2.5 text-left hover:bg-[#141820] disabled:opacity-50 ${
+                  className={`border-b border-[#222833] px-4 py-3 text-left hover:bg-[#141820] disabled:opacity-50 ${
                     on ? "bg-[#141820]" : ""
                   }`}
                 >
@@ -292,7 +321,9 @@ export default function DealDesk({ initial }: { initial?: CatalogResponse }) {
                     </span>
                   </div>
                   {deal.missing_fields > 0 ? (
-                    <p className="mt-1 text-[10px] text-amber-400/90">{deal.missing_fields} blank field(s)</p>
+                    <span className="mt-1.5 inline-flex border border-amber-900/70 bg-[#1a1408] px-1.5 py-0.5 text-[10px] text-amber-200/90">
+                      Not on page · {deal.missing_fields} {deal.missing_fields === 1 ? "field" : "fields"}
+                    </span>
                   ) : null}
                 </button>
               );
@@ -312,6 +343,12 @@ export default function DealDesk({ initial }: { initial?: CatalogResponse }) {
                   </p>
                   <h2 className="text-xl font-semibold tracking-tight">{active.deal.company}</h2>
                   <p className="mt-1 max-w-xl text-[12px] leading-5 text-zinc-400">{active.scored.rationale}</p>
+                  {extraction.missing_fields.length > 0 ? (
+                    <span className="mt-2 inline-flex border border-amber-900/70 bg-[#1a1408] px-1.5 py-0.5 text-[10px] text-amber-200/90">
+                      Not on page · {extraction.missing_fields.length}{" "}
+                      {extraction.missing_fields.length === 1 ? "field" : "fields"} left blank
+                    </span>
+                  ) : null}
                 </div>
                 <div className="text-right">
                   <p className={`font-mono text-3xl font-semibold leading-none ${recTone(active.scored.recommendation)}`}>
@@ -373,10 +410,14 @@ export default function DealDesk({ initial }: { initial?: CatalogResponse }) {
                   </div>
                 </div>
               ) : (
-                <p className="border-b border-[#2c3340] px-4 py-2 font-mono text-[11px] text-zinc-400">
+                <p className={`border-b px-4 py-3 font-mono text-[11px] ${
+                  active.opportunity.status === "written"
+                    ? "border-emerald-900 bg-[#102418] text-emerald-300"
+                    : "border-rose-900 bg-[#2a1214] text-rose-300"
+                }`}>
                   {active.opportunity.status === "written"
-                    ? `WRITTEN · ${active.opportunity.opportunity_id} · ${active.opportunity.stage}`
-                    : "REJECTED · Opportunity not created"}
+                    ? `Written · ${active.opportunity.opportunity_id} · ${active.opportunity.stage}`
+                    : "Rejected · no live record"}
                 </p>
               )}
 
@@ -415,7 +456,9 @@ export default function DealDesk({ initial }: { initial?: CatalogResponse }) {
                               <span className="text-zinc-600">p.{cite.page}</span> {cite.quote}
                             </>
                           ) : blank ? (
-                            "Not on page. Left blank."
+                            <span className="inline-flex border border-amber-900/70 bg-[#1a1408] px-1.5 py-0.5 text-[10px] text-amber-200/90">
+                              Not on page · left blank
+                            </span>
                           ) : (
                             "—"
                           )}
@@ -460,13 +503,13 @@ export default function DealDesk({ initial }: { initial?: CatalogResponse }) {
       </main>
 
       <section className="border-t border-[#2c3340]">
-        <div className="flex items-center justify-between px-4 py-2">
+        <div className="flex items-center justify-between px-4 py-3">
           <h3 className="text-[10px] font-semibold uppercase tracking-[0.14em] text-zinc-500">Pipeline</h3>
           <p className="font-mono text-[10px] text-zinc-600">{pipeline.length} record(s) · this browser</p>
         </div>
         <div className="grid md:grid-cols-4">
           {STAGES.map((stage) => (
-            <div key={stage} className="min-h-28 border-t border-[#2c3340] px-3 py-2 md:border-l md:border-t-0 md:first:border-l-0">
+            <div key={stage} className="min-h-28 border-t border-[#2c3340] px-4 py-3 md:border-l md:border-t-0 md:first:border-l-0">
               <h4 className="flex items-center justify-between text-[10px] font-semibold uppercase tracking-[0.14em] text-zinc-500">
                 {stage}
                 <span className="font-mono text-zinc-600">
@@ -495,7 +538,7 @@ export default function DealDesk({ initial }: { initial?: CatalogResponse }) {
 
 function Panel({ title, children }: { title: string; children: ReactNode }) {
   return (
-    <div className="border-b border-[#2c3340] px-3 py-3">
+    <div className="border-b border-[#2c3340] px-4 py-3">
       <h3 className="text-[10px] font-semibold uppercase tracking-[0.14em] text-zinc-500">{title}</h3>
       <div className="mt-2">{children}</div>
     </div>
@@ -523,10 +566,52 @@ function DealCloudCard({ record }: { record?: DealCloudRecord }) {
       <p className="mt-1 font-mono text-[11px] text-zinc-400">
         POST {record.system}/{record.object} · {record.write_status}
       </p>
-      <pre className="mt-2 max-h-64 overflow-auto whitespace-pre-wrap font-mono text-[10px] leading-4 text-zinc-300">
-        {JSON.stringify(record.payload, null, 2)}
-      </pre>
+      <JsonView data={record.payload} />
     </div>
+  );
+}
+
+function JsonView({ data }: { data: Record<string, string | number | null> }) {
+  const json = JSON.stringify(data, null, 2);
+  const nodes: ReactNode[] = [];
+  const re = /("(?:\\.|[^"\\])*")(\s*:)?|(-?\d+(?:\.\d+)?)|\b(true|false|null)\b/g;
+  let last = 0;
+  let match: RegExpExecArray | null;
+  while ((match = re.exec(json))) {
+    if (match.index > last) nodes.push(json.slice(last, match.index));
+    if (match[1] && match[2]) {
+      nodes.push(
+        <span key={`${match.index}-k`} className="text-sky-300">
+          {match[1]}
+        </span>,
+        match[2],
+      );
+    } else if (match[1]) {
+      nodes.push(
+        <span key={`${match.index}-s`} className="text-emerald-300">
+          {match[1]}
+        </span>,
+      );
+    } else if (match[3]) {
+      nodes.push(
+        <span key={`${match.index}-n`} className="text-amber-300">
+          {match[3]}
+        </span>,
+      );
+    } else {
+      nodes.push(
+        <span key={`${match.index}-l`} className="text-zinc-500">
+          {match[4]}
+        </span>,
+      );
+    }
+    last = re.lastIndex;
+  }
+  if (last < json.length) nodes.push(json.slice(last));
+  return (
+    <pre className="mt-2 max-h-64 overflow-auto whitespace-pre-wrap border border-[#2c3340] bg-[#0d1016] px-2 py-2 font-mono text-[10px] leading-4 text-zinc-400">
+      {nodes}
+    </pre>
   );
 }
 

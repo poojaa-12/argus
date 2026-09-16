@@ -17,10 +17,23 @@ export default function CaseStudyPage() {
           <SiteNav active="case-study" />
         </div>
         <h1 className="mt-5 text-2xl font-semibold tracking-tight">CIM intake that is allowed to stop</h1>
+        <p className="mt-2 text-[12px] leading-5 text-zinc-500">
+          Prototype built for Metal&apos;s CIM intake workflow — CIM parsing → thesis scoring → human-approved DealCloud
+          write. Built by Sai Pooja Sabbani
+          {" · "}
+          <a className="text-zinc-300 hover:underline" href="https://linkedin.com/in/saipoojasabbani" target="_blank" rel="noreferrer">
+            LinkedIn
+          </a>
+          {" · "}
+          <a className="text-zinc-300 hover:underline" href="https://github.com/poojaa-12/argus" target="_blank" rel="noreferrer">
+            GitHub
+          </a>
+        </p>
         <p className="mt-3 text-sm leading-6 text-zinc-400">
           Associates were pasting CIM numbers into DealCloud. Partners wanted every inbound package scored against a
           written software thesis before it became a live opportunity, and refused an unattended CRM write. This tenant
-          freezes that contract. It is not a real fund.
+          freezes that contract. It is not a real fund. Rapid build to show the mechanism — fields missing from the page
+          stay blank rather than guessed.
         </p>
         <p className="mt-2 font-mono text-[11px] text-zinc-500">
           <Link className="text-zinc-300 hover:underline" href="/">
