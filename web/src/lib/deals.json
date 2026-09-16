@@ -1,0 +1,70 @@
+{
+  "thesis": {
+    "firm_id": "acme-capital",
+    "firm_name": "Acme Capital",
+    "mandate": "Control and significant-minority investments in North American B2B software and data infrastructure. Associates screen every CIM against this thesis before a DealCloud record is created.",
+    "sectors": [
+      "B2B software",
+      "data infrastructure",
+      "vertical SaaS",
+      "payments infrastructure"
+    ],
+    "geographies": [
+      "United States",
+      "Canada"
+    ],
+    "revenue_m_min": 25.0,
+    "revenue_m_max": 100.0,
+    "growth_pct_min": 15.0,
+    "max_net_debt_ebitda": 6.0,
+    "avoid": [
+      "project-based services",
+      "heavily cyclical industrials",
+      "majority consumer"
+    ]
+  },
+  "deals": [
+    {
+      "id": "northwind",
+      "company": "Northwind Analytics",
+      "document_type": "CIM",
+      "filename": "Northwind_Analytics_CIM.pdf",
+      "text": "NORTHWIND ANALYTICS, INC.\nConfidential Information Memorandum\nPrepared for qualified investors only\n\nCompany: Northwind Analytics\nSector: B2B software / data observability\nHQ: Austin, TX\nEmployees: 310\n\nNorthwind sells a SaaS platform that traces data pipelines for mid-market manufacturers\nand logistics operators. 94% of FY2025 revenue was recurring subscription. [p.9]\n\nFinancials (FY2025A)\nRevenue: $48.2 million [p.12]\nYoY growth: 31% [p.12]\nAdj. EBITDA: $11.6 million [p.13]\nEBITDA margin: 24% [p.13]\nNet debt: $48.7 million [p.18]\nNet debt / EBITDA: 4.2x [p.18]\nRecurring revenue: 94% [p.9]\n\nRisks\n- Customer concentration: top 10 accounts are 38% of ARR [p.22]\n- Competitive pressure from hyperscaler observability suites [p.24]\n"
+    },
+    {
+      "id": "harborpay",
+      "company": "HarborPay",
+      "document_type": "CIM",
+      "filename": "HarborPay_CIM.pdf",
+      "text": "HARBORPAY, INC.\nConfidential Information Memorandum\n\nCompany: HarborPay\nSector: B2B payments infrastructure\nHQ: Chicago, IL\nEmployees: 190\n\nHarborPay provides embedded payouts and reconciliation for vertical SaaS platforms.\nGross payment volume grew faster than revenue as take-rate compressed. [p.7]\n\nFinancials (FY2025A)\nRevenue: $36.4 million [p.11]\nYoY growth: 18% [p.11]\nAdj. EBITDA: $6.1 million [p.12]\nEBITDA margin: 17% [p.12]\nNet debt: $41.5 million [p.19]\nNet debt / EBITDA: 6.8x [p.19]\nRecurring revenue: 81% [p.8]\n\nRisks\n- Sponsor-led recap left leverage above 6x [p.19]\n- Take-rate compression vs. larger processors [p.16]\n"
+    },
+    {
+      "id": "helios",
+      "company": "Helios Solar",
+      "document_type": "teaser",
+      "filename": "Helios_Solar_Teaser.pdf",
+      "text": "HELIOS SOLAR EPC LLC\nTeaser \u2014 Project Development Platform\n\nCompany: Helios Solar\nSector: project-based solar EPC\nHQ: Phoenix, AZ\nEmployees: 540\n\nHelios builds utility-scale solar sites under fixed-price EPC contracts. Revenue is\nrecognized on percentage-of-completion and is lumpy by construction cycle. [p.3]\n\nFinancials (FY2025A)\nRevenue: $72.0 million [p.6]\nYoY growth: 12% [p.6]\nAdj. EBITDA: $8.4 million [p.7]\nEBITDA margin: 12% [p.7]\nNet debt: $22.0 million [p.9]\nNet debt / EBITDA: 2.6x [p.9]\nRecurring revenue: 8% [p.4]\n\nRisks\n- Backlog depends on interconnection queue timing [p.11]\n- Commodity and labor inflation on fixed-price jobs [p.12]\n"
+    },
+    {
+      "id": "atlas",
+      "company": "Atlas Clinics",
+      "document_type": "CIM",
+      "filename": "Atlas_Clinics_CIM.pdf",
+      "text": "ATLAS CLINICS GROUP\nConfidential Information Memorandum\n\nCompany: Atlas Clinics\nSector: multi-site specialty healthcare services\nHQ: Nashville, TN\nEmployees: 820\n\nAtlas operates 41 orthopedic clinics. Same-store growth is solid, but reimbursement\nmix and physician recruitment drive the model, not software. [p.5]\n\nFinancials (FY2025A)\nRevenue: $55.1 million [p.10]\nYoY growth: 22% [p.10]\nAdj. EBITDA: $9.9 million [p.11]\nEBITDA margin: 18% [p.11]\nNet debt: $39.6 million [p.15]\nNet debt / EBITDA: 4.0x [p.15]\nRecurring revenue: 0% [p.6]\n\nRisks\n- Payer mix and Medicare rate exposure [p.18]\n- Key-man risk in physician partners [p.19]\n"
+    },
+    {
+      "id": "quorum",
+      "company": "Quorum Data",
+      "document_type": "CIM",
+      "filename": "Quorum_Data_CIM.pdf",
+      "text": "QUORUM DATA LTD.\nConfidential Information Memorandum\n\nCompany: Quorum Data\nSector: vertical SaaS / insurance data infrastructure\nHQ: Toronto, Canada\nEmployees: 140\n\nQuorum sells policy and claims data products to P&C carriers in Canada and the\nUnited States on multi-year contracts. [p.4]\n\nFinancials (FY2025A)\nRevenue: $29.3 million [p.8]\nYoY growth: 27% [p.8]\nAdj. EBITDA: $7.4 million [p.9]\nEBITDA margin: 25% [p.9]\nNet debt: $18.1 million [p.14]\nNet debt / EBITDA: 2.4x [p.14]\nRecurring revenue: 91% [p.5]\n\nRisks\n- Cross-border data residency requirements [p.17]\n- Carrier procurement cycles can slip a quarter [p.18]\n"
+    },
+    {
+      "id": "meridian",
+      "company": "Meridian Logistics",
+      "document_type": "teaser",
+      "filename": "Meridian_Logistics_Teaser.pdf",
+      "text": "MERIDIAN LOGISTICS SOFTWARE\nOne-page teaser\n\nCompany: Meridian Logistics\nSector: B2B software / transportation TMS\nHQ: Denver, CO\n\nEarly teaser circulated by the sell-side advisor. Full CIM and quality of earnings\nare not yet in the data room. Do not invent missing financials.\n\nFinancials (limited)\nRevenue: $41.0 million [p.1]\nEmployees: 210\n\nThe advisor states growth and EBITDA will be provided in the CIM. No leverage\nfigures are included in this teaser.\n\nRisks\n- Incomplete package; associate must wait for CIM before scoring leverage [p.1]\n"
+    }
+  ]
+}

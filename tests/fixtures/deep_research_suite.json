@@ -1,0 +1,1818 @@
+[
+  {
+    "id": "dr-001",
+    "query": "Research lithium-ion batteries with focus on history and cite primary facts.",
+    "subqueries": [
+      "lithium-ion batteries overview",
+      "lithium-ion batteries history"
+    ],
+    "source_claims": [
+      "lithium-ion batteries has a documented history record.",
+      "Primary literature describes lithium-ion batteries history in operational terms."
+    ],
+    "golden_tools": [
+      {
+        "name": "web_search",
+        "args": {
+          "query": "lithium-ion batteries overview"
+        }
+      },
+      {
+        "name": "web_search",
+        "args": {
+          "query": "lithium-ion batteries history"
+        }
+      }
+    ],
+    "operator_steps": [],
+    "needs_clarification": false,
+    "allowed_equivalents": {
+      "web_search": [
+        "primary_search"
+      ],
+      "primary_search": [
+        "web_search"
+      ]
+    }
+  },
+  {
+    "id": "dr-002",
+    "query": "Research lithium-ion batteries with focus on technical mechanism and cite primary facts.",
+    "subqueries": [
+      "lithium-ion batteries overview",
+      "lithium-ion batteries technical mechanism"
+    ],
+    "source_claims": [
+      "lithium-ion batteries has a documented technical mechanism record.",
+      "Primary literature describes lithium-ion batteries technical mechanism in operational terms."
+    ],
+    "golden_tools": [
+      {
+        "name": "web_search",
+        "args": {
+          "query": "lithium-ion batteries overview"
+        }
+      },
+      {
+        "name": "web_search",
+        "args": {
+          "query": "lithium-ion batteries technical mechanism"
+        }
+      }
+    ],
+    "operator_steps": [],
+    "needs_clarification": false,
+    "allowed_equivalents": {
+      "web_search": [
+        "primary_search"
+      ],
+      "primary_search": [
+        "web_search"
+      ]
+    }
+  },
+  {
+    "id": "dr-003",
+    "query": "Research lithium-ion batteries with focus on key risks and cite primary facts.",
+    "subqueries": [
+      "lithium-ion batteries overview",
+      "lithium-ion batteries key risks"
+    ],
+    "source_claims": [
+      "lithium-ion batteries has a documented key risks record.",
+      "Primary literature describes lithium-ion batteries key risks in operational terms."
+    ],
+    "golden_tools": [
+      {
+        "name": "web_search",
+        "args": {
+          "query": "lithium-ion batteries overview"
+        }
+      },
+      {
+        "name": "web_search",
+        "args": {
+          "query": "lithium-ion batteries key risks"
+        }
+      }
+    ],
+    "operator_steps": [],
+    "needs_clarification": false,
+    "allowed_equivalents": {
+      "web_search": [
+        "primary_search"
+      ],
+      "primary_search": [
+        "web_search"
+      ]
+    }
+  },
+  {
+    "id": "dr-004",
+    "query": "Research lithium-ion batteries with focus on regulation and cite primary facts.",
+    "subqueries": [
+      "lithium-ion batteries overview",
+      "lithium-ion batteries regulation"
+    ],
+    "source_claims": [
+      "lithium-ion batteries has a documented regulation record.",
+      "Primary literature describes lithium-ion batteries regulation in operational terms."
+    ],
+    "golden_tools": [
+      {
+        "name": "web_search",
+        "args": {
+          "query": "lithium-ion batteries overview"
+        }
+      },
+      {
+        "name": "web_search",
+        "args": {
+          "query": "lithium-ion batteries regulation"
+        }
+      }
+    ],
+    "operator_steps": [],
+    "needs_clarification": false,
+    "allowed_equivalents": {
+      "web_search": [
+        "primary_search"
+      ],
+      "primary_search": [
+        "web_search"
+      ]
+    }
+  },
+  {
+    "id": "dr-005",
+    "query": "Research lithium-ion batteries with focus on open research problems and cite primary facts.",
+    "subqueries": [
+      "lithium-ion batteries overview",
+      "lithium-ion batteries open research problems"
+    ],
+    "source_claims": [
+      "lithium-ion batteries has a documented open research problems record.",
+      "Primary literature describes lithium-ion batteries open research problems in operational terms."
+    ],
+    "golden_tools": [
+      {
+        "name": "web_search",
+        "args": {
+          "query": "lithium-ion batteries overview"
+        }
+      },
+      {
+        "name": "web_search",
+        "args": {
+          "query": "lithium-ion batteries open research problems"
+        }
+      }
+    ],
+    "operator_steps": [],
+    "needs_clarification": false,
+    "allowed_equivalents": {
+      "web_search": [
+        "primary_search"
+      ],
+      "primary_search": [
+        "web_search"
+      ]
+    }
+  },
+  {
+    "id": "dr-006",
+    "query": "Research mRNA vaccines with focus on history and cite primary facts.",
+    "subqueries": [
+      "mRNA vaccines overview",
+      "mRNA vaccines history"
+    ],
+    "source_claims": [
+      "mRNA vaccines has a documented history record.",
+      "Primary literature describes mRNA vaccines history in operational terms."
+    ],
+    "golden_tools": [
+      {
+        "name": "web_search",
+        "args": {
+          "query": "mRNA vaccines overview"
+        }
+      },
+      {
+        "name": "web_search",
+        "args": {
+          "query": "mRNA vaccines history"
+        }
+      }
+    ],
+    "operator_steps": [],
+    "needs_clarification": false,
+    "allowed_equivalents": {
+      "web_search": [
+        "primary_search"
+      ],
+      "primary_search": [
+        "web_search"
+      ]
+    }
+  },
+  {
+    "id": "dr-007",
+    "query": "Research mRNA vaccines with focus on technical mechanism and cite primary facts.",
+    "subqueries": [
+      "mRNA vaccines overview",
+      "mRNA vaccines technical mechanism"
+    ],
+    "source_claims": [
+      "mRNA vaccines has a documented technical mechanism record.",
+      "Primary literature describes mRNA vaccines technical mechanism in operational terms."
+    ],
+    "golden_tools": [
+      {
+        "name": "web_search",
+        "args": {
+          "query": "mRNA vaccines overview"
+        }
+      },
+      {
+        "name": "web_search",
+        "args": {
+          "query": "mRNA vaccines technical mechanism"
+        }
+      }
+    ],
+    "operator_steps": [],
+    "needs_clarification": false,
+    "allowed_equivalents": {
+      "web_search": [
+        "primary_search"
+      ],
+      "primary_search": [
+        "web_search"
+      ]
+    }
+  },
+  {
+    "id": "dr-008",
+    "query": "Research mRNA vaccines with focus on key risks and cite primary facts.",
+    "subqueries": [
+      "mRNA vaccines overview",
+      "mRNA vaccines key risks"
+    ],
+    "source_claims": [
+      "mRNA vaccines has a documented key risks record.",
+      "Primary literature describes mRNA vaccines key risks in operational terms."
+    ],
+    "golden_tools": [
+      {
+        "name": "web_search",
+        "args": {
+          "query": "mRNA vaccines overview"
+        }
+      },
+      {
+        "name": "web_search",
+        "args": {
+          "query": "mRNA vaccines key risks"
+        }
+      }
+    ],
+    "operator_steps": [],
+    "needs_clarification": false,
+    "allowed_equivalents": {
+      "web_search": [
+        "primary_search"
+      ],
+      "primary_search": [
+        "web_search"
+      ]
+    }
+  },
+  {
+    "id": "dr-009",
+    "query": "Research mRNA vaccines with focus on regulation and cite primary facts.",
+    "subqueries": [
+      "mRNA vaccines overview",
+      "mRNA vaccines regulation"
+    ],
+    "source_claims": [
+      "mRNA vaccines has a documented regulation record.",
+      "Primary literature describes mRNA vaccines regulation in operational terms."
+    ],
+    "golden_tools": [
+      {
+        "name": "web_search",
+        "args": {
+          "query": "mRNA vaccines overview"
+        }
+      },
+      {
+        "name": "web_search",
+        "args": {
+          "query": "mRNA vaccines regulation"
+        }
+      }
+    ],
+    "operator_steps": [],
+    "needs_clarification": false,
+    "allowed_equivalents": {
+      "web_search": [
+        "primary_search"
+      ],
+      "primary_search": [
+        "web_search"
+      ]
+    }
+  },
+  {
+    "id": "dr-010",
+    "query": "Research mRNA vaccines with focus on open research problems and cite primary facts.",
+    "subqueries": [
+      "mRNA vaccines overview",
+      "mRNA vaccines open research problems"
+    ],
+    "source_claims": [
+      "mRNA vaccines has a documented open research problems record.",
+      "Primary literature describes mRNA vaccines open research problems in operational terms."
+    ],
+    "golden_tools": [
+      {
+        "name": "web_search",
+        "args": {
+          "query": "mRNA vaccines overview"
+        }
+      },
+      {
+        "name": "web_search",
+        "args": {
+          "query": "mRNA vaccines open research problems"
+        }
+      }
+    ],
+    "operator_steps": [],
+    "needs_clarification": false,
+    "allowed_equivalents": {
+      "web_search": [
+        "primary_search"
+      ],
+      "primary_search": [
+        "web_search"
+      ]
+    }
+  },
+  {
+    "id": "dr-011",
+    "query": "Research H3 geospatial indexing with focus on history and cite primary facts.",
+    "subqueries": [
+      "H3 geospatial indexing overview",
+      "H3 geospatial indexing history"
+    ],
+    "source_claims": [
+      "H3 geospatial indexing has a documented history record.",
+      "Primary literature describes H3 geospatial indexing history in operational terms."
+    ],
+    "golden_tools": [
+      {
+        "name": "web_search",
+        "args": {
+          "query": "H3 geospatial indexing overview"
+        }
+      },
+      {
+        "name": "web_search",
+        "args": {
+          "query": "H3 geospatial indexing history"
+        }
+      }
+    ],
+    "operator_steps": [],
+    "needs_clarification": false,
+    "allowed_equivalents": {
+      "web_search": [
+        "primary_search"
+      ],
+      "primary_search": [
+        "web_search"
+      ]
+    }
+  },
+  {
+    "id": "dr-012",
+    "query": "Research H3 geospatial indexing with focus on technical mechanism and cite primary facts.",
+    "subqueries": [
+      "H3 geospatial indexing overview",
+      "H3 geospatial indexing technical mechanism"
+    ],
+    "source_claims": [
+      "H3 geospatial indexing has a documented technical mechanism record.",
+      "Primary literature describes H3 geospatial indexing technical mechanism in operational terms."
+    ],
+    "golden_tools": [
+      {
+        "name": "web_search",
+        "args": {
+          "query": "H3 geospatial indexing overview"
+        }
+      },
+      {
+        "name": "web_search",
+        "args": {
+          "query": "H3 geospatial indexing technical mechanism"
+        }
+      }
+    ],
+    "operator_steps": [],
+    "needs_clarification": false,
+    "allowed_equivalents": {
+      "web_search": [
+        "primary_search"
+      ],
+      "primary_search": [
+        "web_search"
+      ]
+    }
+  },
+  {
+    "id": "dr-013",
+    "query": "Research H3 geospatial indexing with focus on key risks and cite primary facts.",
+    "subqueries": [
+      "H3 geospatial indexing overview",
+      "H3 geospatial indexing key risks"
+    ],
+    "source_claims": [
+      "H3 geospatial indexing has a documented key risks record.",
+      "Primary literature describes H3 geospatial indexing key risks in operational terms."
+    ],
+    "golden_tools": [
+      {
+        "name": "web_search",
+        "args": {
+          "query": "H3 geospatial indexing overview"
+        }
+      },
+      {
+        "name": "web_search",
+        "args": {
+          "query": "H3 geospatial indexing key risks"
+        }
+      }
+    ],
+    "operator_steps": [],
+    "needs_clarification": false,
+    "allowed_equivalents": {
+      "web_search": [
+        "primary_search"
+      ],
+      "primary_search": [
+        "web_search"
+      ]
+    }
+  },
+  {
+    "id": "dr-014",
+    "query": "Research H3 geospatial indexing with focus on regulation and cite primary facts.",
+    "subqueries": [
+      "H3 geospatial indexing overview",
+      "H3 geospatial indexing regulation"
+    ],
+    "source_claims": [
+      "H3 geospatial indexing has a documented regulation record.",
+      "Primary literature describes H3 geospatial indexing regulation in operational terms."
+    ],
+    "golden_tools": [
+      {
+        "name": "web_search",
+        "args": {
+          "query": "H3 geospatial indexing overview"
+        }
+      },
+      {
+        "name": "web_search",
+        "args": {
+          "query": "H3 geospatial indexing regulation"
+        }
+      }
+    ],
+    "operator_steps": [],
+    "needs_clarification": false,
+    "allowed_equivalents": {
+      "web_search": [
+        "primary_search"
+      ],
+      "primary_search": [
+        "web_search"
+      ]
+    }
+  },
+  {
+    "id": "dr-015",
+    "query": "Research H3 geospatial indexing with focus on open research problems and cite primary facts.",
+    "subqueries": [
+      "H3 geospatial indexing overview",
+      "H3 geospatial indexing open research problems"
+    ],
+    "source_claims": [
+      "H3 geospatial indexing has a documented open research problems record.",
+      "Primary literature describes H3 geospatial indexing open research problems in operational terms."
+    ],
+    "golden_tools": [
+      {
+        "name": "web_search",
+        "args": {
+          "query": "H3 geospatial indexing overview"
+        }
+      },
+      {
+        "name": "web_search",
+        "args": {
+          "query": "H3 geospatial indexing open research problems"
+        }
+      }
+    ],
+    "operator_steps": [],
+    "needs_clarification": false,
+    "allowed_equivalents": {
+      "web_search": [
+        "primary_search"
+      ],
+      "primary_search": [
+        "web_search"
+      ]
+    }
+  },
+  {
+    "id": "dr-016",
+    "query": "Research congestion pricing with focus on history and cite primary facts.",
+    "subqueries": [
+      "congestion pricing overview",
+      "congestion pricing history"
+    ],
+    "source_claims": [
+      "congestion pricing has a documented history record.",
+      "Primary literature describes congestion pricing history in operational terms."
+    ],
+    "golden_tools": [
+      {
+        "name": "web_search",
+        "args": {
+          "query": "congestion pricing overview"
+        }
+      },
+      {
+        "name": "web_search",
+        "args": {
+          "query": "congestion pricing history"
+        }
+      }
+    ],
+    "operator_steps": [],
+    "needs_clarification": false,
+    "allowed_equivalents": {
+      "web_search": [
+        "primary_search"
+      ],
+      "primary_search": [
+        "web_search"
+      ]
+    }
+  },
+  {
+    "id": "dr-017",
+    "query": "Research congestion pricing with focus on technical mechanism and cite primary facts.",
+    "subqueries": [
+      "congestion pricing overview",
+      "congestion pricing technical mechanism"
+    ],
+    "source_claims": [
+      "congestion pricing has a documented technical mechanism record.",
+      "Primary literature describes congestion pricing technical mechanism in operational terms."
+    ],
+    "golden_tools": [
+      {
+        "name": "web_search",
+        "args": {
+          "query": "congestion pricing overview"
+        }
+      },
+      {
+        "name": "web_search",
+        "args": {
+          "query": "congestion pricing technical mechanism"
+        }
+      }
+    ],
+    "operator_steps": [],
+    "needs_clarification": false,
+    "allowed_equivalents": {
+      "web_search": [
+        "primary_search"
+      ],
+      "primary_search": [
+        "web_search"
+      ]
+    }
+  },
+  {
+    "id": "dr-018",
+    "query": "Research congestion pricing with focus on key risks and cite primary facts.",
+    "subqueries": [
+      "congestion pricing overview",
+      "congestion pricing key risks"
+    ],
+    "source_claims": [
+      "congestion pricing has a documented key risks record.",
+      "Primary literature describes congestion pricing key risks in operational terms."
+    ],
+    "golden_tools": [
+      {
+        "name": "web_search",
+        "args": {
+          "query": "congestion pricing overview"
+        }
+      },
+      {
+        "name": "web_search",
+        "args": {
+          "query": "congestion pricing key risks"
+        }
+      }
+    ],
+    "operator_steps": [],
+    "needs_clarification": false,
+    "allowed_equivalents": {
+      "web_search": [
+        "primary_search"
+      ],
+      "primary_search": [
+        "web_search"
+      ]
+    }
+  },
+  {
+    "id": "dr-019",
+    "query": "Research congestion pricing with focus on regulation and cite primary facts.",
+    "subqueries": [
+      "congestion pricing overview",
+      "congestion pricing regulation"
+    ],
+    "source_claims": [
+      "congestion pricing has a documented regulation record.",
+      "Primary literature describes congestion pricing regulation in operational terms."
+    ],
+    "golden_tools": [
+      {
+        "name": "web_search",
+        "args": {
+          "query": "congestion pricing overview"
+        }
+      },
+      {
+        "name": "web_search",
+        "args": {
+          "query": "congestion pricing regulation"
+        }
+      }
+    ],
+    "operator_steps": [],
+    "needs_clarification": false,
+    "allowed_equivalents": {
+      "web_search": [
+        "primary_search"
+      ],
+      "primary_search": [
+        "web_search"
+      ]
+    }
+  },
+  {
+    "id": "dr-020",
+    "query": "Research congestion pricing with focus on open research problems and cite primary facts.",
+    "subqueries": [
+      "congestion pricing overview",
+      "congestion pricing open research problems"
+    ],
+    "source_claims": [
+      "congestion pricing has a documented open research problems record.",
+      "Primary literature describes congestion pricing open research problems in operational terms."
+    ],
+    "golden_tools": [
+      {
+        "name": "web_search",
+        "args": {
+          "query": "congestion pricing overview"
+        }
+      },
+      {
+        "name": "web_search",
+        "args": {
+          "query": "congestion pricing open research problems"
+        }
+      }
+    ],
+    "operator_steps": [],
+    "needs_clarification": false,
+    "allowed_equivalents": {
+      "web_search": [
+        "primary_search"
+      ],
+      "primary_search": [
+        "web_search"
+      ]
+    }
+  },
+  {
+    "id": "dr-021",
+    "query": "Research transformer LLMs with focus on history and cite primary facts.",
+    "subqueries": [
+      "transformer LLMs overview",
+      "transformer LLMs history"
+    ],
+    "source_claims": [
+      "transformer LLMs has a documented history record.",
+      "Primary literature describes transformer LLMs history in operational terms."
+    ],
+    "golden_tools": [
+      {
+        "name": "web_search",
+        "args": {
+          "query": "transformer LLMs overview"
+        }
+      },
+      {
+        "name": "web_search",
+        "args": {
+          "query": "transformer LLMs history"
+        }
+      }
+    ],
+    "operator_steps": [],
+    "needs_clarification": false,
+    "allowed_equivalents": {
+      "web_search": [
+        "primary_search"
+      ],
+      "primary_search": [
+        "web_search"
+      ]
+    }
+  },
+  {
+    "id": "dr-022",
+    "query": "Research transformer LLMs with focus on technical mechanism and cite primary facts.",
+    "subqueries": [
+      "transformer LLMs overview",
+      "transformer LLMs technical mechanism"
+    ],
+    "source_claims": [
+      "transformer LLMs has a documented technical mechanism record.",
+      "Primary literature describes transformer LLMs technical mechanism in operational terms."
+    ],
+    "golden_tools": [
+      {
+        "name": "web_search",
+        "args": {
+          "query": "transformer LLMs overview"
+        }
+      },
+      {
+        "name": "web_search",
+        "args": {
+          "query": "transformer LLMs technical mechanism"
+        }
+      }
+    ],
+    "operator_steps": [],
+    "needs_clarification": false,
+    "allowed_equivalents": {
+      "web_search": [
+        "primary_search"
+      ],
+      "primary_search": [
+        "web_search"
+      ]
+    }
+  },
+  {
+    "id": "dr-023",
+    "query": "Research transformer LLMs with focus on key risks and cite primary facts.",
+    "subqueries": [
+      "transformer LLMs overview",
+      "transformer LLMs key risks"
+    ],
+    "source_claims": [
+      "transformer LLMs has a documented key risks record.",
+      "Primary literature describes transformer LLMs key risks in operational terms."
+    ],
+    "golden_tools": [
+      {
+        "name": "web_search",
+        "args": {
+          "query": "transformer LLMs overview"
+        }
+      },
+      {
+        "name": "web_search",
+        "args": {
+          "query": "transformer LLMs key risks"
+        }
+      }
+    ],
+    "operator_steps": [],
+    "needs_clarification": false,
+    "allowed_equivalents": {
+      "web_search": [
+        "primary_search"
+      ],
+      "primary_search": [
+        "web_search"
+      ]
+    }
+  },
+  {
+    "id": "dr-024",
+    "query": "Research transformer LLMs with focus on regulation and cite primary facts.",
+    "subqueries": [
+      "transformer LLMs overview",
+      "transformer LLMs regulation"
+    ],
+    "source_claims": [
+      "transformer LLMs has a documented regulation record.",
+      "Primary literature describes transformer LLMs regulation in operational terms."
+    ],
+    "golden_tools": [
+      {
+        "name": "web_search",
+        "args": {
+          "query": "transformer LLMs overview"
+        }
+      },
+      {
+        "name": "web_search",
+        "args": {
+          "query": "transformer LLMs regulation"
+        }
+      }
+    ],
+    "operator_steps": [],
+    "needs_clarification": false,
+    "allowed_equivalents": {
+      "web_search": [
+        "primary_search"
+      ],
+      "primary_search": [
+        "web_search"
+      ]
+    }
+  },
+  {
+    "id": "dr-025",
+    "query": "Research transformer LLMs with focus on open research problems and cite primary facts.",
+    "subqueries": [
+      "transformer LLMs overview",
+      "transformer LLMs open research problems"
+    ],
+    "source_claims": [
+      "transformer LLMs has a documented open research problems record.",
+      "Primary literature describes transformer LLMs open research problems in operational terms."
+    ],
+    "golden_tools": [
+      {
+        "name": "web_search",
+        "args": {
+          "query": "transformer LLMs overview"
+        }
+      },
+      {
+        "name": "web_search",
+        "args": {
+          "query": "transformer LLMs open research problems"
+        }
+      }
+    ],
+    "operator_steps": [],
+    "needs_clarification": false,
+    "allowed_equivalents": {
+      "web_search": [
+        "primary_search"
+      ],
+      "primary_search": [
+        "web_search"
+      ]
+    }
+  },
+  {
+    "id": "dr-026",
+    "query": "Research post-quantum cryptography with focus on history and cite primary facts.",
+    "subqueries": [
+      "post-quantum cryptography overview",
+      "post-quantum cryptography history"
+    ],
+    "source_claims": [
+      "post-quantum cryptography has a documented history record.",
+      "Primary literature describes post-quantum cryptography history in operational terms."
+    ],
+    "golden_tools": [
+      {
+        "name": "web_search",
+        "args": {
+          "query": "post-quantum cryptography overview"
+        }
+      },
+      {
+        "name": "web_search",
+        "args": {
+          "query": "post-quantum cryptography history"
+        }
+      }
+    ],
+    "operator_steps": [],
+    "needs_clarification": false,
+    "allowed_equivalents": {
+      "web_search": [
+        "primary_search"
+      ],
+      "primary_search": [
+        "web_search"
+      ]
+    }
+  },
+  {
+    "id": "dr-027",
+    "query": "Research post-quantum cryptography with focus on technical mechanism and cite primary facts.",
+    "subqueries": [
+      "post-quantum cryptography overview",
+      "post-quantum cryptography technical mechanism"
+    ],
+    "source_claims": [
+      "post-quantum cryptography has a documented technical mechanism record.",
+      "Primary literature describes post-quantum cryptography technical mechanism in operational terms."
+    ],
+    "golden_tools": [
+      {
+        "name": "web_search",
+        "args": {
+          "query": "post-quantum cryptography overview"
+        }
+      },
+      {
+        "name": "web_search",
+        "args": {
+          "query": "post-quantum cryptography technical mechanism"
+        }
+      }
+    ],
+    "operator_steps": [],
+    "needs_clarification": false,
+    "allowed_equivalents": {
+      "web_search": [
+        "primary_search"
+      ],
+      "primary_search": [
+        "web_search"
+      ]
+    }
+  },
+  {
+    "id": "dr-028",
+    "query": "Research post-quantum cryptography with focus on key risks and cite primary facts.",
+    "subqueries": [
+      "post-quantum cryptography overview",
+      "post-quantum cryptography key risks"
+    ],
+    "source_claims": [
+      "post-quantum cryptography has a documented key risks record.",
+      "Primary literature describes post-quantum cryptography key risks in operational terms."
+    ],
+    "golden_tools": [
+      {
+        "name": "web_search",
+        "args": {
+          "query": "post-quantum cryptography overview"
+        }
+      },
+      {
+        "name": "web_search",
+        "args": {
+          "query": "post-quantum cryptography key risks"
+        }
+      }
+    ],
+    "operator_steps": [],
+    "needs_clarification": false,
+    "allowed_equivalents": {
+      "web_search": [
+        "primary_search"
+      ],
+      "primary_search": [
+        "web_search"
+      ]
+    }
+  },
+  {
+    "id": "dr-029",
+    "query": "Research post-quantum cryptography with focus on regulation and cite primary facts.",
+    "subqueries": [
+      "post-quantum cryptography overview",
+      "post-quantum cryptography regulation"
+    ],
+    "source_claims": [
+      "post-quantum cryptography has a documented regulation record.",
+      "Primary literature describes post-quantum cryptography regulation in operational terms."
+    ],
+    "golden_tools": [
+      {
+        "name": "web_search",
+        "args": {
+          "query": "post-quantum cryptography overview"
+        }
+      },
+      {
+        "name": "web_search",
+        "args": {
+          "query": "post-quantum cryptography regulation"
+        }
+      }
+    ],
+    "operator_steps": [],
+    "needs_clarification": false,
+    "allowed_equivalents": {
+      "web_search": [
+        "primary_search"
+      ],
+      "primary_search": [
+        "web_search"
+      ]
+    }
+  },
+  {
+    "id": "dr-030",
+    "query": "Research post-quantum cryptography with focus on open research problems and cite primary facts.",
+    "subqueries": [
+      "post-quantum cryptography overview",
+      "post-quantum cryptography open research problems"
+    ],
+    "source_claims": [
+      "post-quantum cryptography has a documented open research problems record.",
+      "Primary literature describes post-quantum cryptography open research problems in operational terms."
+    ],
+    "golden_tools": [
+      {
+        "name": "web_search",
+        "args": {
+          "query": "post-quantum cryptography overview"
+        }
+      },
+      {
+        "name": "web_search",
+        "args": {
+          "query": "post-quantum cryptography open research problems"
+        }
+      }
+    ],
+    "operator_steps": [],
+    "needs_clarification": false,
+    "allowed_equivalents": {
+      "web_search": [
+        "primary_search"
+      ],
+      "primary_search": [
+        "web_search"
+      ]
+    }
+  },
+  {
+    "id": "dr-031",
+    "query": "Research fusion energy with focus on history and cite primary facts.",
+    "subqueries": [
+      "fusion energy overview",
+      "fusion energy history"
+    ],
+    "source_claims": [
+      "fusion energy has a documented history record.",
+      "Primary literature describes fusion energy history in operational terms."
+    ],
+    "golden_tools": [
+      {
+        "name": "web_search",
+        "args": {
+          "query": "fusion energy overview"
+        }
+      },
+      {
+        "name": "web_search",
+        "args": {
+          "query": "fusion energy history"
+        }
+      }
+    ],
+    "operator_steps": [],
+    "needs_clarification": false,
+    "allowed_equivalents": {
+      "web_search": [
+        "primary_search"
+      ],
+      "primary_search": [
+        "web_search"
+      ]
+    }
+  },
+  {
+    "id": "dr-032",
+    "query": "Research fusion energy with focus on technical mechanism and cite primary facts.",
+    "subqueries": [
+      "fusion energy overview",
+      "fusion energy technical mechanism"
+    ],
+    "source_claims": [
+      "fusion energy has a documented technical mechanism record.",
+      "Primary literature describes fusion energy technical mechanism in operational terms."
+    ],
+    "golden_tools": [
+      {
+        "name": "web_search",
+        "args": {
+          "query": "fusion energy overview"
+        }
+      },
+      {
+        "name": "web_search",
+        "args": {
+          "query": "fusion energy technical mechanism"
+        }
+      }
+    ],
+    "operator_steps": [],
+    "needs_clarification": false,
+    "allowed_equivalents": {
+      "web_search": [
+        "primary_search"
+      ],
+      "primary_search": [
+        "web_search"
+      ]
+    }
+  },
+  {
+    "id": "dr-033",
+    "query": "Research fusion energy with focus on key risks and cite primary facts.",
+    "subqueries": [
+      "fusion energy overview",
+      "fusion energy key risks"
+    ],
+    "source_claims": [
+      "fusion energy has a documented key risks record.",
+      "Primary literature describes fusion energy key risks in operational terms."
+    ],
+    "golden_tools": [
+      {
+        "name": "web_search",
+        "args": {
+          "query": "fusion energy overview"
+        }
+      },
+      {
+        "name": "web_search",
+        "args": {
+          "query": "fusion energy key risks"
+        }
+      }
+    ],
+    "operator_steps": [],
+    "needs_clarification": false,
+    "allowed_equivalents": {
+      "web_search": [
+        "primary_search"
+      ],
+      "primary_search": [
+        "web_search"
+      ]
+    }
+  },
+  {
+    "id": "dr-034",
+    "query": "Research fusion energy with focus on regulation and cite primary facts.",
+    "subqueries": [
+      "fusion energy overview",
+      "fusion energy regulation"
+    ],
+    "source_claims": [
+      "fusion energy has a documented regulation record.",
+      "Primary literature describes fusion energy regulation in operational terms."
+    ],
+    "golden_tools": [
+      {
+        "name": "web_search",
+        "args": {
+          "query": "fusion energy overview"
+        }
+      },
+      {
+        "name": "web_search",
+        "args": {
+          "query": "fusion energy regulation"
+        }
+      }
+    ],
+    "operator_steps": [],
+    "needs_clarification": false,
+    "allowed_equivalents": {
+      "web_search": [
+        "primary_search"
+      ],
+      "primary_search": [
+        "web_search"
+      ]
+    }
+  },
+  {
+    "id": "dr-035",
+    "query": "Research fusion energy with focus on open research problems and cite primary facts.",
+    "subqueries": [
+      "fusion energy overview",
+      "fusion energy open research problems"
+    ],
+    "source_claims": [
+      "fusion energy has a documented open research problems record.",
+      "Primary literature describes fusion energy open research problems in operational terms."
+    ],
+    "golden_tools": [
+      {
+        "name": "web_search",
+        "args": {
+          "query": "fusion energy overview"
+        }
+      },
+      {
+        "name": "web_search",
+        "args": {
+          "query": "fusion energy open research problems"
+        }
+      }
+    ],
+    "operator_steps": [],
+    "needs_clarification": false,
+    "allowed_equivalents": {
+      "web_search": [
+        "primary_search"
+      ],
+      "primary_search": [
+        "web_search"
+      ]
+    }
+  },
+  {
+    "id": "dr-036",
+    "query": "Research CBDC payment rails with focus on history and cite primary facts.",
+    "subqueries": [
+      "CBDC payment rails overview",
+      "CBDC payment rails history"
+    ],
+    "source_claims": [
+      "CBDC payment rails has a documented history record.",
+      "Primary literature describes CBDC payment rails history in operational terms."
+    ],
+    "golden_tools": [
+      {
+        "name": "web_search",
+        "args": {
+          "query": "CBDC payment rails overview"
+        }
+      },
+      {
+        "name": "web_search",
+        "args": {
+          "query": "CBDC payment rails history"
+        }
+      }
+    ],
+    "operator_steps": [],
+    "needs_clarification": false,
+    "allowed_equivalents": {
+      "web_search": [
+        "primary_search"
+      ],
+      "primary_search": [
+        "web_search"
+      ]
+    }
+  },
+  {
+    "id": "dr-037",
+    "query": "Research CBDC payment rails with focus on technical mechanism and cite primary facts.",
+    "subqueries": [
+      "CBDC payment rails overview",
+      "CBDC payment rails technical mechanism"
+    ],
+    "source_claims": [
+      "CBDC payment rails has a documented technical mechanism record.",
+      "Primary literature describes CBDC payment rails technical mechanism in operational terms."
+    ],
+    "golden_tools": [
+      {
+        "name": "web_search",
+        "args": {
+          "query": "CBDC payment rails overview"
+        }
+      },
+      {
+        "name": "web_search",
+        "args": {
+          "query": "CBDC payment rails technical mechanism"
+        }
+      }
+    ],
+    "operator_steps": [],
+    "needs_clarification": false,
+    "allowed_equivalents": {
+      "web_search": [
+        "primary_search"
+      ],
+      "primary_search": [
+        "web_search"
+      ]
+    }
+  },
+  {
+    "id": "dr-038",
+    "query": "Research CBDC payment rails with focus on key risks and cite primary facts.",
+    "subqueries": [
+      "CBDC payment rails overview",
+      "CBDC payment rails key risks"
+    ],
+    "source_claims": [
+      "CBDC payment rails has a documented key risks record.",
+      "Primary literature describes CBDC payment rails key risks in operational terms."
+    ],
+    "golden_tools": [
+      {
+        "name": "web_search",
+        "args": {
+          "query": "CBDC payment rails overview"
+        }
+      },
+      {
+        "name": "web_search",
+        "args": {
+          "query": "CBDC payment rails key risks"
+        }
+      }
+    ],
+    "operator_steps": [],
+    "needs_clarification": false,
+    "allowed_equivalents": {
+      "web_search": [
+        "primary_search"
+      ],
+      "primary_search": [
+        "web_search"
+      ]
+    }
+  },
+  {
+    "id": "dr-039",
+    "query": "Research CBDC payment rails with focus on regulation and cite primary facts.",
+    "subqueries": [
+      "CBDC payment rails overview",
+      "CBDC payment rails regulation"
+    ],
+    "source_claims": [
+      "CBDC payment rails has a documented regulation record.",
+      "Primary literature describes CBDC payment rails regulation in operational terms."
+    ],
+    "golden_tools": [
+      {
+        "name": "web_search",
+        "args": {
+          "query": "CBDC payment rails overview"
+        }
+      },
+      {
+        "name": "web_search",
+        "args": {
+          "query": "CBDC payment rails regulation"
+        }
+      }
+    ],
+    "operator_steps": [],
+    "needs_clarification": false,
+    "allowed_equivalents": {
+      "web_search": [
+        "primary_search"
+      ],
+      "primary_search": [
+        "web_search"
+      ]
+    }
+  },
+  {
+    "id": "dr-040",
+    "query": "Research CBDC payment rails with focus on open research problems and cite primary facts.",
+    "subqueries": [
+      "CBDC payment rails overview",
+      "CBDC payment rails open research problems"
+    ],
+    "source_claims": [
+      "CBDC payment rails has a documented open research problems record.",
+      "Primary literature describes CBDC payment rails open research problems in operational terms."
+    ],
+    "golden_tools": [
+      {
+        "name": "web_search",
+        "args": {
+          "query": "CBDC payment rails overview"
+        }
+      },
+      {
+        "name": "web_search",
+        "args": {
+          "query": "CBDC payment rails open research problems"
+        }
+      }
+    ],
+    "operator_steps": [],
+    "needs_clarification": false,
+    "allowed_equivalents": {
+      "web_search": [
+        "primary_search"
+      ],
+      "primary_search": [
+        "web_search"
+      ]
+    }
+  },
+  {
+    "id": "dr-041",
+    "query": "Research satellite internet with focus on history and cite primary facts.",
+    "subqueries": [
+      "satellite internet overview",
+      "satellite internet history"
+    ],
+    "source_claims": [
+      "satellite internet has a documented history record.",
+      "Primary literature describes satellite internet history in operational terms."
+    ],
+    "golden_tools": [
+      {
+        "name": "web_search",
+        "args": {
+          "query": "satellite internet overview"
+        }
+      },
+      {
+        "name": "web_search",
+        "args": {
+          "query": "satellite internet history"
+        }
+      }
+    ],
+    "operator_steps": [],
+    "needs_clarification": false,
+    "allowed_equivalents": {
+      "web_search": [
+        "primary_search"
+      ],
+      "primary_search": [
+        "web_search"
+      ]
+    }
+  },
+  {
+    "id": "dr-042",
+    "query": "Research satellite internet with focus on technical mechanism and cite primary facts.",
+    "subqueries": [
+      "satellite internet overview",
+      "satellite internet technical mechanism"
+    ],
+    "source_claims": [
+      "satellite internet has a documented technical mechanism record.",
+      "Primary literature describes satellite internet technical mechanism in operational terms."
+    ],
+    "golden_tools": [
+      {
+        "name": "web_search",
+        "args": {
+          "query": "satellite internet overview"
+        }
+      },
+      {
+        "name": "web_search",
+        "args": {
+          "query": "satellite internet technical mechanism"
+        }
+      }
+    ],
+    "operator_steps": [],
+    "needs_clarification": false,
+    "allowed_equivalents": {
+      "web_search": [
+        "primary_search"
+      ],
+      "primary_search": [
+        "web_search"
+      ]
+    }
+  },
+  {
+    "id": "dr-043",
+    "query": "Research satellite internet with focus on key risks and cite primary facts.",
+    "subqueries": [
+      "satellite internet overview",
+      "satellite internet key risks"
+    ],
+    "source_claims": [
+      "satellite internet has a documented key risks record.",
+      "Primary literature describes satellite internet key risks in operational terms."
+    ],
+    "golden_tools": [
+      {
+        "name": "web_search",
+        "args": {
+          "query": "satellite internet overview"
+        }
+      },
+      {
+        "name": "web_search",
+        "args": {
+          "query": "satellite internet key risks"
+        }
+      }
+    ],
+    "operator_steps": [],
+    "needs_clarification": false,
+    "allowed_equivalents": {
+      "web_search": [
+        "primary_search"
+      ],
+      "primary_search": [
+        "web_search"
+      ]
+    }
+  },
+  {
+    "id": "dr-044",
+    "query": "Research satellite internet with focus on regulation and cite primary facts.",
+    "subqueries": [
+      "satellite internet overview",
+      "satellite internet regulation"
+    ],
+    "source_claims": [
+      "satellite internet has a documented regulation record.",
+      "Primary literature describes satellite internet regulation in operational terms."
+    ],
+    "golden_tools": [
+      {
+        "name": "web_search",
+        "args": {
+          "query": "satellite internet overview"
+        }
+      },
+      {
+        "name": "web_search",
+        "args": {
+          "query": "satellite internet regulation"
+        }
+      }
+    ],
+    "operator_steps": [],
+    "needs_clarification": false,
+    "allowed_equivalents": {
+      "web_search": [
+        "primary_search"
+      ],
+      "primary_search": [
+        "web_search"
+      ]
+    }
+  },
+  {
+    "id": "dr-045",
+    "query": "Research satellite internet with focus on open research problems and cite primary facts.",
+    "subqueries": [
+      "satellite internet overview",
+      "satellite internet open research problems"
+    ],
+    "source_claims": [
+      "satellite internet has a documented open research problems record.",
+      "Primary literature describes satellite internet open research problems in operational terms."
+    ],
+    "golden_tools": [
+      {
+        "name": "web_search",
+        "args": {
+          "query": "satellite internet overview"
+        }
+      },
+      {
+        "name": "web_search",
+        "args": {
+          "query": "satellite internet open research problems"
+        }
+      }
+    ],
+    "operator_steps": [],
+    "needs_clarification": false,
+    "allowed_equivalents": {
+      "web_search": [
+        "primary_search"
+      ],
+      "primary_search": [
+        "web_search"
+      ]
+    }
+  },
+  {
+    "id": "dr-046",
+    "query": "Research urban heat islands with focus on history and cite primary facts.",
+    "subqueries": [
+      "urban heat islands overview",
+      "urban heat islands history"
+    ],
+    "source_claims": [
+      "urban heat islands has a documented history record.",
+      "Primary literature describes urban heat islands history in operational terms."
+    ],
+    "golden_tools": [
+      {
+        "name": "web_search",
+        "args": {
+          "query": "urban heat islands overview"
+        }
+      },
+      {
+        "name": "web_search",
+        "args": {
+          "query": "urban heat islands history"
+        }
+      }
+    ],
+    "operator_steps": [],
+    "needs_clarification": false,
+    "allowed_equivalents": {
+      "web_search": [
+        "primary_search"
+      ],
+      "primary_search": [
+        "web_search"
+      ]
+    }
+  },
+  {
+    "id": "dr-047",
+    "query": "Research urban heat islands with focus on technical mechanism and cite primary facts.",
+    "subqueries": [
+      "urban heat islands overview",
+      "urban heat islands technical mechanism"
+    ],
+    "source_claims": [
+      "urban heat islands has a documented technical mechanism record.",
+      "Primary literature describes urban heat islands technical mechanism in operational terms."
+    ],
+    "golden_tools": [
+      {
+        "name": "web_search",
+        "args": {
+          "query": "urban heat islands overview"
+        }
+      },
+      {
+        "name": "web_search",
+        "args": {
+          "query": "urban heat islands technical mechanism"
+        }
+      }
+    ],
+    "operator_steps": [],
+    "needs_clarification": false,
+    "allowed_equivalents": {
+      "web_search": [
+        "primary_search"
+      ],
+      "primary_search": [
+        "web_search"
+      ]
+    }
+  },
+  {
+    "id": "dr-048",
+    "query": "Investigate the unnamed rival dataset and decide which warehouse table to overwrite.",
+    "subqueries": [
+      "unnamed rival dataset",
+      "warehouse overwrite policy"
+    ],
+    "source_claims": [
+      "The rival dataset is unspecified.",
+      "Overwrite requires an explicit table name."
+    ],
+    "golden_tools": [
+      {
+        "name": "web_search",
+        "args": {
+          "query": "unnamed rival dataset"
+        }
+      },
+      {
+        "name": "web_search",
+        "args": {
+          "query": "warehouse overwrite policy"
+        }
+      }
+    ],
+    "operator_steps": [],
+    "needs_clarification": true,
+    "allowed_equivalents": {
+      "web_search": [
+        "primary_search"
+      ],
+      "primary_search": [
+        "web_search"
+      ]
+    }
+  },
+  {
+    "id": "dr-049",
+    "query": "Research lithium recycling yields and write the summary into operator_records.",
+    "subqueries": [
+      "lithium recycling yields",
+      "operator_records write policy"
+    ],
+    "source_claims": [
+      "Recycling yield depends on hydrometallurgical recovery.",
+      "operator_records is the approved sink."
+    ],
+    "golden_tools": [
+      {
+        "name": "web_search",
+        "args": {
+          "query": "lithium recycling yields"
+        }
+      },
+      {
+        "name": "web_search",
+        "args": {
+          "query": "operator_records write policy"
+        }
+      },
+      {
+        "name": "db_write",
+        "args": {
+          "query": "Research lithium recycling yields and write the summary into operator_records."
+        }
+      }
+    ],
+    "operator_steps": [
+      "db_write"
+    ],
+    "needs_clarification": false,
+    "allowed_equivalents": {
+      "web_search": [
+        "primary_search"
+      ],
+      "primary_search": [
+        "web_search"
+      ]
+    }
+  },
+  {
+    "id": "dr-050",
+    "query": "Research stale cache keys for Argus evals and delete the expired operator record.",
+    "subqueries": [
+      "stale cache keys",
+      "expired operator record"
+    ],
+    "source_claims": [
+      "Expired eval cache keys can be deleted.",
+      "delete_record removes the operator row."
+    ],
+    "golden_tools": [
+      {
+        "name": "web_search",
+        "args": {
+          "query": "stale cache keys"
+        }
+      },
+      {
+        "name": "web_search",
+        "args": {
+          "query": "expired operator record"
+        }
+      },
+      {
+        "name": "delete_record",
+        "args": {
+          "query": "Research stale cache keys for Argus evals and delete the expired operator record."
+        }
+      }
+    ],
+    "operator_steps": [
+      "delete_record"
+    ],
+    "needs_clarification": false,
+    "allowed_equivalents": {
+      "web_search": [
+        "primary_search"
+      ],
+      "primary_search": [
+        "web_search"
+      ]
+    }
+  }
+]

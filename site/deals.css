@@ -1,0 +1,166 @@
+.deals-shell {
+  max-width: 1200px;
+}
+
+.eyebrow {
+  margin: 0 0 6px;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+}
+
+.thesis-card p {
+  margin-bottom: 10px;
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 0.8rem;
+  color: var(--muted);
+  background: #0f1730;
+}
+
+.deals-layout {
+  grid-template-columns: minmax(260px, 0.9fr) minmax(0, 1.4fr);
+}
+
+.inbox {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.inbox-item,
+.lane-card {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #0f1730;
+  padding: 10px;
+  text-align: left;
+  color: inherit;
+  width: 100%;
+  cursor: pointer;
+}
+
+.inbox-item:hover,
+.lane-card:hover {
+  border-color: #3b82f6;
+}
+
+.inbox-item .name,
+.lane-card .name {
+  font-weight: 600;
+}
+
+.inbox-item .meta,
+.lane-card .meta {
+  color: var(--muted);
+  font-size: 0.82rem;
+  margin-top: 4px;
+}
+
+.package-empty {
+  color: var(--muted);
+}
+
+.kv {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 6px 10px;
+  margin: 12px 0;
+  font-size: 0.92rem;
+}
+
+.kv .label {
+  color: var(--muted);
+}
+
+.quote {
+  border-left: 2px solid #60a5fa;
+  padding-left: 10px;
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin: 6px 0;
+}
+
+.score-hero {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.rec-advance { color: var(--good); }
+.rec-diligence { color: var(--warn); }
+.rec-pass { color: var(--bad); }
+
+.hitl-banner {
+  border: 1px solid #a16207;
+  background: #24180a;
+  border-radius: 10px;
+  padding: 12px;
+  margin: 12px 0;
+}
+
+.btn-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.btn.good {
+  background: #16351f;
+  border-color: #1e8f4a;
+}
+
+.btn.bad {
+  background: #3a1518;
+  border-color: #ef4444;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.lane {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #0c1326;
+  min-height: 140px;
+  padding: 10px;
+}
+
+.lane h4 {
+  margin: 0 0 8px;
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.lane-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+pre.doc {
+  max-height: 220px;
+  white-space: pre-wrap;
+  font-size: 0.78rem;
+}
+
+@media (max-width: 900px) {
+  .deals-layout,
+  .board {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,1832 @@
+{
+  "seed": 1337,
+  "total": 50,
+  "tool_selection_accuracy": 1.0,
+  "hallucination_rate": 0.0,
+  "mean_llm_calls": 5.06,
+  "token_reduction": 0.9771316563214636,
+  "verdicts": [
+    {
+      "query_id": "dr-001",
+      "tool_selection": {
+        "expected": [
+          "web_search",
+          "web_search"
+        ],
+        "actual": [
+          "web_search",
+          "web_search"
+        ],
+        "correct": 2,
+        "total": 2,
+        "accuracy": 1.0
+      },
+      "hallucination_rate": 0.0,
+      "claims": [
+        {
+          "claim": "lithium-ion batteries has a documented open research problems record",
+          "entailed": true,
+          "source": "tool_context"
+        },
+        {
+          "claim": "Primary literature describes lithium-ion batteries history in operational terms",
+          "entailed": true,
+          "source": "tool_context"
+        }
+      ],
+      "trajectory": {
+        "llm_calls": 5,
+        "tool_calls": 2,
+        "operator_iterations": 1
+      },
+      "token_reduction": null,
+      "status": "completed"
+    },
+    {
+      "query_id": "dr-002",
+      "tool_selection": {
+        "expected": [
+          "web_search",
+          "web_search"
+        ],
+        "actual": [
+          "web_search",
+          "web_search"
+        ],
+        "correct": 2,
+        "total": 2,
+        "accuracy": 1.0
+      },
+      "hallucination_rate": 0.0,
+      "claims": [
+        {
+          "claim": "lithium-ion batteries has a documented open research problems record",
+          "entailed": true,
+          "source": "tool_context"
+        },
+        {
+          "claim": "Primary literature describes lithium-ion batteries technical mechanism in operational terms",
+          "entailed": true,
+          "source": "tool_context"
+        }
+      ],
+      "trajectory": {
+        "llm_calls": 5,
+        "tool_calls": 2,
+        "operator_iterations": 1
+      },
+      "token_reduction": null,
+      "status": "completed"
+    },
+    {
+      "query_id": "dr-003",
+      "tool_selection": {
+        "expected": [
+          "web_search",
+          "web_search"
+        ],
+        "actual": [
+          "web_search",
+          "web_search"
+        ],
+        "correct": 2,
+        "total": 2,
+        "accuracy": 1.0
+      },
+      "hallucination_rate": 0.0,
+      "claims": [
+        {
+          "claim": "lithium-ion batteries has a documented open research problems record",
+          "entailed": true,
+          "source": "tool_context"
+        },
+        {
+          "claim": "Primary literature describes lithium-ion batteries key risks in operational terms",
+          "entailed": true,
+          "source": "tool_context"
+        }
+      ],
+      "trajectory": {
+        "llm_calls": 5,
+        "tool_calls": 2,
+        "operator_iterations": 1
+      },
+      "token_reduction": null,
+      "status": "completed"
+    },
+    {
+      "query_id": "dr-004",
+      "tool_selection": {
+        "expected": [
+          "web_search",
+          "web_search"
+        ],
+        "actual": [
+          "web_search",
+          "web_search"
+        ],
+        "correct": 2,
+        "total": 2,
+        "accuracy": 1.0
+      },
+      "hallucination_rate": 0.0,
+      "claims": [
+        {
+          "claim": "lithium-ion batteries has a documented open research problems record",
+          "entailed": true,
+          "source": "tool_context"
+        },
+        {
+          "claim": "Primary literature describes lithium-ion batteries regulation in operational terms",
+          "entailed": true,
+          "source": "tool_context"
+        }
+      ],
+      "trajectory": {
+        "llm_calls": 5,
+        "tool_calls": 2,
+        "operator_iterations": 1
+      },
+      "token_reduction": null,
+      "status": "completed"
+    },
+    {
+      "query_id": "dr-005",
+      "tool_selection": {
+        "expected": [
+          "web_search",
+          "web_search"
+        ],
+        "actual": [
+          "web_search",
+          "web_search"
+        ],
+        "correct": 2,
+        "total": 2,
+        "accuracy": 1.0
+      },
+      "hallucination_rate": 0.0,
+      "claims": [
+        {
+          "claim": "lithium-ion batteries has a documented open research problems record",
+          "entailed": true,
+          "source": "tool_context"
+        },
+        {
+          "claim": "Primary literature describes lithium-ion batteries open research problems in operational terms",
+          "entailed": true,
+          "source": "tool_context"
+        }
+      ],
+      "trajectory": {
+        "llm_calls": 5,
+        "tool_calls": 2,
+        "operator_iterations": 1
+      },
+      "token_reduction": null,
+      "status": "completed"
+    },
+    {
+      "query_id": "dr-006",
+      "tool_selection": {
+        "expected": [
+          "web_search",
+          "web_search"
+        ],
+        "actual": [
+          "web_search",
+          "web_search"
+        ],
+        "correct": 2,
+        "total": 2,
+        "accuracy": 1.0
+      },
+      "hallucination_rate": 0.0,
+      "claims": [
+        {
+          "claim": "mRNA vaccines has a documented open research problems record",
+          "entailed": true,
+          "source": "tool_context"
+        },
+        {
+          "claim": "Primary literature describes mRNA vaccines history in operational terms",
+          "entailed": true,
+          "source": "tool_context"
+        }
+      ],
+      "trajectory": {
+        "llm_calls": 5,
+        "tool_calls": 2,
+        "operator_iterations": 1
+      },
+      "token_reduction": null,
+      "status": "completed"
+    },
+    {
+      "query_id": "dr-007",
+      "tool_selection": {
+        "expected": [
+          "web_search",
+          "web_search"
+        ],
+        "actual": [
+          "web_search",
+          "web_search"
+        ],
+        "correct": 2,
+        "total": 2,
+        "accuracy": 1.0
+      },
+      "hallucination_rate": 0.0,
+      "claims": [
+        {
+          "claim": "mRNA vaccines has a documented open research problems record",
+          "entailed": true,
+          "source": "tool_context"
+        },
+        {
+          "claim": "Primary literature describes mRNA vaccines technical mechanism in operational terms",
+          "entailed": true,
+          "source": "tool_context"
+        }
+      ],
+      "trajectory": {
+        "llm_calls": 5,
+        "tool_calls": 2,
+        "operator_iterations": 1
+      },
+      "token_reduction": null,
+      "status": "completed"
+    },
+    {
+      "query_id": "dr-008",
+      "tool_selection": {
+        "expected": [
+          "web_search",
+          "web_search"
+        ],
+        "actual": [
+          "web_search",
+          "web_search"
+        ],
+        "correct": 2,
+        "total": 2,
+        "accuracy": 1.0
+      },
+      "hallucination_rate": 0.0,
+      "claims": [
+        {
+          "claim": "mRNA vaccines has a documented open research problems record",
+          "entailed": true,
+          "source": "tool_context"
+        },
+        {
+          "claim": "Primary literature describes mRNA vaccines key risks in operational terms",
+          "entailed": true,
+          "source": "tool_context"
+        }
+      ],
+      "trajectory": {
+        "llm_calls": 5,
+        "tool_calls": 2,
+        "operator_iterations": 1
+      },
+      "token_reduction": null,
+      "status": "completed"
+    },
+    {
+      "query_id": "dr-009",
+      "tool_selection": {
+        "expected": [
+          "web_search",
+          "web_search"
+        ],
+        "actual": [
+          "web_search",
+          "web_search"
+        ],
+        "correct": 2,
+        "total": 2,
+        "accuracy": 1.0
+      },
+      "hallucination_rate": 0.0,
+      "claims": [
+        {
+          "claim": "mRNA vaccines has a documented open research problems record",
+          "entailed": true,
+          "source": "tool_context"
+        },
+        {
+          "claim": "Primary literature describes mRNA vaccines regulation in operational terms",
+          "entailed": true,
+          "source": "tool_context"
+        }
+      ],
+      "trajectory": {
+        "llm_calls": 5,
+        "tool_calls": 2,
+        "operator_iterations": 1
+      },
+      "token_reduction": null,
+      "status": "completed"
+    },
+    {
+      "query_id": "dr-010",
+      "tool_selection": {
+        "expected": [
+          "web_search",
+          "web_search"
+        ],
+        "actual": [
+          "web_search",
+          "web_search"
+        ],
+        "correct": 2,
+        "total": 2,
+        "accuracy": 1.0
+      },
+      "hallucination_rate": 0.0,
+      "claims": [
+        {
+          "claim": "mRNA vaccines has a documented open research problems record",
+          "entailed": true,
+          "source": "tool_context"
+        },
+        {
+          "claim": "Primary literature describes mRNA vaccines open research problems in operational terms",
+          "entailed": true,
+          "source": "tool_context"
+        }
+      ],
+      "trajectory": {
+        "llm_calls": 5,
+        "tool_calls": 2,
+        "operator_iterations": 1
+      },
+      "token_reduction": null,
+      "status": "completed"
+    },
+    {
+      "query_id": "dr-011",
+      "tool_selection": {
+        "expected": [
+          "web_search",
+          "web_search"
+        ],
+        "actual": [
+          "web_search",
+          "web_search"
+        ],
+        "correct": 2,
+        "total": 2,
+        "accuracy": 1.0
+      },
+      "hallucination_rate": 0.0,
+      "claims": [
+        {
+          "claim": "H3 geospatial indexing has a documented open research problems record",
+          "entailed": true,
+          "source": "tool_context"
+        },
+        {
+          "claim": "Primary literature describes H3 geospatial indexing history in operational terms",
+          "entailed": true,
+          "source": "tool_context"
+        }
+      ],
+      "trajectory": {
+        "llm_calls": 5,
+        "tool_calls": 2,
+        "operator_iterations": 1
+      },
+      "token_reduction": null,
+      "status": "completed"
+    },
+    {
+      "query_id": "dr-012",
+      "tool_selection": {
+        "expected": [
+          "web_search",
+          "web_search"
+        ],
+        "actual": [
+          "web_search",
+          "web_search"
+        ],
+        "correct": 2,
+        "total": 2,
+        "accuracy": 1.0
+      },
+      "hallucination_rate": 0.0,
+      "claims": [
+        {
+          "claim": "H3 geospatial indexing has a documented open research problems record",
+          "entailed": true,
+          "source": "tool_context"
+        },
+        {
+          "claim": "Primary literature describes H3 geospatial indexing technical mechanism in operational terms",
+          "entailed": true,
+          "source": "tool_context"
+        }
+      ],
+      "trajectory": {
+        "llm_calls": 5,
+        "tool_calls": 2,
+        "operator_iterations": 1
+      },
+      "token_reduction": null,
+      "status": "completed"
+    },
+    {
+      "query_id": "dr-013",
+      "tool_selection": {
+        "expected": [
+          "web_search",
+          "web_search"
+        ],
+        "actual": [
+          "web_search",
+          "web_search"
+        ],
+        "correct": 2,
+        "total": 2,
+        "accuracy": 1.0
+      },
+      "hallucination_rate": 0.0,
+      "claims": [
+        {
+          "claim": "H3 geospatial indexing has a documented open research problems record",
+          "entailed": true,
+          "source": "tool_context"
+        },
+        {
+          "claim": "Primary literature describes H3 geospatial indexing key risks in operational terms",
+          "entailed": true,
+          "source": "tool_context"
+        }
+      ],
+      "trajectory": {
+        "llm_calls": 5,
+        "tool_calls": 2,
+        "operator_iterations": 1
+      },
+      "token_reduction": null,
+      "status": "completed"
+    },
+    {
+      "query_id": "dr-014",
+      "tool_selection": {
+        "expected": [
+          "web_search",
+          "web_search"
+        ],
+        "actual": [
+          "web_search",
+          "web_search"
+        ],
+        "correct": 2,
+        "total": 2,
+        "accuracy": 1.0
+      },
+      "hallucination_rate": 0.0,
+      "claims": [
+        {
+          "claim": "H3 geospatial indexing has a documented open research problems record",
+          "entailed": true,
+          "source": "tool_context"
+        },
+        {
+          "claim": "Primary literature describes H3 geospatial indexing regulation in operational terms",
+          "entailed": true,
+          "source": "tool_context"
+        }
+      ],
+      "trajectory": {
+        "llm_calls": 5,
+        "tool_calls": 2,
+        "operator_iterations": 1
+      },
+      "token_reduction": null,
+      "status": "completed"
+    },
+    {
+      "query_id": "dr-015",
+      "tool_selection": {
+        "expected": [
+          "web_search",
+          "web_search"
+        ],
+        "actual": [
+          "web_search",
+          "web_search"
+        ],
+        "correct": 2,
+        "total": 2,
+        "accuracy": 1.0
+      },
+      "hallucination_rate": 0.0,
+      "claims": [
+        {
+          "claim": "H3 geospatial indexing has a documented open research problems record",
+          "entailed": true,
+          "source": "tool_context"
+        },
+        {
+          "claim": "Primary literature describes H3 geospatial indexing open research problems in operational terms",
+          "entailed": true,
+          "source": "tool_context"
+        }
+      ],
+      "trajectory": {
+        "llm_calls": 5,
+        "tool_calls": 2,
+        "operator_iterations": 1
+      },
+      "token_reduction": null,
+      "status": "completed"
+    },
+    {
+      "query_id": "dr-016",
+      "tool_selection": {
+        "expected": [
+          "web_search",
+          "web_search"
+        ],
+        "actual": [
+          "web_search",
+          "web_search"
+        ],
+        "correct": 2,
+        "total": 2,
+        "accuracy": 1.0
+      },
+      "hallucination_rate": 0.0,
+      "claims": [
+        {
+          "claim": "congestion pricing has a documented open research problems record",
+          "entailed": true,
+          "source": "tool_context"
+        },
+        {
+          "claim": "Primary literature describes congestion pricing history in operational terms",
+          "entailed": true,
+          "source": "tool_context"
+        }
+      ],
+      "trajectory": {
+        "llm_calls": 5,
+        "tool_calls": 2,
+        "operator_iterations": 1
+      },
+      "token_reduction": null,
+      "status": "completed"
+    },
+    {
+      "query_id": "dr-017",
+      "tool_selection": {
+        "expected": [
+          "web_search",
+          "web_search"
+        ],
+        "actual": [
+          "web_search",
+          "web_search"
+        ],
+        "correct": 2,
+        "total": 2,
+        "accuracy": 1.0
+      },
+      "hallucination_rate": 0.0,
+      "claims": [
+        {
+          "claim": "congestion pricing has a documented open research problems record",
+          "entailed": true,
+          "source": "tool_context"
+        },
+        {
+          "claim": "Primary literature describes congestion pricing technical mechanism in operational terms",
+          "entailed": true,
+          "source": "tool_context"
+        }
+      ],
+      "trajectory": {
+        "llm_calls": 5,
+        "tool_calls": 2,
+        "operator_iterations": 1
+      },
+      "token_reduction": null,
+      "status": "completed"
+    },
+    {
+      "query_id": "dr-018",
+      "tool_selection": {
+        "expected": [
+          "web_search",
+          "web_search"
+        ],
+        "actual": [
+          "web_search",
+          "web_search"
+        ],
+        "correct": 2,
+        "total": 2,
+        "accuracy": 1.0
+      },
+      "hallucination_rate": 0.0,
+      "claims": [
+        {
+          "claim": "congestion pricing has a documented open research problems record",
+          "entailed": true,
+          "source": "tool_context"
+        },
+        {
+          "claim": "Primary literature describes congestion pricing key risks in operational terms",
+          "entailed": true,
+          "source": "tool_context"
+        }
+      ],
+      "trajectory": {
+        "llm_calls": 5,
+        "tool_calls": 2,
+        "operator_iterations": 1
+      },
+      "token_reduction": null,
+      "status": "completed"
+    },
+    {
+      "query_id": "dr-019",
+      "tool_selection": {
+        "expected": [
+          "web_search",
+          "web_search"
+        ],
+        "actual": [
+          "web_search",
+          "web_search"
+        ],
+        "correct": 2,
+        "total": 2,
+        "accuracy": 1.0
+      },
+      "hallucination_rate": 0.0,
+      "claims": [
+        {
+          "claim": "congestion pricing has a documented open research problems record",
+          "entailed": true,
+          "source": "tool_context"
+        },
+        {
+          "claim": "Primary literature describes congestion pricing regulation in operational terms",
+          "entailed": true,
+          "source": "tool_context"
+        }
+      ],
+      "trajectory": {
+        "llm_calls": 5,
+        "tool_calls": 2,
+        "operator_iterations": 1
+      },
+      "token_reduction": null,
+      "status": "completed"
+    },
+    {
+      "query_id": "dr-020",
+      "tool_selection": {
+        "expected": [
+          "web_search",
+          "web_search"
+        ],
+        "actual": [
+          "web_search",
+          "web_search"
+        ],
+        "correct": 2,
+        "total": 2,
+        "accuracy": 1.0
+      },
+      "hallucination_rate": 0.0,
+      "claims": [
+        {
+          "claim": "congestion pricing has a documented open research problems record",
+          "entailed": true,
+          "source": "tool_context"
+        },
+        {
+          "claim": "Primary literature describes congestion pricing open research problems in operational terms",
+          "entailed": true,
+          "source": "tool_context"
+        }
+      ],
+      "trajectory": {
+        "llm_calls": 5,
+        "tool_calls": 2,
+        "operator_iterations": 1
+      },
+      "token_reduction": null,
+      "status": "completed"
+    },
+    {
+      "query_id": "dr-021",
+      "tool_selection": {
+        "expected": [
+          "web_search",
+          "web_search"
+        ],
+        "actual": [
+          "web_search",
+          "web_search"
+        ],
+        "correct": 2,
+        "total": 2,
+        "accuracy": 1.0
+      },
+      "hallucination_rate": 0.0,
+      "claims": [
+        {
+          "claim": "transformer LLMs has a documented open research problems record",
+          "entailed": true,
+          "source": "tool_context"
+        },
+        {
+          "claim": "Primary literature describes transformer LLMs history in operational terms",
+          "entailed": true,
+          "source": "tool_context"
+        }
+      ],
+      "trajectory": {
+        "llm_calls": 5,
+        "tool_calls": 2,
+        "operator_iterations": 1
+      },
+      "token_reduction": null,
+      "status": "completed"
+    },
+    {
+      "query_id": "dr-022",
+      "tool_selection": {
+        "expected": [
+          "web_search",
+          "web_search"
+        ],
+        "actual": [
+          "web_search",
+          "web_search"
+        ],
+        "correct": 2,
+        "total": 2,
+        "accuracy": 1.0
+      },
+      "hallucination_rate": 0.0,
+      "claims": [
+        {
+          "claim": "transformer LLMs has a documented open research problems record",
+          "entailed": true,
+          "source": "tool_context"
+        },
+        {
+          "claim": "Primary literature describes transformer LLMs technical mechanism in operational terms",
+          "entailed": true,
+          "source": "tool_context"
+        }
+      ],
+      "trajectory": {
+        "llm_calls": 5,
+        "tool_calls": 2,
+        "operator_iterations": 1
+      },
+      "token_reduction": null,
+      "status": "completed"
+    },
+    {
+      "query_id": "dr-023",
+      "tool_selection": {
+        "expected": [
+          "web_search",
+          "web_search"
+        ],
+        "actual": [
+          "web_search",
+          "web_search"
+        ],
+        "correct": 2,
+        "total": 2,
+        "accuracy": 1.0
+      },
+      "hallucination_rate": 0.0,
+      "claims": [
+        {
+          "claim": "transformer LLMs has a documented open research problems record",
+          "entailed": true,
+          "source": "tool_context"
+        },
+        {
+          "claim": "Primary literature describes transformer LLMs key risks in operational terms",
+          "entailed": true,
+          "source": "tool_context"
+        }
+      ],
+      "trajectory": {
+        "llm_calls": 5,
+        "tool_calls": 2,
+        "operator_iterations": 1
+      },
+      "token_reduction": null,
+      "status": "completed"
+    },
+    {
+      "query_id": "dr-024",
+      "tool_selection": {
+        "expected": [
+          "web_search",
+          "web_search"
+        ],
+        "actual": [
+          "web_search",
+          "web_search"
+        ],
+        "correct": 2,
+        "total": 2,
+        "accuracy": 1.0
+      },
+      "hallucination_rate": 0.0,
+      "claims": [
+        {
+          "claim": "transformer LLMs has a documented open research problems record",
+          "entailed": true,
+          "source": "tool_context"
+        },
+        {
+          "claim": "Primary literature describes transformer LLMs regulation in operational terms",
+          "entailed": true,
+          "source": "tool_context"
+        }
+      ],
+      "trajectory": {
+        "llm_calls": 5,
+        "tool_calls": 2,
+        "operator_iterations": 1
+      },
+      "token_reduction": null,
+      "status": "completed"
+    },
+    {
+      "query_id": "dr-025",
+      "tool_selection": {
+        "expected": [
+          "web_search",
+          "web_search"
+        ],
+        "actual": [
+          "web_search",
+          "web_search"
+        ],
+        "correct": 2,
+        "total": 2,
+        "accuracy": 1.0
+      },
+      "hallucination_rate": 0.0,
+      "claims": [
+        {
+          "claim": "transformer LLMs has a documented open research problems record",
+          "entailed": true,
+          "source": "tool_context"
+        },
+        {
+          "claim": "Primary literature describes transformer LLMs open research problems in operational terms",
+          "entailed": true,
+          "source": "tool_context"
+        }
+      ],
+      "trajectory": {
+        "llm_calls": 5,
+        "tool_calls": 2,
+        "operator_iterations": 1
+      },
+      "token_reduction": null,
+      "status": "completed"
+    },
+    {
+      "query_id": "dr-026",
+      "tool_selection": {
+        "expected": [
+          "web_search",
+          "web_search"
+        ],
+        "actual": [
+          "web_search",
+          "web_search"
+        ],
+        "correct": 2,
+        "total": 2,
+        "accuracy": 1.0
+      },
+      "hallucination_rate": 0.0,
+      "claims": [
+        {
+          "claim": "post-quantum cryptography has a documented open research problems record",
+          "entailed": true,
+          "source": "tool_context"
+        },
+        {
+          "claim": "Primary literature describes post-quantum cryptography history in operational terms",
+          "entailed": true,
+          "source": "tool_context"
+        }
+      ],
+      "trajectory": {
+        "llm_calls": 5,
+        "tool_calls": 2,
+        "operator_iterations": 1
+      },
+      "token_reduction": null,
+      "status": "completed"
+    },
+    {
+      "query_id": "dr-027",
+      "tool_selection": {
+        "expected": [
+          "web_search",
+          "web_search"
+        ],
+        "actual": [
+          "web_search",
+          "web_search"
+        ],
+        "correct": 2,
+        "total": 2,
+        "accuracy": 1.0
+      },
+      "hallucination_rate": 0.0,
+      "claims": [
+        {
+          "claim": "post-quantum cryptography has a documented open research problems record",
+          "entailed": true,
+          "source": "tool_context"
+        },
+        {
+          "claim": "Primary literature describes post-quantum cryptography technical mechanism in operational terms",
+          "entailed": true,
+          "source": "tool_context"
+        }
+      ],
+      "trajectory": {
+        "llm_calls": 5,
+        "tool_calls": 2,
+        "operator_iterations": 1
+      },
+      "token_reduction": null,
+      "status": "completed"
+    },
+    {
+      "query_id": "dr-028",
+      "tool_selection": {
+        "expected": [
+          "web_search",
+          "web_search"
+        ],
+        "actual": [
+          "web_search",
+          "web_search"
+        ],
+        "correct": 2,
+        "total": 2,
+        "accuracy": 1.0
+      },
+      "hallucination_rate": 0.0,
+      "claims": [
+        {
+          "claim": "post-quantum cryptography has a documented open research problems record",
+          "entailed": true,
+          "source": "tool_context"
+        },
+        {
+          "claim": "Primary literature describes post-quantum cryptography key risks in operational terms",
+          "entailed": true,
+          "source": "tool_context"
+        }
+      ],
+      "trajectory": {
+        "llm_calls": 5,
+        "tool_calls": 2,
+        "operator_iterations": 1
+      },
+      "token_reduction": null,
+      "status": "completed"
+    },
+    {
+      "query_id": "dr-029",
+      "tool_selection": {
+        "expected": [
+          "web_search",
+          "web_search"
+        ],
+        "actual": [
+          "web_search",
+          "web_search"
+        ],
+        "correct": 2,
+        "total": 2,
+        "accuracy": 1.0
+      },
+      "hallucination_rate": 0.0,
+      "claims": [
+        {
+          "claim": "post-quantum cryptography has a documented open research problems record",
+          "entailed": true,
+          "source": "tool_context"
+        },
+        {
+          "claim": "Primary literature describes post-quantum cryptography regulation in operational terms",
+          "entailed": true,
+          "source": "tool_context"
+        }
+      ],
+      "trajectory": {
+        "llm_calls": 5,
+        "tool_calls": 2,
+        "operator_iterations": 1
+      },
+      "token_reduction": null,
+      "status": "completed"
+    },
+    {
+      "query_id": "dr-030",
+      "tool_selection": {
+        "expected": [
+          "web_search",
+          "web_search"
+        ],
+        "actual": [
+          "web_search",
+          "web_search"
+        ],
+        "correct": 2,
+        "total": 2,
+        "accuracy": 1.0
+      },
+      "hallucination_rate": 0.0,
+      "claims": [
+        {
+          "claim": "post-quantum cryptography has a documented open research problems record",
+          "entailed": true,
+          "source": "tool_context"
+        },
+        {
+          "claim": "Primary literature describes post-quantum cryptography open research problems in operational terms",
+          "entailed": true,
+          "source": "tool_context"
+        }
+      ],
+      "trajectory": {
+        "llm_calls": 5,
+        "tool_calls": 2,
+        "operator_iterations": 1
+      },
+      "token_reduction": null,
+      "status": "completed"
+    },
+    {
+      "query_id": "dr-031",
+      "tool_selection": {
+        "expected": [
+          "web_search",
+          "web_search"
+        ],
+        "actual": [
+          "web_search",
+          "web_search"
+        ],
+        "correct": 2,
+        "total": 2,
+        "accuracy": 1.0
+      },
+      "hallucination_rate": 0.0,
+      "claims": [
+        {
+          "claim": "fusion energy has a documented open research problems record",
+          "entailed": true,
+          "source": "tool_context"
+        },
+        {
+          "claim": "Primary literature describes fusion energy history in operational terms",
+          "entailed": true,
+          "source": "tool_context"
+        }
+      ],
+      "trajectory": {
+        "llm_calls": 5,
+        "tool_calls": 2,
+        "operator_iterations": 1
+      },
+      "token_reduction": null,
+      "status": "completed"
+    },
+    {
+      "query_id": "dr-032",
+      "tool_selection": {
+        "expected": [
+          "web_search",
+          "web_search"
+        ],
+        "actual": [
+          "web_search",
+          "web_search"
+        ],
+        "correct": 2,
+        "total": 2,
+        "accuracy": 1.0
+      },
+      "hallucination_rate": 0.0,
+      "claims": [
+        {
+          "claim": "fusion energy has a documented open research problems record",
+          "entailed": true,
+          "source": "tool_context"
+        },
+        {
+          "claim": "Primary literature describes fusion energy technical mechanism in operational terms",
+          "entailed": true,
+          "source": "tool_context"
+        }
+      ],
+      "trajectory": {
+        "llm_calls": 5,
+        "tool_calls": 2,
+        "operator_iterations": 1
+      },
+      "token_reduction": null,
+      "status": "completed"
+    },
+    {
+      "query_id": "dr-033",
+      "tool_selection": {
+        "expected": [
+          "web_search",
+          "web_search"
+        ],
+        "actual": [
+          "web_search",
+          "web_search"
+        ],
+        "correct": 2,
+        "total": 2,
+        "accuracy": 1.0
+      },
+      "hallucination_rate": 0.0,
+      "claims": [
+        {
+          "claim": "fusion energy has a documented open research problems record",
+          "entailed": true,
+          "source": "tool_context"
+        },
+        {
+          "claim": "Primary literature describes fusion energy key risks in operational terms",
+          "entailed": true,
+          "source": "tool_context"
+        }
+      ],
+      "trajectory": {
+        "llm_calls": 5,
+        "tool_calls": 2,
+        "operator_iterations": 1
+      },
+      "token_reduction": null,
+      "status": "completed"
+    },
+    {
+      "query_id": "dr-034",
+      "tool_selection": {
+        "expected": [
+          "web_search",
+          "web_search"
+        ],
+        "actual": [
+          "web_search",
+          "web_search"
+        ],
+        "correct": 2,
+        "total": 2,
+        "accuracy": 1.0
+      },
+      "hallucination_rate": 0.0,
+      "claims": [
+        {
+          "claim": "fusion energy has a documented open research problems record",
+          "entailed": true,
+          "source": "tool_context"
+        },
+        {
+          "claim": "Primary literature describes fusion energy regulation in operational terms",
+          "entailed": true,
+          "source": "tool_context"
+        }
+      ],
+      "trajectory": {
+        "llm_calls": 5,
+        "tool_calls": 2,
+        "operator_iterations": 1
+      },
+      "token_reduction": null,
+      "status": "completed"
+    },
+    {
+      "query_id": "dr-035",
+      "tool_selection": {
+        "expected": [
+          "web_search",
+          "web_search"
+        ],
+        "actual": [
+          "web_search",
+          "web_search"
+        ],
+        "correct": 2,
+        "total": 2,
+        "accuracy": 1.0
+      },
+      "hallucination_rate": 0.0,
+      "claims": [
+        {
+          "claim": "fusion energy has a documented open research problems record",
+          "entailed": true,
+          "source": "tool_context"
+        },
+        {
+          "claim": "Primary literature describes fusion energy open research problems in operational terms",
+          "entailed": true,
+          "source": "tool_context"
+        }
+      ],
+      "trajectory": {
+        "llm_calls": 5,
+        "tool_calls": 2,
+        "operator_iterations": 1
+      },
+      "token_reduction": null,
+      "status": "completed"
+    },
+    {
+      "query_id": "dr-036",
+      "tool_selection": {
+        "expected": [
+          "web_search",
+          "web_search"
+        ],
+        "actual": [
+          "web_search",
+          "web_search"
+        ],
+        "correct": 2,
+        "total": 2,
+        "accuracy": 1.0
+      },
+      "hallucination_rate": 0.0,
+      "claims": [
+        {
+          "claim": "CBDC payment rails has a documented open research problems record",
+          "entailed": true,
+          "source": "tool_context"
+        },
+        {
+          "claim": "Primary literature describes CBDC payment rails history in operational terms",
+          "entailed": true,
+          "source": "tool_context"
+        }
+      ],
+      "trajectory": {
+        "llm_calls": 5,
+        "tool_calls": 2,
+        "operator_iterations": 1
+      },
+      "token_reduction": null,
+      "status": "completed"
+    },
+    {
+      "query_id": "dr-037",
+      "tool_selection": {
+        "expected": [
+          "web_search",
+          "web_search"
+        ],
+        "actual": [
+          "web_search",
+          "web_search"
+        ],
+        "correct": 2,
+        "total": 2,
+        "accuracy": 1.0
+      },
+      "hallucination_rate": 0.0,
+      "claims": [
+        {
+          "claim": "CBDC payment rails has a documented open research problems record",
+          "entailed": true,
+          "source": "tool_context"
+        },
+        {
+          "claim": "Primary literature describes CBDC payment rails technical mechanism in operational terms",
+          "entailed": true,
+          "source": "tool_context"
+        }
+      ],
+      "trajectory": {
+        "llm_calls": 5,
+        "tool_calls": 2,
+        "operator_iterations": 1
+      },
+      "token_reduction": null,
+      "status": "completed"
+    },
+    {
+      "query_id": "dr-038",
+      "tool_selection": {
+        "expected": [
+          "web_search",
+          "web_search"
+        ],
+        "actual": [
+          "web_search",
+          "web_search"
+        ],
+        "correct": 2,
+        "total": 2,
+        "accuracy": 1.0
+      },
+      "hallucination_rate": 0.0,
+      "claims": [
+        {
+          "claim": "CBDC payment rails has a documented open research problems record",
+          "entailed": true,
+          "source": "tool_context"
+        },
+        {
+          "claim": "Primary literature describes CBDC payment rails key risks in operational terms",
+          "entailed": true,
+          "source": "tool_context"
+        }
+      ],
+      "trajectory": {
+        "llm_calls": 5,
+        "tool_calls": 2,
+        "operator_iterations": 1
+      },
+      "token_reduction": null,
+      "status": "completed"
+    },
+    {
+      "query_id": "dr-039",
+      "tool_selection": {
+        "expected": [
+          "web_search",
+          "web_search"
+        ],
+        "actual": [
+          "web_search",
+          "web_search"
+        ],
+        "correct": 2,
+        "total": 2,
+        "accuracy": 1.0
+      },
+      "hallucination_rate": 0.0,
+      "claims": [
+        {
+          "claim": "CBDC payment rails has a documented open research problems record",
+          "entailed": true,
+          "source": "tool_context"
+        },
+        {
+          "claim": "Primary literature describes CBDC payment rails regulation in operational terms",
+          "entailed": true,
+          "source": "tool_context"
+        }
+      ],
+      "trajectory": {
+        "llm_calls": 5,
+        "tool_calls": 2,
+        "operator_iterations": 1
+      },
+      "token_reduction": null,
+      "status": "completed"
+    },
+    {
+      "query_id": "dr-040",
+      "tool_selection": {
+        "expected": [
+          "web_search",
+          "web_search"
+        ],
+        "actual": [
+          "web_search",
+          "web_search"
+        ],
+        "correct": 2,
+        "total": 2,
+        "accuracy": 1.0
+      },
+      "hallucination_rate": 0.0,
+      "claims": [
+        {
+          "claim": "CBDC payment rails has a documented open research problems record",
+          "entailed": true,
+          "source": "tool_context"
+        },
+        {
+          "claim": "Primary literature describes CBDC payment rails open research problems in operational terms",
+          "entailed": true,
+          "source": "tool_context"
+        }
+      ],
+      "trajectory": {
+        "llm_calls": 5,
+        "tool_calls": 2,
+        "operator_iterations": 1
+      },
+      "token_reduction": null,
+      "status": "completed"
+    },
+    {
+      "query_id": "dr-041",
+      "tool_selection": {
+        "expected": [
+          "web_search",
+          "web_search"
+        ],
+        "actual": [
+          "web_search",
+          "web_search"
+        ],
+        "correct": 2,
+        "total": 2,
+        "accuracy": 1.0
+      },
+      "hallucination_rate": 0.0,
+      "claims": [
+        {
+          "claim": "satellite internet has a documented open research problems record",
+          "entailed": true,
+          "source": "tool_context"
+        },
+        {
+          "claim": "Primary literature describes satellite internet history in operational terms",
+          "entailed": true,
+          "source": "tool_context"
+        }
+      ],
+      "trajectory": {
+        "llm_calls": 5,
+        "tool_calls": 2,
+        "operator_iterations": 1
+      },
+      "token_reduction": null,
+      "status": "completed"
+    },
+    {
+      "query_id": "dr-042",
+      "tool_selection": {
+        "expected": [
+          "web_search",
+          "web_search"
+        ],
+        "actual": [
+          "web_search",
+          "web_search"
+        ],
+        "correct": 2,
+        "total": 2,
+        "accuracy": 1.0
+      },
+      "hallucination_rate": 0.0,
+      "claims": [
+        {
+          "claim": "satellite internet has a documented open research problems record",
+          "entailed": true,
+          "source": "tool_context"
+        },
+        {
+          "claim": "Primary literature describes satellite internet technical mechanism in operational terms",
+          "entailed": true,
+          "source": "tool_context"
+        }
+      ],
+      "trajectory": {
+        "llm_calls": 5,
+        "tool_calls": 2,
+        "operator_iterations": 1
+      },
+      "token_reduction": null,
+      "status": "completed"
+    },
+    {
+      "query_id": "dr-043",
+      "tool_selection": {
+        "expected": [
+          "web_search",
+          "web_search"
+        ],
+        "actual": [
+          "web_search",
+          "web_search"
+        ],
+        "correct": 2,
+        "total": 2,
+        "accuracy": 1.0
+      },
+      "hallucination_rate": 0.0,
+      "claims": [
+        {
+          "claim": "satellite internet has a documented open research problems record",
+          "entailed": true,
+          "source": "tool_context"
+        },
+        {
+          "claim": "Primary literature describes satellite internet key risks in operational terms",
+          "entailed": true,
+          "source": "tool_context"
+        }
+      ],
+      "trajectory": {
+        "llm_calls": 5,
+        "tool_calls": 2,
+        "operator_iterations": 1
+      },
+      "token_reduction": null,
+      "status": "completed"
+    },
+    {
+      "query_id": "dr-044",
+      "tool_selection": {
+        "expected": [
+          "web_search",
+          "web_search"
+        ],
+        "actual": [
+          "web_search",
+          "web_search"
+        ],
+        "correct": 2,
+        "total": 2,
+        "accuracy": 1.0
+      },
+      "hallucination_rate": 0.0,
+      "claims": [
+        {
+          "claim": "satellite internet has a documented open research problems record",
+          "entailed": true,
+          "source": "tool_context"
+        },
+        {
+          "claim": "Primary literature describes satellite internet regulation in operational terms",
+          "entailed": true,
+          "source": "tool_context"
+        }
+      ],
+      "trajectory": {
+        "llm_calls": 5,
+        "tool_calls": 2,
+        "operator_iterations": 1
+      },
+      "token_reduction": null,
+      "status": "completed"
+    },
+    {
+      "query_id": "dr-045",
+      "tool_selection": {
+        "expected": [
+          "web_search",
+          "web_search"
+        ],
+        "actual": [
+          "web_search",
+          "web_search"
+        ],
+        "correct": 2,
+        "total": 2,
+        "accuracy": 1.0
+      },
+      "hallucination_rate": 0.0,
+      "claims": [
+        {
+          "claim": "satellite internet has a documented open research problems record",
+          "entailed": true,
+          "source": "tool_context"
+        },
+        {
+          "claim": "Primary literature describes satellite internet open research problems in operational terms",
+          "entailed": true,
+          "source": "tool_context"
+        }
+      ],
+      "trajectory": {
+        "llm_calls": 5,
+        "tool_calls": 2,
+        "operator_iterations": 1
+      },
+      "token_reduction": null,
+      "status": "completed"
+    },
+    {
+      "query_id": "dr-046",
+      "tool_selection": {
+        "expected": [
+          "web_search",
+          "web_search"
+        ],
+        "actual": [
+          "web_search",
+          "web_search"
+        ],
+        "correct": 2,
+        "total": 2,
+        "accuracy": 1.0
+      },
+      "hallucination_rate": 0.0,
+      "claims": [
+        {
+          "claim": "urban heat islands has a documented technical mechanism record",
+          "entailed": true,
+          "source": "tool_context"
+        },
+        {
+          "claim": "Primary literature describes urban heat islands history in operational terms",
+          "entailed": true,
+          "source": "tool_context"
+        }
+      ],
+      "trajectory": {
+        "llm_calls": 5,
+        "tool_calls": 2,
+        "operator_iterations": 1
+      },
+      "token_reduction": null,
+      "status": "completed"
+    },
+    {
+      "query_id": "dr-047",
+      "tool_selection": {
+        "expected": [
+          "web_search",
+          "web_search"
+        ],
+        "actual": [
+          "web_search",
+          "web_search"
+        ],
+        "correct": 2,
+        "total": 2,
+        "accuracy": 1.0
+      },
+      "hallucination_rate": 0.0,
+      "claims": [
+        {
+          "claim": "urban heat islands has a documented technical mechanism record",
+          "entailed": true,
+          "source": "tool_context"
+        },
+        {
+          "claim": "Primary literature describes urban heat islands technical mechanism in operational terms",
+          "entailed": true,
+          "source": "tool_context"
+        }
+      ],
+      "trajectory": {
+        "llm_calls": 5,
+        "tool_calls": 2,
+        "operator_iterations": 1
+      },
+      "token_reduction": null,
+      "status": "completed"
+    },
+    {
+      "query_id": "dr-048",
+      "tool_selection": {
+        "expected": [
+          "web_search",
+          "web_search"
+        ],
+        "actual": [
+          "web_search",
+          "web_search"
+        ],
+        "correct": 2,
+        "total": 2,
+        "accuracy": 1.0
+      },
+      "hallucination_rate": 0.0,
+      "claims": [
+        {
+          "claim": "The rival dataset is unspecified",
+          "entailed": true,
+          "source": "tool_context"
+        },
+        {
+          "claim": "Overwrite requires an explicit table name",
+          "entailed": true,
+          "source": "tool_context"
+        },
+        {
+          "claim": "human_feedback=use operator_records",
+          "entailed": true,
+          "source": "tool_context"
+        }
+      ],
+      "trajectory": {
+        "llm_calls": 6,
+        "tool_calls": 2,
+        "operator_iterations": 2
+      },
+      "token_reduction": null,
+      "status": "completed"
+    },
+    {
+      "query_id": "dr-049",
+      "tool_selection": {
+        "expected": [
+          "web_search",
+          "web_search",
+          "db_write"
+        ],
+        "actual": [
+          "web_search",
+          "web_search",
+          "db_write"
+        ],
+        "correct": 3,
+        "total": 3,
+        "accuracy": 1.0
+      },
+      "hallucination_rate": 0.0,
+      "claims": [
+        {
+          "claim": "Recycling yield depends on hydrometallurgical recovery",
+          "entailed": true,
+          "source": "tool_context"
+        },
+        {
+          "claim": "operator_records is the approved sink",
+          "entailed": true,
+          "source": "tool_context"
+        },
+        {
+          "claim": "db_write applied db_write applied human_feedback=use operator_records",
+          "entailed": true,
+          "source": "tool_context"
+        }
+      ],
+      "trajectory": {
+        "llm_calls": 6,
+        "tool_calls": 3,
+        "operator_iterations": 2
+      },
+      "token_reduction": null,
+      "status": "completed"
+    },
+    {
+      "query_id": "dr-050",
+      "tool_selection": {
+        "expected": [
+          "web_search",
+          "web_search",
+          "delete_record"
+        ],
+        "actual": [
+          "web_search",
+          "web_search",
+          "delete_record"
+        ],
+        "correct": 3,
+        "total": 3,
+        "accuracy": 1.0
+      },
+      "hallucination_rate": 0.0,
+      "claims": [
+        {
+          "claim": "Expired eval cache keys can be deleted",
+          "entailed": true,
+          "source": "tool_context"
+        },
+        {
+          "claim": "delete_record removes the operator row",
+          "entailed": true,
+          "source": "tool_context"
+        },
+        {
+          "claim": "delete_record applied delete_record applied human_feedback=use operator_records",
+          "entailed": true,
+          "source": "tool_context"
+        }
+      ],
+      "trajectory": {
+        "llm_calls": 6,
+        "tool_calls": 3,
+        "operator_iterations": 2
+      },
+      "token_reduction": null,
+      "status": "completed"
+    }
+  ],
+  "token_reduction_pct": 97.7,
+  "tool_selection_accuracy_pct": 100.0,
+  "hallucination_rate_pct": 0.0
+}

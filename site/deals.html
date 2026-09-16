@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Acme Capital — CIM Intake</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./deals.css" />
+  </head>
+  <body>
+    <main class="container deals-shell">
+      <header class="header">
+        <div>
+          <p class="eyebrow">Argus Deal Intake · flagship account demo</p>
+          <h1>Acme Capital</h1>
+          <nav class="top-nav">
+            <a class="nav-link" href="./index.html">Reliability</a>
+            <a class="nav-link" href="./metrics.html">Evals</a>
+            <a class="nav-link active" href="./deals.html">Deal Intake</a>
+          </nav>
+        </div>
+        <div class="actions">
+          <span id="status-line" class="muted-text">Load a CIM to start.</span>
+        </div>
+      </header>
+
+      <section class="card thesis-card">
+        <h2>Firm thesis</h2>
+        <p id="thesis-mandate" class="muted-text">Loading mandate…</p>
+        <div id="thesis-chips" class="chip-row"></div>
+      </section>
+
+      <section class="grid deals-layout">
+        <article class="card">
+          <h3>Inbox</h3>
+          <p class="muted-text">Synthetic CIMs and teasers. Intake extracts, scores, then pauses before DealCloud.</p>
+          <div id="inbox" class="inbox"></div>
+        </article>
+        <article class="card">
+          <h3>Active package</h3>
+          <div id="active-package" class="package-empty">Select a document.</div>
+        </article>
+      </section>
+
+      <section class="card">
+        <h3>Pipeline</h3>
+        <div id="board" class="board">
+          <div class="lane" data-stage="New"><h4>New</h4><div class="lane-body"></div></div>
+          <div class="lane" data-stage="Screened"><h4>Screened</h4><div class="lane-body"></div></div>
+          <div class="lane" data-stage="Diligence"><h4>Diligence</h4><div class="lane-body"></div></div>
+          <div class="lane" data-stage="Passed"><h4>Passed</h4><div class="lane-body"></div></div>
+        </div>
+      </section>
+    </main>
+    <script src="./deals.js"></script>
+  </body>
+</html>

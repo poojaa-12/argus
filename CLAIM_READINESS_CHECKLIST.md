@@ -37,3 +37,13 @@ Use this checklist before citing Argus reliability numbers in resumes, portfolio
 - [x] Relative uplift formula is documented in README.
 - [x] Baseline and reliability numbers are generated from the same deterministic suites.
 - [x] Evidence artifacts (`eval_report.json`, tests) are reproducible locally.
+
+## Deep Research / Operator (v2)
+
+- [x] Cyclic graph runtime with planner, parallel researchers, merge, operator, and synthesize.
+- [x] Tool nodes reuse the reliability orchestrator (`Orchestrator._call_step`).
+- [x] HITL interrupts for destructive tools and ambiguous requirements, with inspect/resume API.
+- [x] Token-budget compression preserves task + system instructions.
+- [x] Judge suite of 50 queries is separate from reliability 50-task success rate.
+- [x] Do not report reliability 92% as tool-selection accuracy.
+

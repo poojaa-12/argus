@@ -183,3 +183,31 @@ Argus is claim-ready when:
 - all reliability paths are covered by tests,
 - run traces explain every failure and recovery path,
 - and failure-injection evals demonstrate sustained recovery gain (>=35%) with documented methodology.
+
+## 14) Deep Research & Operator runtime (v2)
+
+The linear orchestrator in `argus/agent/orchestrator.py` remains the reliability
+claim path. v2 adds a cyclic graph runtime that **calls that orchestrator** on
+every tool node.
+
+### Graph
+
+- State: `argus/graph/state.py` (`AgentState` + Pydantic `AgentStateModel`).
+- Nodes: planner → parallel researchers (`Send` in LangGraph, sequential fan-in locally) → recursive merge → compress → operator ⇄ tool_node → synthesize.
+- HITL: `interrupt_before=["hitl_gate"]` for destructive tools (`db_write`, `delete_record`) or `needs_clarification`.
+- Checkpoints: Redis JSON (`argus/graph/checkpoint.py`) when `ARGUS_REDIS_URL` is up; MemorySaver / in-process otherwise.
+- Serving: FastAPI inspect/resume + WebSocket events; Postgres/SQLite run store.
+
+### Compression
+
+`argus/memory/token_budget.py` runs before model/policy invocation. At 80% of the
+context window, tool-role messages are summarized. Task and system instructions
+are pinned and never dropped.
+
+### Judge evals
+
+`argus/evals/judge/` scores 50 frozen queries for tool-selection accuracy,
+hallucination vs tool context, trajectory LLM calls, and measured token
+reduction. Reliability `eval_report.json` is unchanged and must not be relabeled
+as tool-selection accuracy.
+

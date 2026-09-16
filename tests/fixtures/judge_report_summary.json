@@ -1,0 +1,7 @@
+{
+  "total": 50,
+  "tool_selection_accuracy_pct": 100.0,
+  "hallucination_rate_pct": 0.0,
+  "mean_llm_calls": 5.06,
+  "token_reduction_pct": 97.7
+}

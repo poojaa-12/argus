@@ -1,0 +1,19 @@
+services:
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: argus
+      POSTGRES_PASSWORD: argus
+      POSTGRES_DB: argus
+    ports:
+      - "5434:5432"
+    volumes:
+      - argus_pg:/var/lib/postgresql/data
+
+volumes:
+  argus_pg:

@@ -1,0 +1,141 @@
+{
+  "total_deals": 6,
+  "field_accuracy": 1.0,
+  "field_accuracy_pct": 100.0,
+  "hallucinated_missing_fields": 0,
+  "correctly_left_blank": 5,
+  "deals": [
+    {
+      "deal_id": "northwind",
+      "company": "Northwind Analytics",
+      "score": 100,
+      "recommendation": "advance",
+      "missing_fields": [],
+      "field_accuracy": {
+        "company": true,
+        "document_type": true,
+        "sector": true,
+        "headquarters": true,
+        "revenue_m": true,
+        "yoy_growth_pct": true,
+        "ebitda_m": true,
+        "ebitda_margin_pct": true,
+        "net_debt_ebitda": true,
+        "recurring_revenue_pct": true,
+        "employees": true
+      },
+      "missing_fields_match": true
+    },
+    {
+      "deal_id": "harborpay",
+      "company": "HarborPay",
+      "score": 84,
+      "recommendation": "diligence",
+      "missing_fields": [],
+      "field_accuracy": {
+        "company": true,
+        "document_type": true,
+        "sector": true,
+        "headquarters": true,
+        "revenue_m": true,
+        "yoy_growth_pct": true,
+        "ebitda_m": true,
+        "ebitda_margin_pct": true,
+        "net_debt_ebitda": true,
+        "recurring_revenue_pct": true,
+        "employees": true
+      },
+      "missing_fields_match": true
+    },
+    {
+      "deal_id": "helios",
+      "company": "Helios Solar",
+      "score": 50,
+      "recommendation": "pass",
+      "missing_fields": [],
+      "field_accuracy": {
+        "company": true,
+        "document_type": true,
+        "sector": true,
+        "headquarters": true,
+        "revenue_m": true,
+        "yoy_growth_pct": true,
+        "ebitda_m": true,
+        "ebitda_margin_pct": true,
+        "net_debt_ebitda": true,
+        "recurring_revenue_pct": true,
+        "employees": true
+      },
+      "missing_fields_match": true
+    },
+    {
+      "deal_id": "atlas",
+      "company": "Atlas Clinics",
+      "score": 60,
+      "recommendation": "pass",
+      "missing_fields": [],
+      "field_accuracy": {
+        "company": true,
+        "document_type": true,
+        "sector": true,
+        "headquarters": true,
+        "revenue_m": true,
+        "yoy_growth_pct": true,
+        "ebitda_m": true,
+        "ebitda_margin_pct": true,
+        "net_debt_ebitda": true,
+        "recurring_revenue_pct": true,
+        "employees": true
+      },
+      "missing_fields_match": true
+    },
+    {
+      "deal_id": "quorum",
+      "company": "Quorum Data",
+      "score": 100,
+      "recommendation": "advance",
+      "missing_fields": [],
+      "field_accuracy": {
+        "company": true,
+        "document_type": true,
+        "sector": true,
+        "headquarters": true,
+        "revenue_m": true,
+        "yoy_growth_pct": true,
+        "ebitda_m": true,
+        "ebitda_margin_pct": true,
+        "net_debt_ebitda": true,
+        "recurring_revenue_pct": true,
+        "employees": true
+      },
+      "missing_fields_match": true
+    },
+    {
+      "deal_id": "meridian",
+      "company": "Meridian Logistics",
+      "score": 72,
+      "recommendation": "diligence",
+      "missing_fields": [
+        "yoy_growth_pct",
+        "ebitda_m",
+        "ebitda_margin_pct",
+        "net_debt_ebitda",
+        "recurring_revenue_pct"
+      ],
+      "field_accuracy": {
+        "company": true,
+        "document_type": true,
+        "sector": true,
+        "headquarters": true,
+        "revenue_m": true,
+        "yoy_growth_pct": true,
+        "ebitda_m": true,
+        "ebitda_margin_pct": true,
+        "net_debt_ebitda": true,
+        "recurring_revenue_pct": true,
+        "employees": true
+      },
+      "missing_fields_match": true
+    }
+  ]
+}
