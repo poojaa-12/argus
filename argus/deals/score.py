@@ -15,7 +15,7 @@ def score_deal(extraction: DealExtraction, thesis: FirmThesis | None = None) -> 
     hq = extraction.headquarters or ""
 
     sector_pts = 0
-    if _contains_any(sector_text, ["project-based", "EPC", "healthcare", "clinic", *thesis.avoid]):
+    if _contains_any(sector_text, ["project-based", "EPC", "healthcare", "clinic", "pharma", "pharmaceutical", "biotech", *thesis.avoid]):
         sector_pts = 0
     elif _contains_any(sector_text, ["software", "saas", "data", "payments"]):
         sector_pts = 30

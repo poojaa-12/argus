@@ -38,17 +38,22 @@ function field(label: string, text: string): string | null {
   return value || null;
 }
 
+function escapeRe(value: string): string {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
 function lineCitation(text: string, name: string, needle: string): Citation | null {
-  for (const raw of text.split(/\n/)) {
-    if (!raw.toLowerCase().includes(needle.toLowerCase())) continue;
-    const pageMatch = raw.match(PAGE);
-    return {
-      field: name,
-      quote: raw.replace(/\s+/g, " ").trim().slice(0, 180),
-      page: pageMatch ? Number.parseInt(pageMatch[1], 10) : 0,
-    };
-  }
-  return null;
+  const lines = text.split(/\n/);
+  const labeled = lines.find((raw) => new RegExp(`^${escapeRe(needle)}\\s*:`, "i").test(raw.trim()));
+  const containing = lines.find((raw) => raw.toLowerCase().includes(needle.toLowerCase()));
+  const raw = labeled ?? containing;
+  if (!raw) return null;
+  const pageMatch = raw.match(PAGE);
+  return {
+    field: name,
+    quote: raw.replace(/\s+/g, " ").trim().slice(0, 180),
+    page: pageMatch ? Number.parseInt(pageMatch[1], 10) : 0,
+  };
 }
 
 function risksFrom(text: string): string[] {
@@ -161,12 +166,13 @@ export function extractFromText(
   const citations: Citation[] = [];
   const citePairs: Array<[string, string]> = [
     ["revenue_m", "Revenue"],
-    ["yoy_growth_pct", "growth"],
-    ["ebitda_m", "EBITDA"],
-    ["net_debt_ebitda", "Net debt"],
+    ["yoy_growth_pct", "YoY growth"],
+    ["ebitda_m", "Adj. EBITDA"],
+    ["ebitda_margin_pct", "EBITDA margin"],
+    ["net_debt_ebitda", "Net debt / EBITDA"],
     ["sector", "Sector"],
     ["headquarters", "HQ"],
-    ["recurring_revenue_pct", "Recurring"],
+    ["recurring_revenue_pct", "Recurring revenue"],
   ];
   for (const [name, needle] of citePairs) {
     if (name in mapping && mapping[name] === null && name !== "sector" && name !== "headquarters") continue;

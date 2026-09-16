@@ -14,5 +14,6 @@ argus.db
 web/node_modules/
 web/.next/
 web/.vercel/
+tmp/
 
 

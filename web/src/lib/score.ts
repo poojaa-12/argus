@@ -11,7 +11,7 @@ export function scoreDeal(extraction: DealExtraction, thesis: FirmThesis = ACME_
   const hq = extraction.headquarters ?? "";
 
   let sectorPts = 0;
-  if (containsAny(sectorText, ["project-based", "EPC", "healthcare", "clinic", ...thesis.avoid])) {
+  if (containsAny(sectorText, ["project-based", "EPC", "healthcare", "clinic", "pharma", "pharmaceutical", "biotech", ...thesis.avoid])) {
     sectorPts = 0;
   } else if (containsAny(sectorText, ["software", "saas", "data", "payments"])) {
     sectorPts = 30;

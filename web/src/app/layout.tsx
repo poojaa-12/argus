@@ -13,9 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Acme Capital · Argus Deal Intake",
+  title: "Acme Capital · Inbound screening",
   description:
-    "CIM and teaser intake with thesis scoring, human-in-the-loop, and DealCloud writes. Forward-deployed last-mile demo on Next.js and Vercel.",
+    "CIM and teaser screening against a written thesis. Extracted fields stay blank if missing. DealCloud writes wait on an associate.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

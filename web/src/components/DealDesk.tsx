@@ -1,93 +1,151 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
 import SiteNav from "@/components/SiteNav";
-import type { DealRecord, FirmThesis, Opportunity, ScoredDeal } from "@/lib/types";
-
-type CatalogDeal = Pick<DealRecord, "id" | "company" | "document_type" | "filename">;
-
-type IntakeResponse = {
-  deal: DealRecord;
-  scored: ScoredDeal;
-  opportunity: Opportunity;
-  hitl: { tool_name: string; destructive: boolean; reason: string };
-};
+import type {
+  AuditEvent,
+  Citation,
+  DealCloudRecord,
+  EvalStrip,
+  FirmThesis,
+  InboxDeal,
+  IntakePackage,
+  Opportunity,
+  ScoreBreakdown,
+  SharePointItem,
+  TraceNode,
+  TraceStatus,
+} from "@/lib/types";
 
 const STAGES: Opportunity["stage"][] = ["New", "Screened", "Diligence", "Passed"];
-const STORAGE_KEY = "argus-deal-pipeline";
+const STORAGE_KEY = "argus-deal-pipeline-v2";
+const BREAKDOWN: Array<[keyof ScoreBreakdown, number]> = [
+  ["sector", 30],
+  ["scale", 20],
+  ["growth", 20],
+  ["geography", 10],
+  ["leverage", 10],
+  ["risk", 10],
+];
+
+type CatalogResponse = {
+  thesis: FirmThesis;
+  deals: InboxDeal[];
+  open: IntakePackage;
+  eval?: EvalStrip;
+};
 
 function fmt(value: number | string | null | undefined, suffix = "") {
   if (value === null || value === undefined || value === "") return "—";
   return `${value}${suffix}`;
 }
 
-function recClass(rec: string | null | undefined) {
+function recTone(rec: string | null | undefined) {
   if (rec === "advance") return "text-emerald-400";
   if (rec === "pass") return "text-rose-400";
   return "text-amber-300";
 }
 
-export default function DealDesk() {
-  const [thesis, setThesis] = useState<FirmThesis | null>(null);
-  const [inbox, setInbox] = useState<CatalogDeal[]>([]);
-  const [status, setStatus] = useState("Loading thesis…");
+function recBg(rec: string | null | undefined) {
+  if (rec === "advance") return "border-emerald-800 bg-[#102418] text-emerald-300";
+  if (rec === "pass") return "border-rose-900 bg-[#2a1214] text-rose-300";
+  return "border-amber-800 bg-[#24180a] text-amber-200";
+}
+
+function traceTone(status: TraceStatus) {
+  if (status === "done") return "border-emerald-800 text-emerald-300";
+  if (status === "interrupted") return "border-amber-700 text-amber-200";
+  if (status === "blocked") return "border-rose-800 text-rose-300";
+  return "border-zinc-700 text-zinc-500";
+}
+
+export default function DealDesk({ initial }: { initial?: CatalogResponse }) {
+  const [thesis, setThesis] = useState<FirmThesis | null>(initial?.thesis ?? null);
+  const [inbox, setInbox] = useState<InboxDeal[]>(initial?.deals ?? []);
+  const [status, setStatus] = useState(
+    initial?.open ? "INTERRUPTED · hitl_gate · crm_upsert" : "Opening inbound…",
+  );
   const [busy, setBusy] = useState(false);
-  const [active, setActive] = useState<IntakeResponse | null>(null);
-  const [pipeline, setPipeline] = useState<Opportunity[]>([]);
+  const [active, setActive] = useState<IntakePackage | null>(initial?.open ?? null);
+  const [pipeline, setPipeline] = useState<Opportunity[]>(
+    initial?.open ? [initial.open.opportunity] : [],
+  );
+  const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
-    const saved = window.localStorage.getItem(STORAGE_KEY);
-    if (saved) {
+    const savedRaw = window.localStorage.getItem(STORAGE_KEY);
+    let saved: Opportunity[] = [];
+    if (savedRaw) {
       try {
-        setPipeline(JSON.parse(saved) as Opportunity[]);
+        saved = JSON.parse(savedRaw) as Opportunity[];
       } catch {
         window.localStorage.removeItem(STORAGE_KEY);
       }
     }
+    const seed = initial?.open;
+    if (seed) {
+      setPipeline(() => {
+        if (saved.some((row) => row.deal_id === seed.opportunity.deal_id)) return saved;
+        return [...saved, seed.opportunity];
+      });
+      setHydrated(true);
+      return;
+    }
     fetch("/api/deals")
       .then((res) => res.json())
-      .then((payload) => {
+      .then((payload: CatalogResponse) => {
         setThesis(payload.thesis);
         setInbox(payload.deals);
-        setStatus("Ready. Intake a CIM.");
+        setActive(payload.open);
+        setPipeline(() => {
+          if (saved.some((row) => row.deal_id === payload.open.opportunity.deal_id)) return saved;
+          return [...saved, payload.open.opportunity];
+        });
+        setHydrated(true);
+        setStatus("INTERRUPTED · hitl_gate · crm_upsert");
       })
-      .catch(() => setStatus("Could not load deals."));
-  }, []);
+      .catch(() => setStatus("Could not load desk."));
+  }, [initial]);
 
   useEffect(() => {
+    if (!hydrated) return;
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(pipeline));
-  }, [pipeline]);
+  }, [hydrated, pipeline]);
 
   const chips = useMemo(() => {
     if (!thesis) return [];
     return [
-      `Revenue $${thesis.revenue_m_min}–${thesis.revenue_m_max}m`,
-      `Growth ≥ ${thesis.growth_pct_min}%`,
-      `Leverage ≤ ${thesis.max_net_debt_ebitda}x`,
+      `Rev $${thesis.revenue_m_min}–${thesis.revenue_m_max}m`,
+      `Growth ≥${thesis.growth_pct_min}%`,
+      `Lev ≤${thesis.max_net_debt_ebitda}x`,
       ...thesis.sectors,
     ];
   }, [thesis]);
 
+  function applyPackage(payload: IntakePackage, nextStatus: string) {
+    setActive(payload);
+    setPipeline((current) => {
+      const next = current.filter((row) => row.deal_id !== payload.opportunity.deal_id);
+      return [...next, payload.opportunity];
+    });
+    setStatus(nextStatus);
+  }
+
   async function intake(dealId: string) {
     setBusy(true);
-    setStatus(`Scoring ${dealId}…`);
+    setStatus(`Running operator · ${dealId}`);
     try {
       const res = await fetch("/api/intake", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ dealId }),
       });
-      const payload = (await res.json()) as IntakeResponse;
+      const payload = (await res.json()) as IntakePackage & { error?: string };
       if (!res.ok) {
-        setStatus((payload as unknown as { error?: string }).error || "Intake failed.");
+        setStatus(payload.error || "Intake failed.");
         return;
       }
-      setActive(payload);
-      setPipeline((current) => {
-        const next = current.filter((row) => row.deal_id !== payload.opportunity.deal_id);
-        return [...next, payload.opportunity];
-      });
-      setStatus("Paused for associate approval.");
+      applyPackage(payload, "INTERRUPTED · hitl_gate · crm_upsert");
     } catch {
       setStatus("Intake failed.");
     } finally {
@@ -98,7 +156,7 @@ export default function DealDesk() {
   async function resume(feedback: "approve" | "reject") {
     if (!active) return;
     setBusy(true);
-    setStatus(feedback === "approve" ? "Writing DealCloud…" : "Blocking CRM write…");
+    setStatus(feedback === "approve" ? "Writing Opportunity…" : "Blocking write…");
     try {
       const res = await fetch("/api/resume", {
         method: "POST",
@@ -107,15 +165,14 @@ export default function DealDesk() {
           scored: active.scored,
           feedback,
           filename: active.deal.filename,
+          deal: active.deal,
         }),
       });
-      const payload = (await res.json()) as { opportunity: Opportunity; status: string };
-      setActive({ ...active, opportunity: payload.opportunity });
-      setPipeline((current) => {
-        const next = current.filter((row) => row.deal_id !== payload.opportunity.deal_id);
-        return [...next, payload.opportunity];
-      });
-      setStatus(payload.status === "rejected" ? "Write blocked." : "DealCloud updated.");
+      const payload = (await res.json()) as IntakePackage & { status: string };
+      applyPackage(
+        { ...payload, deal: { ...payload.deal, text: active.deal.text || payload.deal.text } },
+        payload.opportunity.status === "rejected" ? "WRITE BLOCKED · no live record" : "WRITTEN · DealCloud + SharePoint",
+      );
     } catch {
       setStatus("Resume failed.");
     } finally {
@@ -130,20 +187,17 @@ export default function DealDesk() {
       const body = new FormData();
       body.append("file", file);
       const res = await fetch("/api/upload", { method: "POST", body });
-      const payload = (await res.json()) as IntakeResponse & { error?: string };
+      const payload = (await res.json()) as IntakePackage & { error?: string };
       if (!res.ok) {
         setStatus(payload.error || "Could not read that file.");
         return;
       }
-      setActive(payload);
-      setPipeline((current) => {
-        const next = current.filter((row) => row.deal_id !== payload.opportunity.deal_id);
-        return [...next, payload.opportunity];
-      });
-      setStatus(
-        payload.scored.extraction.missing_fields.length
-          ? `Paused for approval. Blank fields: ${payload.scored.extraction.missing_fields.join(", ")}.`
-          : "Paused for associate approval.",
+      const missing = payload.scored.extraction.missing_fields;
+      applyPackage(
+        payload,
+        missing.length
+          ? `INTERRUPTED · blank ${missing.join(", ")}`
+          : "INTERRUPTED · hitl_gate · crm_upsert",
       );
     } catch {
       setStatus("Upload failed.");
@@ -154,50 +208,54 @@ export default function DealDesk() {
 
   const extraction = active?.scored.extraction;
   const pending = active?.opportunity.status === "pending_approval";
+  const citeFor = (field: string): Citation | undefined =>
+    extraction?.citations.find((row) => row.field === field);
 
   return (
-    <div className="min-h-full bg-[#070d19] text-zinc-100">
-      <main className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
-        <header className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-zinc-400">
-              Argus Deal Intake · Vercel last-mile demo
-            </p>
-            <div className="mt-3">
-              <SiteNav active="desk" />
+    <div className="min-h-full bg-[#0a0c10] font-sans text-[13px] text-zinc-200">
+      <header className="sticky top-0 z-10 border-b border-[#2c3340] bg-[#0a0c10]/95 backdrop-blur">
+        <div className="flex flex-wrap items-center justify-between gap-3 px-4 py-2.5">
+          <div className="flex flex-wrap items-center gap-4">
+            <div>
+              <p className="text-[10px] uppercase tracking-[0.16em] text-zinc-500">Acme Capital</p>
+              <h1 className="text-sm font-semibold tracking-tight">Inbound screening</h1>
             </div>
-            <h1 className="mt-4 font-sans text-3xl font-semibold tracking-tight">Acme Capital</h1>
-            <p className="mt-2 max-w-2xl text-sm text-zinc-400">
-              CIM / teaser extract, thesis score, human-in-the-loop, then DealCloud + SharePoint. Same
-              associate loop as the Python runtime, shipped on Next.js / Tailwind / Vercel.
-            </p>
+            <SiteNav active="desk" />
           </div>
-          <p className="text-sm text-zinc-400">{status}</p>
-        </header>
+          <p className="font-mono text-[11px] text-amber-200/90">{status}</p>
+        </div>
+        <div className="flex flex-wrap items-center justify-between gap-2 border-t border-[#222833] px-4 py-1.5">
+          <p className="font-mono text-[10px] text-zinc-500">
+            {initial?.eval?.gold ?? "gold 6/6 · 0 invented blanks"}
+            {" · "}
+            {initial?.eval?.detail ?? "Helios sector pass · Meridian held"}
+            {" · tenant is synthetic"}
+          </p>
+        </div>
+        <div className="flex flex-wrap items-center gap-1.5 border-t border-[#222833] px-4 py-2">
+          <span className="mr-2 text-[10px] uppercase tracking-[0.14em] text-zinc-500">Mandate</span>
+          {chips.map((chip) => (
+            <span key={chip} className="border border-[#2c3340] bg-[#11141a] px-2 py-0.5 font-mono text-[10px] text-zinc-300">
+              {chip}
+            </span>
+          ))}
+          {thesis?.avoid.slice(0, 2).map((item) => (
+            <span key={item} className="border border-rose-950 bg-[#1a1012] px-2 py-0.5 font-mono text-[10px] text-rose-300/80">
+              avoid {item}
+            </span>
+          ))}
+        </div>
+      </header>
 
-        <section className="rounded-2xl border border-slate-700 bg-[#111a2e] p-5">
-          <h2 className="text-lg font-semibold">Firm thesis</h2>
-          <p className="mt-2 text-sm text-zinc-400">{thesis?.mandate ?? "Loading mandate…"}</p>
-          <div className="mt-3 flex flex-wrap gap-2">
-            {chips.map((chip) => (
-              <span key={chip} className="rounded-full border border-slate-700 bg-[#0f1730] px-3 py-1 text-xs text-zinc-300">
-                {chip}
-              </span>
-            ))}
-          </div>
-        </section>
-
-        <section className="mt-4 grid gap-4 lg:grid-cols-[0.9fr_1.4fr]">
-          <article className="rounded-2xl border border-slate-700 bg-[#111a2e] p-5">
-            <h3 className="text-base font-semibold">Inbox</h3>
-            <p className="mt-1 text-sm text-zinc-400">
-              Synthetic packages, or upload your own CIM / teaser (.pdf, .txt, .md). Missing numbers stay blank.
-            </p>
-            <label className="mt-3 flex cursor-pointer flex-col rounded-xl border border-dashed border-slate-600 bg-[#0f1730] p-3 text-sm hover:border-sky-500">
-              <span className="font-medium">Upload a document</span>
-              <span className="mt-1 text-xs text-zinc-400">Selectable-text PDF or a text extract. Max 4.5MB.</span>
+      <main className="grid gap-0 min-[1080px]:grid-cols-[210px_minmax(0,1fr)_280px]">
+        <aside className="order-2 border-b border-[#2c3340] min-[1080px]:order-1 min-[1080px]:border-b-0 min-[1080px]:border-r">
+          <div className="border-b border-[#2c3340] px-3 py-2">
+            <h2 className="text-[10px] font-semibold uppercase tracking-[0.14em] text-zinc-500">Queue</h2>
+            <label className="mt-2 block cursor-pointer border border-dashed border-[#3a4252] bg-[#11141a] px-2 py-2 hover:border-zinc-400">
+              <span className="text-[11px] font-medium">Drop CIM / teaser</span>
+              <span className="mt-0.5 block text-[10px] text-zinc-500">PDF · txt · md · 4.5MB · selectable text</span>
               <input
-                className="mt-2 text-xs"
+                className="mt-1 w-full text-[10px] text-zinc-400"
                 type="file"
                 accept=".pdf,.txt,.md,.text,application/pdf,text/plain"
                 disabled={busy}
@@ -208,122 +266,299 @@ export default function DealDesk() {
                 }}
               />
             </label>
-            <div className="mt-3 flex flex-col gap-2">
-              {inbox.map((deal) => (
+          </div>
+          <div className="flex flex-col">
+            {inbox.map((deal) => {
+              const on = active?.deal.id === deal.id;
+              return (
                 <button
                   key={deal.id}
                   type="button"
                   disabled={busy}
                   onClick={() => intake(deal.id)}
-                  className="rounded-xl border border-slate-700 bg-[#0f1730] p-3 text-left hover:border-sky-500 disabled:opacity-60"
+                  className={`border-b border-[#222833] px-3 py-2.5 text-left hover:bg-[#141820] disabled:opacity-50 ${
+                    on ? "bg-[#141820]" : ""
+                  }`}
                 >
-                  <div className="font-medium">{deal.company}</div>
-                  <div className="mt-1 text-xs text-zinc-400">
-                    {deal.document_type} · {deal.filename}
-                  </div>
-                </button>
-              ))}
-            </div>
-          </article>
-
-          <article className="rounded-2xl border border-slate-700 bg-[#111a2e] p-5">
-            <h3 className="text-base font-semibold">Active package</h3>
-            {!active || !extraction ? (
-              <p className="mt-6 text-sm text-zinc-400">Select a document.</p>
-            ) : (
-              <div className="mt-3">
-                <div className="font-medium">{active.deal.company}</div>
-                <div className="text-xs text-zinc-400">
-                  {active.deal.document_type} · {active.deal.filename}
-                </div>
-                <p className={`mt-3 text-3xl font-semibold ${recClass(active.scored.recommendation)}`}>
-                  {active.scored.score}/100{" "}
-                  <span className="text-lg font-medium">{active.scored.recommendation}</span>
-                </p>
-                <p className="mt-2 text-sm text-zinc-300">{active.scored.rationale}</p>
-                {pending ? (
-                  <div className="mt-4 rounded-xl border border-amber-800 bg-[#24180a] p-4">
-                    <p className="font-semibold text-amber-200">Human-in-the-loop</p>
-                    <p className="mt-1 text-sm text-amber-100/80">{active.hitl.reason}</p>
-                    <div className="mt-3 flex gap-2">
-                      <button
-                        type="button"
-                        disabled={busy}
-                        onClick={() => resume("approve")}
-                        className="rounded-lg border border-emerald-700 bg-[#16351f] px-3 py-2 text-sm"
-                      >
-                        Approve write
-                      </button>
-                      <button
-                        type="button"
-                        disabled={busy}
-                        onClick={() => resume("reject")}
-                        className="rounded-lg border border-rose-700 bg-[#3a1518] px-3 py-2 text-sm"
-                      >
-                        Reject
-                      </button>
-                    </div>
-                  </div>
-                ) : (
-                  <p className="mt-3 text-sm text-zinc-400">
-                    Status: {active.opportunity.status}
-                    {active.opportunity.sharepoint_path ? ` · ${active.opportunity.sharepoint_path}` : ""}
-                  </p>
-                )}
-                <dl className="mt-4 grid grid-cols-[132px_1fr] gap-x-3 gap-y-2 text-sm">
-                  <dt className="text-zinc-400">Sector</dt>
-                  <dd>{fmt(extraction.sector)}</dd>
-                  <dt className="text-zinc-400">HQ</dt>
-                  <dd>{fmt(extraction.headquarters)}</dd>
-                  <dt className="text-zinc-400">Revenue</dt>
-                  <dd>{fmt(extraction.revenue_m, "m")}</dd>
-                  <dt className="text-zinc-400">Growth</dt>
-                  <dd>{fmt(extraction.yoy_growth_pct, "%")}</dd>
-                  <dt className="text-zinc-400">EBITDA</dt>
-                  <dd>{fmt(extraction.ebitda_m, "m")}</dd>
-                  <dt className="text-zinc-400">Leverage</dt>
-                  <dd>{fmt(extraction.net_debt_ebitda, "x")}</dd>
-                  <dt className="text-zinc-400">Blank fields</dt>
-                  <dd>{extraction.missing_fields.join(", ") || "None"}</dd>
-                </dl>
-                <div className="mt-3 space-y-2">
-                  {extraction.citations.slice(0, 4).map((cite) => (
-                    <p key={`${cite.field}-${cite.page}`} className="border-l-2 border-sky-400 pl-3 text-xs text-zinc-400">
-                      p.{cite.page} · {cite.quote}
-                    </p>
-                  ))}
-                </div>
-                <pre className="mt-4 max-h-56 overflow-auto whitespace-pre-wrap rounded-xl border border-slate-700 bg-[#0c1326] p-3 text-[11px] text-zinc-300">
-                  {active.deal.text}
-                </pre>
-              </div>
-            )}
-          </article>
-        </section>
-
-        <section className="mt-4 rounded-2xl border border-slate-700 bg-[#111a2e] p-5">
-          <h3 className="text-base font-semibold">Pipeline</h3>
-          <div className="mt-3 grid gap-3 md:grid-cols-4">
-            {STAGES.map((stage) => (
-              <div key={stage} className="min-h-36 rounded-xl border border-slate-700 bg-[#0c1326] p-3">
-                <h4 className="text-xs font-semibold uppercase tracking-wide text-zinc-400">{stage}</h4>
-                <div className="mt-2 flex flex-col gap-2">
-                  {pipeline
-                    .filter((row) => row.stage === stage)
-                    .map((row) => (
-                      <div key={row.opportunity_id} className="rounded-lg border border-slate-700 bg-[#0f1730] p-2">
-                        <div className="text-sm font-medium">{row.account_name}</div>
-                        <div className="text-xs text-zinc-400">
-                          {row.status} · {fmt(row.score)}/100 · {fmt(row.recommendation)}
-                        </div>
+                  <div className="flex items-start justify-between gap-2">
+                    <div>
+                      <div className="text-[13px] font-medium leading-tight">{deal.company}</div>
+                      <div className="mt-0.5 font-mono text-[10px] text-zinc-500">
+                        {deal.source === "edgar" ? "EDGAR exhibit · not in gold set" : `${deal.document_type} · ${deal.filename.replace(/_/g, " ")}`}
                       </div>
-                    ))}
+                    </div>
+                    <span className={`shrink-0 border px-1.5 py-0.5 font-mono text-[10px] uppercase ${recBg(deal.recommendation)}`}>
+                      {deal.score} {deal.recommendation}
+                    </span>
+                  </div>
+                  {deal.missing_fields > 0 ? (
+                    <p className="mt-1 text-[10px] text-amber-400/90">{deal.missing_fields} blank field(s)</p>
+                  ) : null}
+                </button>
+              );
+            })}
+          </div>
+        </aside>
+
+        <section className="order-1 min-w-0 border-b border-[#2c3340] min-[1080px]:order-2 min-[1080px]:border-b-0 min-[1080px]:border-r">
+          {!active || !extraction ? (
+            <p className="px-4 py-8 text-zinc-500">Opening package…</p>
+          ) : (
+            <div>
+              <div className="flex flex-wrap items-start justify-between gap-3 border-b border-[#2c3340] px-4 py-3">
+                <div>
+                  <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-zinc-500">
+                    {active.deal.document_type} · {active.deal.filename}
+                  </p>
+                  <h2 className="text-xl font-semibold tracking-tight">{active.deal.company}</h2>
+                  <p className="mt-1 max-w-xl text-[12px] leading-5 text-zinc-400">{active.scored.rationale}</p>
+                </div>
+                <div className="text-right">
+                  <p className={`font-mono text-3xl font-semibold leading-none ${recTone(active.scored.recommendation)}`}>
+                    {active.scored.score}
+                    <span className="text-sm text-zinc-500">/100</span>
+                  </p>
+                  <p className={`mt-1 font-mono text-[11px] uppercase ${recTone(active.scored.recommendation)}`}>
+                    {active.scored.recommendation}
+                  </p>
                 </div>
               </div>
-            ))}
-          </div>
+
+              <div className="grid grid-cols-6 border-b border-[#2c3340]">
+                {BREAKDOWN.map(([key, max]) => (
+                  <div key={key} className="border-r border-[#222833] px-2 py-2 last:border-r-0">
+                    <p className="font-mono text-[9px] uppercase tracking-wide text-zinc-500">{key}</p>
+                    <p className="font-mono text-sm">
+                      {active.scored.breakdown[key]}
+                      <span className="text-zinc-600">/{max}</span>
+                    </p>
+                  </div>
+                ))}
+              </div>
+
+              <ol className="flex flex-wrap gap-x-3 gap-y-1 border-b border-[#2c3340] px-4 py-2">
+                {(active.trace ?? []).map((node) => (
+                  <li key={node.id} className="flex items-center gap-1.5 font-mono text-[10px]">
+                    <span className="text-zinc-300">{node.label}</span>
+                    <span className={`uppercase ${traceTone(node.status)}`}>{node.status}</span>
+                  </li>
+                ))}
+              </ol>
+
+              {pending ? (
+                <div className="flex flex-wrap items-center justify-between gap-3 border-b border-amber-900 bg-[#1a1408] px-4 py-3">
+                  <div>
+                    <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-amber-300">
+                      HITL · {active.hitl.tool_name}
+                    </p>
+                    <p className="mt-1 max-w-xl text-[12px] text-amber-100/80">{active.hitl.reason}</p>
+                  </div>
+                  <div className="flex gap-2">
+                    <button
+                      type="button"
+                      disabled={busy}
+                      onClick={() => resume("approve")}
+                      className="border border-emerald-700 bg-[#16351f] px-3 py-1.5 text-[12px] font-medium"
+                    >
+                      Approve write
+                    </button>
+                    <button
+                      type="button"
+                      disabled={busy}
+                      onClick={() => resume("reject")}
+                      className="border border-rose-800 bg-[#3a1518] px-3 py-1.5 text-[12px] font-medium"
+                    >
+                      Reject
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <p className="border-b border-[#2c3340] px-4 py-2 font-mono text-[11px] text-zinc-400">
+                  {active.opportunity.status === "written"
+                    ? `WRITTEN · ${active.opportunity.opportunity_id} · ${active.opportunity.stage}`
+                    : "REJECTED · Opportunity not created"}
+                </p>
+              )}
+
+              <table className="w-full text-left">
+                <thead>
+                  <tr className="border-b border-[#2c3340] text-[10px] uppercase tracking-[0.12em] text-zinc-500">
+                    <th className="px-4 py-2 font-medium">Field</th>
+                    <th className="px-2 py-2 font-medium">Value</th>
+                    <th className="px-4 py-2 font-medium">Source quote</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {(
+                    [
+                      ["sector", "Sector", fmt(extraction.sector)],
+                      ["headquarters", "HQ", fmt(extraction.headquarters)],
+                      ["revenue_m", "Revenue", fmt(extraction.revenue_m, "m")],
+                      ["yoy_growth_pct", "Growth", fmt(extraction.yoy_growth_pct, "%")],
+                      ["ebitda_m", "EBITDA", fmt(extraction.ebitda_m, "m")],
+                      ["ebitda_margin_pct", "Margin", fmt(extraction.ebitda_margin_pct, "%")],
+                      ["net_debt_ebitda", "ND/EBITDA", fmt(extraction.net_debt_ebitda, "x")],
+                      ["recurring_revenue_pct", "Recurring", fmt(extraction.recurring_revenue_pct, "%")],
+                    ] as const
+                  ).map(([field, label, value]) => {
+                    const cite = citeFor(field);
+                    const blank = extraction.missing_fields.includes(field) || value === "—";
+                    return (
+                      <tr key={field} className="border-b border-[#1c222c]">
+                        <td className="px-4 py-2 font-mono text-[11px] text-zinc-500">{label}</td>
+                        <td className={`px-2 py-2 font-mono text-[12px] ${blank ? "text-amber-300" : ""}`}>
+                          {blank ? "—" : value}
+                        </td>
+                        <td className="px-4 py-2 text-[11px] leading-4 text-zinc-500">
+                          {cite ? (
+                            <>
+                              <span className="text-zinc-600">p.{cite.page}</span> {cite.quote}
+                            </>
+                          ) : blank ? (
+                            "Not on page. Left blank."
+                          ) : (
+                            "—"
+                          )}
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+              {extraction.risks.length ? (
+                <div className="px-4 py-3">
+                  <p className="text-[10px] uppercase tracking-[0.14em] text-zinc-500">Risks on page</p>
+                  <ul className="mt-1 space-y-1 text-[12px] text-zinc-400">
+                    {extraction.risks.map((risk) => (
+                      <li key={risk}>— {risk}</li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
+            </div>
+          )}
         </section>
+
+        <aside className="order-3 min-w-0">
+          <Panel title="Operator">
+            <ol className="relative ml-1 border-l border-[#2c3340] pl-3">
+              {(active?.trace ?? []).map((node) => (
+                <TraceRow key={node.id} node={node} />
+              ))}
+            </ol>
+          </Panel>
+          <Panel title="DealCloud · Opportunity">
+            <DealCloudCard record={active?.dealcloud} />
+          </Panel>
+          <Panel title="SharePoint · DealRoom">
+            <SharePointCard item={active?.sharepoint} />
+          </Panel>
+          <Panel title="Audit">
+            <AuditList events={active?.audit ?? []} />
+          </Panel>
+        </aside>
       </main>
+
+      <section className="border-t border-[#2c3340]">
+        <div className="flex items-center justify-between px-4 py-2">
+          <h3 className="text-[10px] font-semibold uppercase tracking-[0.14em] text-zinc-500">Pipeline</h3>
+          <p className="font-mono text-[10px] text-zinc-600">{pipeline.length} record(s) · this browser</p>
+        </div>
+        <div className="grid md:grid-cols-4">
+          {STAGES.map((stage) => (
+            <div key={stage} className="min-h-28 border-t border-[#2c3340] px-3 py-2 md:border-l md:border-t-0 md:first:border-l-0">
+              <h4 className="flex items-center justify-between text-[10px] font-semibold uppercase tracking-[0.14em] text-zinc-500">
+                {stage}
+                <span className="font-mono text-zinc-600">
+                  {pipeline.filter((row) => row.stage === stage).length}
+                </span>
+              </h4>
+              <div className="mt-2 flex flex-col gap-1.5">
+                {pipeline
+                  .filter((row) => row.stage === stage)
+                  .map((row) => (
+                    <div key={row.opportunity_id} className="border border-[#2c3340] bg-[#11141a] px-2 py-1.5">
+                      <div className="text-[12px] font-medium">{row.account_name}</div>
+                      <div className="font-mono text-[10px] text-zinc-500">
+                        {row.status} · {fmt(row.score)} · {fmt(row.recommendation)}
+                      </div>
+                    </div>
+                  ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
     </div>
+  );
+}
+
+function Panel({ title, children }: { title: string; children: ReactNode }) {
+  return (
+    <div className="border-b border-[#2c3340] px-3 py-3">
+      <h3 className="text-[10px] font-semibold uppercase tracking-[0.14em] text-zinc-500">{title}</h3>
+      <div className="mt-2">{children}</div>
+    </div>
+  );
+}
+
+function TraceRow({ node }: { node: TraceNode }) {
+  return (
+    <li className="relative pb-2.5 last:pb-0">
+      <span className={`absolute -left-[17px] top-1 h-2 w-2 rounded-full border ${traceTone(node.status)} bg-[#0a0c10]`} />
+      <div className="flex items-baseline justify-between gap-2">
+        <span className="font-mono text-[11px]">{node.label}</span>
+        <span className={`font-mono text-[9px] uppercase ${traceTone(node.status)}`}>{node.status}</span>
+      </div>
+      <p className="mt-0.5 text-[11px] leading-4 text-zinc-500">{node.detail}</p>
+    </li>
+  );
+}
+
+function DealCloudCard({ record }: { record?: DealCloudRecord }) {
+  if (!record) return <p className="text-[12px] text-zinc-500">No Opportunity mapped.</p>;
+  return (
+    <div>
+      <p className="font-mono text-[10px] uppercase text-zinc-500">{record.note}</p>
+      <p className="mt-1 font-mono text-[11px] text-zinc-400">
+        POST {record.system}/{record.object} · {record.write_status}
+      </p>
+      <pre className="mt-2 max-h-64 overflow-auto whitespace-pre-wrap font-mono text-[10px] leading-4 text-zinc-300">
+        {JSON.stringify(record.payload, null, 2)}
+      </pre>
+    </div>
+  );
+}
+
+function SharePointCard({ item }: { item?: SharePointItem }) {
+  if (!item) return <p className="text-[12px] text-zinc-500">No library path.</p>;
+  return (
+    <div className="font-mono text-[11px] leading-5">
+      <p className="text-zinc-500">
+        /sites/{item.site}/{item.library}
+      </p>
+      <p className="break-all text-zinc-300">{item.path}</p>
+      <p className={item.attached ? "text-emerald-400" : "text-zinc-500"}>
+        {item.attached ? "attached" : "not attached · waiting HITL"}
+      </p>
+    </div>
+  );
+}
+
+function AuditList({ events }: { events: AuditEvent[] }) {
+  if (!events.length) return <p className="text-[12px] text-zinc-500">No events.</p>;
+  return (
+    <ol className="space-y-1.5">
+      {events.map((event) => (
+        <li key={event.seq} className="grid grid-cols-[28px_1fr] gap-2 font-mono text-[10px] leading-4">
+          <span className="text-zinc-600">{event.seq}</span>
+          <span>
+            <span className="text-zinc-300">{event.actor}</span>{" "}
+            <span className="text-zinc-500">{event.action}</span>
+            <span className="mt-0.5 block text-zinc-500">{event.detail}</span>
+          </span>
+        </li>
+      ))}
+    </ol>
   );
 }
