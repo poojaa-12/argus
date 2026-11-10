@@ -79,7 +79,7 @@ export function scoreDeal(extraction: DealExtraction, thesis: FirmThesis = ACME_
     rationale = "Partial fit. Associate should review flags before a partner meeting.";
   } else {
     recommendation = "pass";
-    rationale = "Outside mandate or incomplete package. Do not create a live DealCloud opportunity without override.";
+    rationale = "Outside mandate or incomplete package. Do not create a live CRM opportunity without override.";
   }
 
   if (sectorPts === 0) {
@@ -93,7 +93,7 @@ export function scoreDeal(extraction: DealExtraction, thesis: FirmThesis = ACME_
       ". Do not invent numbers. Hold at teaser until the CIM lands.";
   } else if (extraction.net_debt_ebitda !== null && extraction.net_debt_ebitda > thesis.max_net_debt_ebitda) {
     if (recommendation === "advance") recommendation = "diligence";
-    rationale = `Leverage ${extraction.net_debt_ebitda}x is above the ${thesis.max_net_debt_ebitda}x cap. Screen in DealCloud but do not auto-advance.`;
+    rationale = `Leverage ${extraction.net_debt_ebitda}x is above the ${thesis.max_net_debt_ebitda}x cap. Screen in the CRM but do not auto-advance.`;
   }
 
   return {

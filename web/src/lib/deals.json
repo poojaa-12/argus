@@ -2,7 +2,7 @@
   "thesis": {
     "firm_id": "acme-capital",
     "firm_name": "Acme Capital",
-    "mandate": "Control and significant-minority investments in North American B2B software and data infrastructure. Associates screen every CIM against this thesis before a DealCloud record is created.",
+    "mandate": "Control and significant-minority investments in North American B2B software and data infrastructure. Every inbound package is scored against this thesis before a CRM record can be created.",
     "sectors": [
       "B2B software",
       "data infrastructure",

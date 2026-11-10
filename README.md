@@ -1,14 +1,16 @@
 # Argus
 
-Argus is a reliability-first agent runtime. The original linear orchestrator still
-runs deterministic ReAct-style plans with retries and fallbacks. This tree also
-includes a **Deep Research & Operator** runtime: a cyclic LangGraph state machine
-with parallel researcher fan-out, Human-in-the-Loop interrupts, Redis/Postgres
-persistence, token-budget compression, and an LLM-as-judge eval harness.
+Argus converts unstructured investment documents into validated structured
+records, with human approval before any downstream write. Missing fields stay
+blank. Retries cannot duplicate a CRM write. The live desk is the product:
 
-The **Deal Intake** vertical is a last-mile private-markets deployment on that
-runtime: CIM/teaser extract → thesis score → associate approval → DealCloud /
-SharePoint write. See [playbooks/acme-capital.md](playbooks/acme-capital.md).
+**https://argus-deal-intake.vercel.app**
+
+Upload → extract → score → review evidence → approve → write downstream.
+
+The same repository includes the operator runtime behind that loop: a linear
+orchestrator with retries and fallbacks, plus a cyclic LangGraph state machine
+with HITL interrupts, Redis/Postgres persistence, and frozen evals.
 
 ## Run tests
 
@@ -80,12 +82,14 @@ Postgres when `ARGUS_DATABASE_URL` is set, otherwise SQLite/memory.
 Unit tests use MemorySaver/local graph + in-memory/SQLite stores. Integration
 tests require `ARGUS_INTEGRATION=1` after `make up`.
 
-## Deal intake (Acme Capital demo)
+## Live desk
 
-Live (Next.js / Tailwind / Vercel): **https://argus-deal-intake.vercel.app**
-Case study: **https://argus-deal-intake.vercel.app/case-study**
+**https://argus-deal-intake.vercel.app** · product notes: **/case-study**
 
-Upload your own CIM or teaser (`.pdf`, `.txt`, `.md`) on that page. Selectable-text PDFs work; scanned image PDFs do not. Numbers that are not in the document stay blank.
+Upload a document (`.pdf`, `.txt`, `.md`). Selectable-text PDFs work; scanned
+image PDFs do not. Numbers that are not in the document stay blank. Gold set
+`6/6` with zero invented critical fields. Reliability evals: `39/50 → 46/50`
+task success with retries, `12/20 → 18/20` recovery under injected failure.
 
 Local Python runtime:
 
@@ -98,7 +102,7 @@ Open http://127.0.0.1:8080/ui/deals.html
 - `GET /v1/deals` thesis + inbox
 - `POST /v1/deals/intake` extract, score, pause before CRM write
 - `POST /v1/runs/{id}/resume` associate approve/reject
-- `GET /v1/deals/pipeline` DealCloud-shaped board
+- `GET /v1/deals/pipeline` CRM-shaped board
 
 ```bash
 make eval-deals

@@ -75,7 +75,7 @@ export type Opportunity = {
   score: number | null;
   recommendation: Recommendation | null;
   source_document: string | null;
-  sharepoint_path: string | null;
+  document_path: string | null;
   extraction: DealExtraction | null;
   status: "pending_approval" | "written" | "rejected";
 };
@@ -90,26 +90,26 @@ export type TraceNode = {
   detail: string;
 };
 
-export type DealCloudField = {
+export type CrmField = {
   api_name: string;
   label: string;
   value: string | number | null;
   source: string;
 };
 
-export type DealCloudRecord = {
-  system: "DealCloud";
+export type CrmRecord = {
+  system: "CRM";
   object: "Opportunity";
   record_id: string | null;
   write_status: Opportunity["status"];
   note: string;
-  fields: DealCloudField[];
+  fields: CrmField[];
   payload: Record<string, string | number | null>;
 };
 
-export type SharePointItem = {
-  site: string;
-  library: string;
+export type DocumentSource = {
+  workspace: string;
+  collection: string;
   path: string;
   attached: boolean;
 };
@@ -133,8 +133,8 @@ export type IntakePackage = {
   opportunity: Opportunity;
   hitl: HitlGate;
   trace: TraceNode[];
-  dealcloud: DealCloudRecord;
-  sharepoint: SharePointItem;
+  crm: CrmRecord;
+  documents: DocumentSource;
   audit: AuditEvent[];
 };
 

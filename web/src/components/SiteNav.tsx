@@ -15,7 +15,7 @@ export default function SiteNav({ active }: { active: "desk" | "case-study" }) {
   return (
     <nav className="flex items-center gap-3">
       {item("/", "desk", "Desk")}
-      {item("/case-study", "case-study", "Notes")}
+      {item("/case-study", "case-study", "Product")}
       <a
         className="px-1 text-[11px] uppercase tracking-[0.12em] text-zinc-500 hover:text-zinc-200"
         href="https://github.com/poojaa-12/argus"

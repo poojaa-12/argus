@@ -3,14 +3,14 @@ import { extractCim, extractFromText, inferCompany, inferDocumentType } from "./
 import { scoreDeal } from "./score";
 import type {
   AuditEvent,
-  DealCloudRecord,
+  CrmRecord,
   DealRecord,
+  DocumentSource,
   HitlGate,
   InboxDeal,
   IntakePackage,
   Opportunity,
   ScoredDeal,
-  SharePointItem,
   TraceNode,
   EvalStrip,
 } from "./types";
@@ -24,8 +24,8 @@ const STAGES = {
 export const DEFAULT_OPEN_ID = "harborpay";
 
 export const EVAL_STRIP: EvalStrip = {
-  gold: "gold 6/6 · 0 invented blanks",
-  detail: "Helios sector pass · Meridian held",
+  gold: "Gold set 6/6 · 0 invented critical fields",
+  detail: "Retries 39/50 → 46/50 · injected failure 12/20 → 18/20",
 };
 
 export function pendingOpportunity(scored: ScoredDeal, filename: string): Opportunity {
@@ -37,7 +37,7 @@ export function pendingOpportunity(scored: ScoredDeal, filename: string): Opport
     score: scored.score,
     recommendation: scored.recommendation,
     source_document: filename,
-    sharepoint_path: sharepointPath(scored.company, filename),
+    document_path: documentPath(scored.company, filename),
     extraction: scored.extraction,
     status: "pending_approval",
   };
@@ -99,9 +99,9 @@ export function resumeDeal(scored: ScoredDeal, feedback: string, filename: strin
 
 export function decorateIntake(deal: DealRecord, scored: ScoredDeal, opportunity: Opportunity): IntakePackage {
   const hitl: HitlGate = {
-    tool_name: "crm_upsert",
+    tool_name: "crm_write",
     destructive: true,
-    reason: `interrupt_before hitl_gate — ${deal.company} will not be written to DealCloud until an associate approves.`,
+    reason: `${deal.company} will not be written to the CRM until a reviewer approves.`,
   };
   return {
     deal,
@@ -109,15 +109,15 @@ export function decorateIntake(deal: DealRecord, scored: ScoredDeal, opportunity
     opportunity,
     hitl,
     trace: buildTrace(deal, scored, opportunity),
-    dealcloud: buildDealCloud(scored, opportunity, deal),
-    sharepoint: buildSharePoint(opportunity),
+    crm: buildCrm(scored, opportunity, deal),
+    documents: buildDocuments(opportunity),
     audit: buildAudit(deal, scored, opportunity),
   };
 }
 
-function sharepointPath(company: string, filename: string): string {
+function documentPath(company: string, filename: string): string {
   const folder = company.replace(/[^\w]+/g, " ").trim();
-  return `/sites/AcmeCapital/DealRoom/${folder}/${filename}`;
+  return `/documents/${folder}/${filename}`;
 }
 
 function buildTrace(deal: DealRecord, scored: ScoredDeal, opportunity: Opportunity): TraceNode[] {
@@ -130,54 +130,54 @@ function buildTrace(deal: DealRecord, scored: ScoredDeal, opportunity: Opportuni
       id: "planner",
       label: "planner",
       status: "done",
-      detail: "cim_extract → thesis_score → crm_upsert",
+      detail: "extract → score → review → approve → write",
     },
     {
-      id: "cim_extract",
-      label: "cim_extract",
+      id: "extract",
+      label: "extract",
       status: "done",
-      tool: "cim_extract",
+      tool: "extract",
       detail: missing
         ? `${deal.document_type} parsed · ${missing} field(s) left blank`
         : `${deal.document_type} parsed · all scored fields present`,
     },
     {
-      id: "thesis_score",
-      label: "thesis_score",
+      id: "score",
+      label: "score",
       status: "done",
-      tool: "thesis_score",
+      tool: "score",
       detail: `${scored.score}/100 ${scored.recommendation}`,
     },
     {
       id: "operator",
       label: "operator",
       status: pending ? "interrupted" : "done",
-      detail: pending ? "pending_action: crm_upsert (destructive)" : written ? "write authorized" : "write denied",
+      detail: pending ? "pending action: CRM write (destructive)" : written ? "write authorized" : "write denied",
     },
     {
-      id: "hitl_gate",
-      label: "hitl_gate",
+      id: "approve",
+      label: "approve",
       status: pending ? "interrupted" : "done",
-      tool: "crm_upsert",
-      detail: pending ? "waiting on associate" : written ? "approved" : "rejected",
+      tool: "crm_write",
+      detail: pending ? "waiting on reviewer" : written ? "approved" : "rejected",
     },
     {
-      id: "crm_upsert",
-      label: "crm_upsert",
+      id: "crm_write",
+      label: "crm_write",
       status: written ? "done" : rejected ? "blocked" : "waiting",
-      tool: "crm_upsert",
+      tool: "crm_write",
       detail: written
         ? `Opportunity ${opportunity.opportunity_id} · ${opportunity.stage}`
         : rejected
           ? "no live record"
-          : "blocked until HITL",
+          : "blocked until approval",
     },
     {
-      id: "sharepoint_attach",
-      label: "sharepoint_attach",
+      id: "attach_source",
+      label: "attach_source",
       status: written ? "done" : rejected ? "blocked" : "waiting",
-      tool: "sharepoint_attach",
-      detail: written ? "deal-room file linked" : "not attached",
+      tool: "attach_source",
+      detail: written ? "source document linked" : "not attached",
     },
     {
       id: "synthesize",
@@ -188,21 +188,21 @@ function buildTrace(deal: DealRecord, scored: ScoredDeal, opportunity: Opportuni
   ];
 }
 
-function buildDealCloud(scored: ScoredDeal, opportunity: Opportunity, deal: DealRecord): DealCloudRecord {
+function buildCrm(scored: ScoredDeal, opportunity: Opportunity, deal: DealRecord): CrmRecord {
   const ex = scored.extraction;
   const fields = [
-    { api_name: "AccountName", label: "Account", value: scored.company, source: "extract.company" },
-    { api_name: "OpportunityName", label: "Name", value: `${scored.company} ${deal.document_type}`, source: "filename" },
-    { api_name: "Stage", label: "Stage", value: opportunity.stage, source: "score.recommendation" },
-    { api_name: "Sector__c", label: "Sector", value: ex.sector, source: "extract.sector" },
-    { api_name: "HQ__c", label: "HQ", value: ex.headquarters, source: "extract.headquarters" },
-    { api_name: "Revenue_mm__c", label: "Revenue $m", value: ex.revenue_m, source: "extract.revenue_m" },
-    { api_name: "Growth_pct__c", label: "YoY %", value: ex.yoy_growth_pct, source: "extract.yoy_growth_pct" },
-    { api_name: "EBITDA_mm__c", label: "EBITDA $m", value: ex.ebitda_m, source: "extract.ebitda_m" },
-    { api_name: "ND_EBITDA__c", label: "ND/EBITDA", value: ex.net_debt_ebitda, source: "extract.net_debt_ebitda" },
-    { api_name: "ThesisScore__c", label: "Score", value: scored.score, source: "thesis_score" },
-    { api_name: "Recommendation__c", label: "Rec", value: scored.recommendation, source: "thesis_score" },
-    { api_name: "SourceDocument__c", label: "Source", value: deal.filename, source: "inbox" },
+    { api_name: "account_name", label: "Account", value: scored.company, source: "extract.company" },
+    { api_name: "opportunity_name", label: "Name", value: `${scored.company} ${deal.document_type}`, source: "filename" },
+    { api_name: "stage", label: "Stage", value: opportunity.stage, source: "score.recommendation" },
+    { api_name: "sector", label: "Sector", value: ex.sector, source: "extract.sector" },
+    { api_name: "headquarters", label: "HQ", value: ex.headquarters, source: "extract.headquarters" },
+    { api_name: "revenue_m", label: "Revenue $m", value: ex.revenue_m, source: "extract.revenue_m" },
+    { api_name: "growth_pct", label: "YoY %", value: ex.yoy_growth_pct, source: "extract.yoy_growth_pct" },
+    { api_name: "ebitda_m", label: "EBITDA $m", value: ex.ebitda_m, source: "extract.ebitda_m" },
+    { api_name: "nd_ebitda", label: "ND/EBITDA", value: ex.net_debt_ebitda, source: "extract.net_debt_ebitda" },
+    { api_name: "thesis_score", label: "Score", value: scored.score, source: "score" },
+    { api_name: "recommendation", label: "Rec", value: scored.recommendation, source: "score" },
+    { api_name: "source_document", label: "Source", value: deal.filename, source: "inbox" },
   ];
   const payload: Record<string, string | number | null> = {
     object: "Opportunity",
@@ -213,21 +213,21 @@ function buildDealCloud(scored: ScoredDeal, opportunity: Opportunity, deal: Deal
     payload[field.api_name] = field.value;
   }
   return {
-    system: "DealCloud",
+    system: "CRM",
     object: "Opportunity",
     record_id: opportunity.status === "written" ? opportunity.opportunity_id : null,
     write_status: opportunity.status,
-    note: "payload · not a live tenant",
+    note: "payload · not a live CRM write",
     fields,
     payload,
   };
 }
 
-function buildSharePoint(opportunity: Opportunity): SharePointItem {
+function buildDocuments(opportunity: Opportunity): DocumentSource {
   return {
-    site: "AcmeCapital",
-    library: "DealRoom",
-    path: opportunity.sharepoint_path || "",
+    workspace: "Acme Capital",
+    collection: "Deal files",
+    path: opportunity.document_path || "",
     attached: opportunity.status === "written",
   };
 }
@@ -242,7 +242,7 @@ function buildAudit(deal: DealRecord, scored: ScoredDeal, opportunity: Opportuni
     },
     {
       seq: "02",
-      actor: "cim_extract",
+      actor: "extract",
       action: "extract",
       detail: scored.extraction.missing_fields.length
         ? `Blank: ${scored.extraction.missing_fields.join(", ")}`
@@ -250,36 +250,36 @@ function buildAudit(deal: DealRecord, scored: ScoredDeal, opportunity: Opportuni
     },
     {
       seq: "03",
-      actor: "thesis_score",
+      actor: "score",
       action: "score",
       detail: `${scored.score}/100 ${scored.recommendation} · sector ${scored.breakdown.sector} scale ${scored.breakdown.scale} growth ${scored.breakdown.growth}`,
     },
     {
       seq: "04",
-      actor: "hitl_gate",
+      actor: "approve",
       action: "interrupt",
-      detail: "crm_upsert is destructive · associate required",
+      detail: "CRM write is destructive · reviewer required",
     },
   ];
   if (opportunity.status === "written") {
     events.push({
       seq: "05",
-      actor: "associate",
+      actor: "reviewer",
       action: "approve",
-      detail: `DealCloud ${opportunity.opportunity_id} · ${opportunity.stage}`,
+      detail: `CRM ${opportunity.opportunity_id} · ${opportunity.stage}`,
     });
     events.push({
       seq: "06",
-      actor: "sharepoint_attach",
+      actor: "attach_source",
       action: "attach",
-      detail: opportunity.sharepoint_path || "",
+      detail: opportunity.document_path || "",
     });
   } else if (opportunity.status === "rejected") {
     events.push({
       seq: "05",
-      actor: "associate",
+      actor: "reviewer",
       action: "reject",
-      detail: "No Opportunity created · SharePoint unchanged",
+      detail: "No opportunity created · document source unchanged",
     });
   }
   return events;

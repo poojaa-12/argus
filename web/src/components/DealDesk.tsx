@@ -2,23 +2,30 @@
 
 import { useEffect, useMemo, useState, type ReactNode } from "react";
 import SiteNav from "@/components/SiteNav";
+import {
+  Architecture,
+  productOneLiner,
+  WhyHard,
+  WorkflowStrip,
+  workflowPhase,
+} from "@/components/ProductStory";
 import type {
   AuditEvent,
   Citation,
-  DealCloudRecord,
+  CrmRecord,
+  DocumentSource,
   EvalStrip,
   FirmThesis,
   InboxDeal,
   IntakePackage,
   Opportunity,
   ScoreBreakdown,
-  SharePointItem,
   TraceNode,
   TraceStatus,
 } from "@/lib/types";
 
 const STAGES: Opportunity["stage"][] = ["New", "Screened", "Diligence", "Passed"];
-const STORAGE_KEY = "argus-deal-pipeline-v2";
+const STORAGE_KEY = "argus-deal-pipeline-v3";
 const BREAKDOWN: Array<[keyof ScoreBreakdown, number]> = [
   ["sector", 30],
   ["scale", 20],
@@ -60,9 +67,13 @@ function traceTone(status: TraceStatus) {
 }
 
 function statusTone(status: string) {
-  if (status.startsWith("INTERRUPTED")) return "border-amber-800 bg-[#1a1408] text-amber-200";
-  if (status.startsWith("WRITTEN")) return "border-emerald-800 bg-[#102418] text-emerald-300";
-  if (status.includes("BLOCKED") || status.includes("failed") || status.includes("Could not")) {
+  if (status.startsWith("Waiting") || status.startsWith("INTERRUPTED")) {
+    return "border-amber-800 bg-[#1a1408] text-amber-200";
+  }
+  if (status.startsWith("Written") || status.startsWith("WRITTEN")) {
+    return "border-emerald-800 bg-[#102418] text-emerald-300";
+  }
+  if (status.includes("blocked") || status.includes("BLOCKED") || status.includes("failed") || status.includes("Could not")) {
     return "border-rose-900 bg-[#2a1214] text-rose-300";
   }
   if (
@@ -81,7 +92,7 @@ export default function DealDesk({ initial }: { initial?: CatalogResponse }) {
   const [thesis, setThesis] = useState<FirmThesis | null>(initial?.thesis ?? null);
   const [inbox, setInbox] = useState<InboxDeal[]>(initial?.deals ?? []);
   const [status, setStatus] = useState(
-    initial?.open ? "INTERRUPTED · hitl_gate · crm_upsert" : "Opening inbound…",
+    initial?.open ? "Waiting for approval · CRM write blocked" : "Opening inbound…",
   );
   const [busy, setBusy] = useState(false);
   const [active, setActive] = useState<IntakePackage | null>(initial?.open ?? null);
@@ -120,7 +131,7 @@ export default function DealDesk({ initial }: { initial?: CatalogResponse }) {
           return [...saved, payload.open.opportunity];
         });
         setHydrated(true);
-        setStatus("INTERRUPTED · hitl_gate · crm_upsert");
+        setStatus("Waiting for approval · CRM write blocked");
       })
       .catch(() => setStatus("Could not load desk."));
   }, [initial]);
@@ -163,7 +174,7 @@ export default function DealDesk({ initial }: { initial?: CatalogResponse }) {
         setStatus(payload.error || "Intake failed.");
         return;
       }
-      applyPackage(payload, "INTERRUPTED · hitl_gate · crm_upsert");
+      applyPackage(payload, interruptedStatus(payload));
     } catch {
       setStatus("Intake failed.");
     } finally {
@@ -174,7 +185,7 @@ export default function DealDesk({ initial }: { initial?: CatalogResponse }) {
   async function resume(feedback: "approve" | "reject") {
     if (!active) return;
     setBusy(true);
-    setStatus(feedback === "approve" ? "Writing Opportunity…" : "Blocking write…");
+    setStatus(feedback === "approve" ? "Writing opportunity…" : "Blocking write…");
     try {
       const res = await fetch("/api/resume", {
         method: "POST",
@@ -189,7 +200,9 @@ export default function DealDesk({ initial }: { initial?: CatalogResponse }) {
       const payload = (await res.json()) as IntakePackage & { status: string };
       applyPackage(
         { ...payload, deal: { ...payload.deal, text: active.deal.text || payload.deal.text } },
-        payload.opportunity.status === "rejected" ? "WRITE BLOCKED · no live record" : "WRITTEN · DealCloud + SharePoint",
+        payload.opportunity.status === "rejected"
+          ? "Write blocked · no record created"
+          : "Written · CRM + document source",
       );
     } catch {
       setStatus("Resume failed.");
@@ -210,13 +223,7 @@ export default function DealDesk({ initial }: { initial?: CatalogResponse }) {
         setStatus(payload.error || "Could not read that file.");
         return;
       }
-      const missing = payload.scored.extraction.missing_fields;
-      applyPackage(
-        payload,
-        missing.length
-          ? `INTERRUPTED · blank ${missing.join(", ")}`
-          : "INTERRUPTED · hitl_gate · crm_upsert",
-      );
+      applyPackage(payload, interruptedStatus(payload));
     } catch {
       setStatus("Upload failed.");
     } finally {
@@ -228,37 +235,36 @@ export default function DealDesk({ initial }: { initial?: CatalogResponse }) {
   const pending = active?.opportunity.status === "pending_approval";
   const citeFor = (field: string): Citation | undefined =>
     extraction?.citations.find((row) => row.field === field);
+  const phase = workflowPhase(status, Boolean(pending), Boolean(extraction?.missing_fields.length));
 
   return (
     <div className="min-h-full bg-[#0a0c10] font-sans text-[13px] text-zinc-200">
       <header className="sticky top-0 z-10 border-b border-[#2c3340] bg-[#0a0c10]/95 backdrop-blur">
         <div className="flex flex-wrap items-start justify-between gap-3 px-4 py-3">
           <div className="min-w-0 max-w-3xl">
-            <p className="text-[10px] uppercase tracking-[0.16em] text-zinc-500">Acme Capital · synthetic tenant</p>
-            <h1 className="mt-0.5 text-sm font-semibold tracking-tight">Inbound screening</h1>
-            <p className="mt-1.5 text-[12px] leading-5 text-zinc-400">
-              Prototype built for Metal&apos;s CIM intake workflow — CIM parsing → thesis scoring →
-              human-approved DealCloud write. Built by Sai Pooja Sabbani
+            <div className="flex flex-wrap items-center gap-3">
+              <h1 className="text-sm font-semibold tracking-tight">Argus</h1>
+              <SiteNav active="desk" />
+            </div>
+            <p className="mt-1.5 max-w-2xl text-[13px] leading-5 text-zinc-300">{productOneLiner()}</p>
+            <p className="mt-1 text-[11px] text-zinc-500">
+              Sample workspace: {thesis?.firm_name ?? "Acme Capital"} (synthetic) · Sai Pooja Sabbani
               {" · "}
-              <a className="text-zinc-300 hover:underline" href="https://linkedin.com/in/saipoojasabbani" target="_blank" rel="noreferrer">
-                LinkedIn
-              </a>
-              {" · "}
-              <a className="text-zinc-300 hover:underline" href="https://github.com/poojaa-12/argus" target="_blank" rel="noreferrer">
+              <a className="text-zinc-400 hover:underline" href="https://github.com/poojaa-12/argus" target="_blank" rel="noreferrer">
                 GitHub
               </a>
             </p>
-            <div className="mt-2">
-              <SiteNav active="desk" />
-            </div>
           </div>
           <span className={`shrink-0 border px-2 py-1 font-mono text-[11px] ${statusTone(status)}`}>{status}</span>
         </div>
+        <div className="border-t border-[#222833] px-4 py-2">
+          <WorkflowStrip phase={phase} />
+        </div>
         <div className="flex flex-wrap items-center justify-between gap-2 border-t border-[#222833] px-4 py-2">
           <p className="font-mono text-[10px] text-zinc-500">
-            {initial?.eval?.gold ?? "gold 6/6 · 0 invented blanks"}
+            {initial?.eval?.gold ?? "Gold set 6/6 · 0 invented critical fields"}
             {" · "}
-            {initial?.eval?.detail ?? "Helios sector pass · Meridian held"}
+            {initial?.eval?.detail ?? "Retries 39/50 → 46/50 · injected failure 12/20 → 18/20"}
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-1.5 border-t border-[#222833] px-4 py-2">
@@ -281,7 +287,7 @@ export default function DealDesk({ initial }: { initial?: CatalogResponse }) {
           <div className="border-b border-[#2c3340] px-4 py-3">
             <h2 className="text-[10px] font-semibold uppercase tracking-[0.14em] text-zinc-500">Queue</h2>
             <label className="mt-2 block cursor-pointer border border-dashed border-[#3a4252] bg-[#11141a] px-2 py-2 hover:border-zinc-400">
-              <span className="text-[11px] font-medium">Drop CIM / teaser</span>
+              <span className="text-[11px] font-medium">Upload document</span>
               <span className="mt-0.5 block text-[10px] text-zinc-500">PDF · txt · md · 4.5MB · selectable text</span>
               <input
                 className="mt-1 w-full text-[10px] text-zinc-400"
@@ -322,7 +328,7 @@ export default function DealDesk({ initial }: { initial?: CatalogResponse }) {
                   </div>
                   {deal.missing_fields > 0 ? (
                     <span className="mt-1.5 inline-flex border border-amber-900/70 bg-[#1a1408] px-1.5 py-0.5 text-[10px] text-amber-200/90">
-                      Not on page · {deal.missing_fields} {deal.missing_fields === 1 ? "field" : "fields"}
+                      Missing on page · {deal.missing_fields} {deal.missing_fields === 1 ? "field" : "fields"}
                     </span>
                   ) : null}
                 </button>
@@ -343,12 +349,6 @@ export default function DealDesk({ initial }: { initial?: CatalogResponse }) {
                   </p>
                   <h2 className="text-xl font-semibold tracking-tight">{active.deal.company}</h2>
                   <p className="mt-1 max-w-xl text-[12px] leading-5 text-zinc-400">{active.scored.rationale}</p>
-                  {extraction.missing_fields.length > 0 ? (
-                    <span className="mt-2 inline-flex border border-amber-900/70 bg-[#1a1408] px-1.5 py-0.5 text-[10px] text-amber-200/90">
-                      Not on page · {extraction.missing_fields.length}{" "}
-                      {extraction.missing_fields.length === 1 ? "field" : "fields"} left blank
-                    </span>
-                  ) : null}
                 </div>
                 <div className="text-right">
                   <p className={`font-mono text-3xl font-semibold leading-none ${recTone(active.scored.recommendation)}`}>
@@ -360,6 +360,17 @@ export default function DealDesk({ initial }: { initial?: CatalogResponse }) {
                   </p>
                 </div>
               </div>
+
+              {extraction.missing_fields.length > 0 ? (
+                <div className="border-b border-amber-900 bg-[#1a1408] px-4 py-3">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-amber-300">Safe degradation · missing evidence</p>
+                  <p className="mt-1 max-w-xl text-[12px] leading-5 text-amber-100/80">
+                    {extraction.missing_fields.join(", ")} {extraction.missing_fields.length === 1 ? "is" : "are"} not on
+                    this page. Argus left {extraction.missing_fields.length === 1 ? "it" : "them"} blank and held the
+                    score. It did not invent a number.
+                  </p>
+                </div>
+              ) : null}
 
               <div className="grid grid-cols-6 border-b border-[#2c3340]">
                 {BREAKDOWN.map(([key, max]) => (
@@ -373,20 +384,11 @@ export default function DealDesk({ initial }: { initial?: CatalogResponse }) {
                 ))}
               </div>
 
-              <ol className="flex flex-wrap gap-x-3 gap-y-1 border-b border-[#2c3340] px-4 py-2">
-                {(active.trace ?? []).map((node) => (
-                  <li key={node.id} className="flex items-center gap-1.5 font-mono text-[10px]">
-                    <span className="text-zinc-300">{node.label}</span>
-                    <span className={`uppercase ${traceTone(node.status)}`}>{node.status}</span>
-                  </li>
-                ))}
-              </ol>
-
               {pending ? (
                 <div className="flex flex-wrap items-center justify-between gap-3 border-b border-amber-900 bg-[#1a1408] px-4 py-3">
                   <div>
                     <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-amber-300">
-                      HITL · {active.hitl.tool_name}
+                      Approval required · {active.hitl.tool_name}
                     </p>
                     <p className="mt-1 max-w-xl text-[12px] text-amber-100/80">{active.hitl.reason}</p>
                   </div>
@@ -405,7 +407,7 @@ export default function DealDesk({ initial }: { initial?: CatalogResponse }) {
                       onClick={() => resume("reject")}
                       className="border border-rose-800 bg-[#3a1518] px-3 py-1.5 text-[12px] font-medium"
                     >
-                      Reject
+                      Reject write
                     </button>
                   </div>
                 </div>
@@ -483,20 +485,20 @@ export default function DealDesk({ initial }: { initial?: CatalogResponse }) {
         </section>
 
         <aside className="order-3 min-w-0">
-          <Panel title="Operator">
+          <Panel title="Pipeline state">
             <ol className="relative ml-1 border-l border-[#2c3340] pl-3">
               {(active?.trace ?? []).map((node) => (
                 <TraceRow key={node.id} node={node} />
               ))}
             </ol>
           </Panel>
-          <Panel title="DealCloud · Opportunity">
-            <DealCloudCard record={active?.dealcloud} />
+          <Panel title="CRM · Opportunity">
+            <CrmCard record={active?.crm} />
           </Panel>
-          <Panel title="SharePoint · DealRoom">
-            <SharePointCard item={active?.sharepoint} />
+          <Panel title="Document source">
+            <DocumentCard item={active?.documents} />
           </Panel>
-          <Panel title="Audit">
+          <Panel title="Audit trail">
             <AuditList events={active?.audit ?? []} />
           </Panel>
         </aside>
@@ -532,8 +534,18 @@ export default function DealDesk({ initial }: { initial?: CatalogResponse }) {
           ))}
         </div>
       </section>
+
+      <WhyHard />
+      <Architecture />
     </div>
   );
+}
+
+function interruptedStatus(payload: IntakePackage) {
+  const missing = payload.scored.extraction.missing_fields;
+  return missing.length
+    ? `Waiting for approval · ${missing.length} field${missing.length === 1 ? "" : "s"} blank`
+    : "Waiting for approval · CRM write blocked";
 }
 
 function Panel({ title, children }: { title: string; children: ReactNode }) {
@@ -558,8 +570,8 @@ function TraceRow({ node }: { node: TraceNode }) {
   );
 }
 
-function DealCloudCard({ record }: { record?: DealCloudRecord }) {
-  if (!record) return <p className="text-[12px] text-zinc-500">No Opportunity mapped.</p>;
+function CrmCard({ record }: { record?: CrmRecord }) {
+  if (!record) return <p className="text-[12px] text-zinc-500">No opportunity mapped.</p>;
   return (
     <div>
       <p className="font-mono text-[10px] uppercase text-zinc-500">{record.note}</p>
@@ -615,16 +627,16 @@ function JsonView({ data }: { data: Record<string, string | number | null> }) {
   );
 }
 
-function SharePointCard({ item }: { item?: SharePointItem }) {
-  if (!item) return <p className="text-[12px] text-zinc-500">No library path.</p>;
+function DocumentCard({ item }: { item?: DocumentSource }) {
+  if (!item) return <p className="text-[12px] text-zinc-500">No document path.</p>;
   return (
     <div className="font-mono text-[11px] leading-5">
       <p className="text-zinc-500">
-        /sites/{item.site}/{item.library}
+        {item.workspace} / {item.collection}
       </p>
       <p className="break-all text-zinc-300">{item.path}</p>
       <p className={item.attached ? "text-emerald-400" : "text-zinc-500"}>
-        {item.attached ? "attached" : "not attached · waiting HITL"}
+        {item.attached ? "attached" : "not attached · waiting for approval"}
       </p>
     </div>
   );
